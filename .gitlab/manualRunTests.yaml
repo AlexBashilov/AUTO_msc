@@ -1,0 +1,43 @@
+###################################### Шаблон для запуска тестов
+.manual_run_template:
+  stage: run-tests
+  dependencies:
+    - install
+  except:
+    - api
+    - triggers
+    - pipelines
+  when: manual
+  before_script:
+    - wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
+    - chmod +x ./allurectl
+    - touch .env.local
+  script:
+    - ./allurectl watch --results tests/data/results -- pytest
+  after_script:
+    - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
+    - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
+  tags:
+    - ci-docker
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/pip
+      - venv/
+
+###################################### Стадия тестов wms-test
+integrtest-1:
+  extends: .manual_run_template
+  variables: !reference [.var-test-1, variables]
+
+integrtest-2:
+  extends: .manual_run_template
+  variables: !reference [.var-test-2, variables]
+
+integrtest-3:
+  extends: .manual_run_template
+  variables: !reference [.var-test-3, variables]
+
+integrtest-4:
+  extends: .manual_run_template
+  variables: !reference [.var-test-4, variables]
