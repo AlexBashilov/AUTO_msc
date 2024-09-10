@@ -9,7 +9,7 @@ variables:
   ALLURE_LAUNCH_NAME: 'AUTOTESTS - ${CI_COMMIT_REF_NAME} - ${GITLAB_USER_LOGIN}'
 
 ###################################### Докер образ
-image: harbor.vseinstrumenti.ru/dockerhub/library/python:3.12-bullseye
+image: harbor.vseinstrumenti.ru/dockerhub/library/python:3.10-bullseye
 
 ###################################### Стадии pipeline
 stages:
