@@ -15,12 +15,17 @@
     - virtualenv venv
     - source venv/bin/activate
   script:
-    - ./allurectl watch -- pytest tests/ --alluredir _output
+    - ./allurectl watch -- pytest tests/ --alluredir _output --results _output
   after_script:
     - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
   tags:
     - ci-docker
+  artifacts:
+    when: always
+    paths:
+      - _output/
+    expire_in: 1 day
   cache:
     key: "$CI_COMMIT_REF_SLUG"
     paths:

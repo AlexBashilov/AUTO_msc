@@ -35,7 +35,7 @@ class TestGetVehicle:
 
         assert response.status_code == HTTPStatus.BAD_REQUEST, f"Код ответа response.status_code"
         assert_schema(response, GetVehicleErrorSchema)
-        response_json = GetVehicleErrorSchema.parse_raw(response.content)
+        response_json = GetVehicleErrorSchema.model_validate_json(response.content)
         assert (
                 response_json.errors[0].message == "Ошибка обработки получения ТС: Транспорт с таким ID не существует"
         ), "Текст ошибки отличается от ожидаемого"
