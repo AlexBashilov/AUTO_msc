@@ -23,7 +23,7 @@ class TestGetVehicle:
         """
         body = {"params": {"id": 934}, "requestId": "0c5b2444-70a0-4932-980c-b4dc0d3f02b5"}
         response = get_vehicle(client, body)
-        assert response.status_code == HTTPStatus.OK, f"Код ответа response.status_code"
+        assert response.status_code == HTTPStatus.OK, f"Код ответа {response.status_code}"
         assert_schema(response, GetVehicleResponseSchema)
 
     def test_get_vehicle_send_not_exist_vehicle(self, client):
