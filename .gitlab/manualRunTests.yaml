@@ -15,7 +15,7 @@
     - virtualenv venv
     - source venv/bin/activate
   script:
-    - ./allurectl watch --alluredir _output --results _output -- pytest tests/
+    - ./allurectl watch --results _output -- pytest tests/ --alluredir _output
   after_script:
     - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
