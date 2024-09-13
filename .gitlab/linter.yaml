@@ -4,7 +4,7 @@ Lint:
     - pip install virtualenv flake8
     - virtualenv venv
     - source venv/bin/activate
-    - flake8
+    - flake8 --color always
   tags:
     - ci-docker
   except:
