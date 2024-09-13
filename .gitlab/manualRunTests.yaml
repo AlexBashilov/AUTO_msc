@@ -2,7 +2,7 @@
 .manual_run_template:
   stage: run-tests
   dependencies:
-    - linter
+    - linters
   except:
     - api
     - triggers
