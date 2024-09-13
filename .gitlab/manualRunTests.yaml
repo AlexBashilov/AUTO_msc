@@ -9,13 +9,13 @@
     - pipelines
   when: manual
   before_script:
-#    - wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
-#    - chmod +x ./allurectl
+    - wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
+    - chmod +x ./allurectl
     - pip install virtualenv
     - virtualenv venv
     - source venv/bin/activate
   script:
-    - pytest tests/
+    - ./allurectl watch -- pytest tests/ --alluredir _output
   after_script:
     - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
