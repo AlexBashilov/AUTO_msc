@@ -1,6 +1,6 @@
 ###################################### Шаблон для запуска тестов
 .manual_run_template:
-  stage: run-tests
+  stage: tests
   dependencies:
     - linters
   except:
