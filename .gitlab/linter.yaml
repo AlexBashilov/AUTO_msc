@@ -1,7 +1,7 @@
 Lint:
   stage: linters
   script:
-    - pip install virtualenv
+    - pip install virtualenv flake8
     - virtualenv venv
     - source venv/bin/activate
     - python -m flake8
