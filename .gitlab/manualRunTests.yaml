@@ -13,7 +13,7 @@
     - chmod +x ./allurectl
     - touch .env.local
   script:
-    - ./allurectl watch --results tests/data/results -- pytest
+    - ./allurectl watch -- pytest tests/ --alluredir _output
   after_script:
     - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")

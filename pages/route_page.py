@@ -25,7 +25,7 @@ class RoutePage:
         assert self.helper.wait_for_element_visible('h2').text == 'Маршруты'
         self.helper.wait_for_element_visible('[data-qa="active-switch"]')
         assert self.helper.wait_for_element_visible(
-            '[data-qa="active-switch"]').text == 'Маршруты с активными шаблонами'
+            '[data-qa="active-switch"]').text == 'Маршруты с шаблонами'
         self.helper.wait_for_element_visible('#clearFilters')
         assert self.helper.wait_for_element_visible('#clearFilters').text == 'Очистить фильтры'
         self.helper.wait_for_element_visible(self.CREATE_BUTTON)

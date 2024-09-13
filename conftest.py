@@ -81,7 +81,8 @@ def take_screenshot(driver: WebDriver, test_name):
     """
     date_now = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     filename = f"{test_name}_{date_now}.png"
-    screenshot_file_path = os.path.join(DIRECTORY_PATH, "tests", "data", filename)
+    os.makedirs(os.path.join(DIRECTORY_PATH, "_output"), exist_ok=True)
+    screenshot_file_path = os.path.join(DIRECTORY_PATH, "_output", filename)
     png = driver.get_screenshot_as_png()
     allure.attach(
         png, name="Скриншот места падения теста", attachment_type=AttachmentType.PNG
