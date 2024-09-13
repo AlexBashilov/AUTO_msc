@@ -7,7 +7,7 @@ certifi==2024.7.4
 charset-normalizer==3.3.2
 et-xmlfile==1.1.0
 h11==0.14.0
-helperpackage @ git+https://git.vseinstrumenti.net/pkg/tests-py-webdriver@1.0.21
+helperpackage @ git+https://git.vseinstrumenti.net/pkg/tests-py-webdriver@tags/1.0.21
 httpcore==1.0.5
 httpx==0.27.0
 idna==3.7
