@@ -1,5 +1,7 @@
 Lint:
   stage: linters
+  dependencies:
+    - install
   script:
     - python -m flake8
   tags:
