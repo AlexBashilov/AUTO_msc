@@ -11,9 +11,8 @@
   before_script:
     - wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
     - chmod +x ./allurectl
-    - touch .env.local
   script:
-    - ./allurectl watch -- pytest tests/ --alluredir _output
+    - pytest tests/
   after_script:
     - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
