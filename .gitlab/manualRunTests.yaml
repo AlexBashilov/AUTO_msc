@@ -8,11 +8,11 @@
     - triggers
     - pipelines
   when: manual
-  before_script:
-    - wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
-    - chmod +x ./allurectl
+#  before_script:
+#    - wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
+#    - chmod +x ./allurectl
   script:
-    - pytest tests/
+    - python -m pytest
   after_script:
     - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
