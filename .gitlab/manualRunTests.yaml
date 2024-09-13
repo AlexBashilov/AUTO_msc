@@ -11,12 +11,9 @@
   before_script:
 #    - wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
 #    - chmod +x ./allurectl
-    - python -V
     - pip install virtualenv
     - virtualenv venv
     - source venv/bin/activate
-    - apt-get update && apt-get install -yq make
-    - make apply_patch
   script:
     - pytest tests/
   after_script:
