@@ -4,13 +4,12 @@ from helperpackage import HelperWd
 
 
 class Base:
-    
     CANCEL_BUTTON = '//span[text()="Отмена"]/ancestor::button'
     CREATE_BUTTON = '#createBtn'
     SAVE_BUTTON = '[data-qa="btn-save"]'
     ACCEPT_BUTTON = '[data-qa="button-accept"]'
     BURGER_MENU_BUTTON = '#burgerBtn'
-    
+
     def __init__(self, driver):
         self.helper = HelperWd(driver)
 
@@ -33,9 +32,8 @@ class Base:
         self.helper.wait_for_element_clickable(self.BURGER_MENU_BUTTON).click()
         self.helper.wait_for_element_visible('#transportCompaniesMenuItem').click()
         self.helper.wait_for_element_visible('//h2[text()="Транспортные компании"]')
-    
+
     @allure.step("Закрыть модальное окно с информацией")
     def close_info_modal(self):
         self.helper.wait_for_element_clickable(self.CANCEL_BUTTON).click()
         self.helper.wait_for_element_invisibility(self.CANCEL_BUTTON)
-    

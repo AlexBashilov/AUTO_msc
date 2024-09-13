@@ -3,10 +3,8 @@ variables:
   STREAM_COUNT:
     value: "5"
     description: "Укажите количество потоков для запуска автотестов"
-  FILE_NAME:
-    description: "Укажите путь до файла для запуска автотестов (используется для запуска тестов в конкретном файле. Пример: tests/acceptance/mars/api/WtisMarsIntegrationCest.php)"
   DEFAULT_CHANNEL_ID: '5ygdz4813jgp3b9x8j3yzzw6be'
-  ALLURE_LAUNCH_NAME: 'AUTOTESTS - ${CI_COMMIT_REF_NAME} - ${GITLAB_USER_LOGIN}'
+  ALLURE_LAUNCH_NAME: 'AUTOTESTS Python - ${CI_COMMIT_REF_NAME} - ${GITLAB_USER_LOGIN}'
 
 ###################################### Докер образ
 image: harbor.vseinstrumenti.ru/dockerhub/library/python:3.12-bullseye
@@ -14,11 +12,14 @@ image: harbor.vseinstrumenti.ru/dockerhub/library/python:3.12-bullseye
 ###################################### Стадии pipeline
 stages:
   - install
-  - run-tests
+  - linters
+  - tests
+  - report
 
 ###################################### Подключаемые конфиги
 include:
   - local: .gitlab/install.yaml
+  - local: .gitlab/linter.yaml
   - local: .gitlab/manualRunTests.yaml
   - local: .gitlab/stageConfig.yaml
 

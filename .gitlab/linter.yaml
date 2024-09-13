@@ -1,0 +1,11 @@
+Lint:
+  stage: linters
+  script:
+    - python -m flake8
+  tags:
+    - ci-docker
+  except:
+    refs:
+      - schedules
+      - pipelines
+  allow_failure: true

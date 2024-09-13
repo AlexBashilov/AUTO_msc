@@ -91,6 +91,7 @@ def take_screenshot(driver: WebDriver, test_name):
     with open(screenshot_file_path, "wb") as f:
         f.write(png)
 
+
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item):
     outcome = yield

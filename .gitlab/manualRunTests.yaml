@@ -21,11 +21,6 @@
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
   tags:
     - ci-docker
-  artifacts:
-    when: always
-    paths:
-      - _output/
-    expire_in: 1 day
   cache:
     key: "$CI_COMMIT_REF_SLUG"
     paths:

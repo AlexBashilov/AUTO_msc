@@ -1,20 +1,17 @@
 ###################################### Стадия install
 install:
   stage: install
-  variables:
-    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  cache:
-    key: "$CI_COMMIT_REF_SLUG"
-    paths:
-      - .cache/pip
-      - venv/
   before_script:
-    - python -V
     - pip install virtualenv
     - virtualenv venv
     - source venv/bin/activate
   script:
     - pip install -Ur requirements.txt
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/pip
+      - venv/
   tags:
     - ci-docker
 

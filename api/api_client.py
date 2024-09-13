@@ -1,6 +1,6 @@
 import os
 
-from httpx import Client, Response
+from httpx import Client
 
 
 class ApiClient(Client):

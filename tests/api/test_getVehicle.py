@@ -5,7 +5,7 @@ import pytest
 from api.api_client import ApiClient
 from api.utils import assert_schema
 from api.vehicle_api import get_vehicle
-from models.getVehicle_models import GetVehicleResponseSchema, GetVehicleErrorSchema
+from api.models.getVehicle_models import GetVehicleResponseSchema, GetVehicleErrorSchema
 
 
 class TestGetVehicle:
@@ -23,7 +23,7 @@ class TestGetVehicle:
         """
         body = {"params": {"id": 934}, "requestId": "0c5b2444-70a0-4932-980c-b4dc0d3f02b5"}
         response = get_vehicle(client, body)
-        assert response.status_code == HTTPStatus.OK, f"Код ответа response.status_code"
+        assert response.status_code == HTTPStatus.OK, f"Код ответа {response.status_code}"
         assert_schema(response, GetVehicleResponseSchema)
 
     def test_get_vehicle_send_not_exist_vehicle(self, client):
@@ -33,7 +33,7 @@ class TestGetVehicle:
         body = {"params": {"id": 999999}, "requestId": "0c5b2444-70a0-4932-980c-b4dc0d3f02b5"}
         response = get_vehicle(client, body)
 
-        assert response.status_code == HTTPStatus.BAD_REQUEST, f"Код ответа response.status_code"
+        assert response.status_code == HTTPStatus.BAD_REQUEST, f"Код ответа {response.status_code}"
         assert_schema(response, GetVehicleErrorSchema)
         response_json = GetVehicleErrorSchema.model_validate_json(response.content)
         assert (
