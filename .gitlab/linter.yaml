@@ -1,6 +1,9 @@
 Lint:
   stage: linters
   script:
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
     - python -m flake8
   tags:
     - ci-docker
