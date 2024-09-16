@@ -9,4 +9,4 @@ class ApiClient(Client):
     """
 
     def __init__(self):
-        super().__init__(base_url='https://tms-api-rest.intgr-test-' + os.getenv('STAGE') + '.ox1.dev/api')
+        super().__init__(base_url='https://tms-api-rest.intgr-test-' + os.getenv('STAGE') + '.ox1.dev/api_utils')

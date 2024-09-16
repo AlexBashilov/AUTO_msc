@@ -21,11 +21,11 @@ def assert_schema(response, model: Type[BaseModel]):
 
 
 def assert_response_code(expected_code, actual_code):
-    allure.step("Проверить что код ответа соответствует - " + str(expected_code))
-    assert actual_code == expected_code, f"Код ответа {actual_code}"
+    with allure.step("Проверить что код ответа соответствует - " + str(expected_code)):
+        assert actual_code == expected_code, f"Код ответа {actual_code}"
 
 
-@allure.step("Проверить текс ошибки")
+@allure.step("Проверить текст ошибки")
 def assert_error_message(expected_error, actual_error):
     assert (
             actual_error == expected_error

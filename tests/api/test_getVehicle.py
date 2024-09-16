@@ -4,18 +4,14 @@ from http import HTTPStatus
 import allure
 import pytest
 
-from api.api_client import ApiClient
-from api.utils import assert_schema, assert_response_code, assert_error_message
-from api.vehicle_api import get_vehicle
-from api.models.getVehicle_models import GetVehicleResponseSchema, GetVehicleErrorSchema, GetVehicleRequestSchema, \
+from api_utils.api_client import ApiClient
+from api_utils.utils import assert_schema, assert_response_code, assert_error_message
+from api_utils.vehicle_api import get_vehicle
+from api_utils.models.getVehicle_models import GetVehicleResponseSchema, GetVehicleErrorSchema, GetVehicleRequestSchema, \
     VehicleRequestParams
 
 
 class TestGetVehicle:
-    """
-    Тесты /getVehicle
-    """
-
     @pytest.fixture(scope='class')
     def client(self):
         return ApiClient()

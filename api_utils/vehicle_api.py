@@ -2,7 +2,7 @@ import allure
 from allure_commons.types import AttachmentType
 from pydantic import BaseModel
 
-from api import routes
+from api_utils import routes
 
 
 @allure.step("Отправить GET запрос на ручку /get_vehicle")
