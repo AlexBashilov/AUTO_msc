@@ -3,6 +3,15 @@ from typing import List
 from pydantic import BaseModel
 
 
+class VehicleRequestParams(BaseModel):
+    id: int
+
+
+class GetVehicleRequestSchema(BaseModel):
+    requestId: str
+    params: VehicleRequestParams
+
+
 class VehicleData(BaseModel):
     id: int
     transportCompanyIds: List[int]

@@ -1,11 +1,14 @@
+import uuid
 from http import HTTPStatus
 
+import allure
 import pytest
 
 from api.api_client import ApiClient
 from api.utils import assert_schema
 from api.vehicle_api import get_vehicle
-from api.models.getVehicle_models import GetVehicleResponseSchema, GetVehicleErrorSchema
+from api.models.getVehicle_models import GetVehicleResponseSchema, GetVehicleErrorSchema, GetVehicleRequestSchema, \
+    VehicleRequestParams
 
 
 class TestGetVehicle:
@@ -17,20 +20,24 @@ class TestGetVehicle:
     def client(self):
         return ApiClient()
 
+    @allure.id(38875)
+    @allure.title('Получение ТС по id')
     def test_get_vehicle(self, client):
-        """
-        Получение ТС по id
-        """
-        body = {"params": {"id": 934}, "requestId": "0c5b2444-70a0-4932-980c-b4dc0d3f02b5"}
+        body = GetVehicleRequestSchema(
+            requestId=str(uuid.uuid4()),
+            params=VehicleRequestParams(id=934)
+        )
         response = get_vehicle(client, body)
         assert response.status_code == HTTPStatus.OK, f"Код ответа {response.status_code}"
         assert_schema(response, GetVehicleResponseSchema)
 
+    @allure.id(37053)
+    @allure.title('Получить не существующее транспортное средство')
     def test_get_vehicle_send_not_exist_vehicle(self, client):
-        """
-        Получить не существующее транспортное средство
-        """
-        body = {"params": {"id": 999999}, "requestId": "0c5b2444-70a0-4932-980c-b4dc0d3f02b5"}
+        body = GetVehicleRequestSchema(
+            requestId=str(uuid.uuid4()),
+            params=VehicleRequestParams(id=999999)
+        )
         response = get_vehicle(client, body)
 
         assert response.status_code == HTTPStatus.BAD_REQUEST, f"Код ответа {response.status_code}"
