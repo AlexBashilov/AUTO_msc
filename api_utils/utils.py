@@ -20,9 +20,9 @@ def assert_schema(response, model: Type[BaseModel]):
         model.model_validate(body, strict=True)
 
 
+@allure.step("Проверить код ответа")
 def assert_response_code(expected_code, actual_code):
-    with allure.step("Проверить что код ответа соответствует - " + str(expected_code)):
-        assert actual_code == expected_code, f"Код ответа {actual_code}"
+    assert actual_code == expected_code, f"Код ответа {actual_code}"
 
 
 @allure.step("Проверить текст ошибки")
