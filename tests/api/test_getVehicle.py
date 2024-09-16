@@ -5,7 +5,7 @@ import allure
 import pytest
 
 from api.api_client import ApiClient
-from api.utils import assert_schema
+from api.utils import assert_schema, assert_response_code, assert_error_message
 from api.vehicle_api import get_vehicle
 from api.models.getVehicle_models import GetVehicleResponseSchema, GetVehicleErrorSchema, GetVehicleRequestSchema, \
     VehicleRequestParams
@@ -28,7 +28,7 @@ class TestGetVehicle:
             params=VehicleRequestParams(id=934)
         )
         response = get_vehicle(client, body)
-        assert response.status_code == HTTPStatus.OK, f"Код ответа {response.status_code}"
+        assert_response_code(HTTPStatus.OK, response.status_code)
         assert_schema(response, GetVehicleResponseSchema)
 
     @allure.id(37053)
@@ -39,10 +39,8 @@ class TestGetVehicle:
             params=VehicleRequestParams(id=999999)
         )
         response = get_vehicle(client, body)
-
-        assert response.status_code == HTTPStatus.BAD_REQUEST, f"Код ответа {response.status_code}"
+        assert_response_code(HTTPStatus.BAD_REQUEST, response.status_code)
         assert_schema(response, GetVehicleErrorSchema)
         response_json = GetVehicleErrorSchema.model_validate_json(response.content)
-        assert (
-                response_json.errors[0].message == "Ошибка обработки получения ТС: Транспорт с таким ID не существует"
-        ), "Текст ошибки отличается от ожидаемого"
+        assert_error_message("Ошибка обработки получения ТС: Транспорт с таким ID не существует",
+                             response_json.errors[0].message)
