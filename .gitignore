@@ -2,3 +2,4 @@
 /.idea/
 /.env.local
 /tests/.pytest_cache/
+_output
