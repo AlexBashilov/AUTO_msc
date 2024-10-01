@@ -1,8 +1,12 @@
 import requests
+#import pytest
+#from tests.test_create_item import response
 
+#otvet = response.request.body[id]
 
-res = requests.get('http://localhost:8080/book_cost_items/get_all')
+res = requests.get('http://localhost:8080/book_cost_items/get_only_one/63')
 
-
-def test_res():
+#@pytest.mark.parametrize
+def test_get_only_one():
     assert res.status_code == 200
+
