@@ -4,7 +4,7 @@ import requests
 
 #otvet = response.request.body[id]
 
-res = requests.get('http://localhost:8080/book_cost_items/get_only_one/63')
+res = requests.get('http://localhost:8080/book_cost_items/get_only_one/60')
 
 #@pytest.mark.parametrize
 def test_get_only_one():
