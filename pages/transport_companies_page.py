@@ -98,30 +98,30 @@ class TransportCompaniesPage:
     def filter_transport_company(self, tkInfo):
         self.helper.wait_for_element_visible(self.TRANSPORT_COMPANY_FILTER).click()
         self.helper.wait_for_element_visible(self.FILTER_TK)
-        self.helper.fill_field(self.FILTER_TK, tkInfo[TransportCompanies.SHORT_NAME_TRANSPORTER])
+        self.helper.fill_field_with_delay(self.FILTER_TK, tkInfo[TransportCompanies.SHORT_NAME_TRANSPORTER])
         self.helper.wait_for_element_visible(
             '//span[text()="' + tkInfo[TransportCompanies.SHORT_NAME_TRANSPORTER] + '"]').click()
 
     @allure.step('Удалить первую ТК в списке')
     def delete_first_transport_company_on_the_list(self, tkInfo):
-        self.helper.wait_for_element_visible('[data-qa^="action-delete-modal"]', 15).click()
-        self.helper.wait_for_element_visible(self.ACCEPT_BUTTON, 15)
+        self.helper.wait_for_element_visible('[data-qa^="action-delete-modal"]').click()
+        self.helper.wait_for_element_visible(self.ACCEPT_BUTTON)
         assert (tkInfo[TransportCompanies.SHORT_NAME_TRANSPORTER] in
                 self.helper.wait_for_element_visible('[data-qa="typo-delete-tc"]').text), \
             'Сообщение при удалении не содержит краткое имя ТК!'
-        self.helper.wait_for_element_visible(self.ACCEPT_BUTTON, 15).click()
-        self.helper.wait_for_element_invisibility(self.ACCEPT_BUTTON, 15)
+        self.helper.wait_for_element_visible(self.ACCEPT_BUTTON).click()
+        self.helper.wait_for_element_invisibility(self.ACCEPT_BUTTON)
 
     @allure.step('Проверить что на странице нет указанной ТК')
     def check_lack_transport_company_on_the_list(self, tkInfo):
-        self.helper.wait_for_element_visible(self.TRANSPORT_COMPANY_FILTER, 15).click()
+        self.helper.wait_for_element_visible(self.TRANSPORT_COMPANY_FILTER).click()
         self.helper.wait_for_element_visible(self.FILTER_TK)
-        self.helper.fill_field(self.FILTER_TK, tkInfo[TransportCompanies.SHORT_NAME_TRANSPORTER])
-        self.helper.wait_for_element_invisibility(tkInfo[TransportCompanies.SHORT_NAME_TRANSPORTER], 15)
+        self.helper.fill_field_with_delay(self.FILTER_TK, tkInfo[TransportCompanies.SHORT_NAME_TRANSPORTER])
+        self.helper.wait_for_element_invisibility('//span[text()="' + tkInfo[TransportCompanies.SHORT_NAME_TRANSPORTER] + '"]')
 
     @allure.step('Перейти в первую ТК в списке')
     def go_to_first_transport_company_on_the_list(self):
-        self.helper.wait_for_element_visible('[href^="/transport-companies"]', 15).click()
+        self.helper.wait_for_element_visible('[href^="/transport-companies"]').click()
 
     @allure.step('Проверить ошибку при создании транспортной компании')
     def check_error_message_after_save_transport_company(self, expectedError):
