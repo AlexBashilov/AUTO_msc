@@ -7,7 +7,7 @@ class ValidTransportCompanies:
             {
                 'name': 'Создание транспортной компании тип владения "ООО" и её последующее удаление',
                 'allureID': '27651',
-                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс',
+                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс 1',
                 TransportCompanies.REGISTERED_ADDRESS_TRANSPORTER: 'ул. Мира, 44/9, Владимир, Владимирская обл., 600009',
                 TransportCompanies.SHORT_NAME_TRANSPORTER: 'Авто Регресс 1',
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_OOO,
@@ -24,7 +24,7 @@ class ValidTransportCompanies:
             {
                 'name': 'Создание транспортной компании тип владения "ЗАО" и её последующее удаление ',
                 'allureID': '54541',
-                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс',
+                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс 2',
                 TransportCompanies.REGISTERED_ADDRESS_TRANSPORTER: 'ул. Мира, 44/9, Владимир, Владимирская обл., 600009',
                 TransportCompanies.SHORT_NAME_TRANSPORTER: 'Авто Регресс 2',
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_ZAO,
@@ -41,7 +41,7 @@ class ValidTransportCompanies:
             {
                 'name': 'Создание транспортной компании тип владения "ИП" и её последующее удаление ',
                 'allureID': '54542',
-                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс',
+                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс 3',
                 TransportCompanies.REGISTERED_ADDRESS_TRANSPORTER: 'ул. Мира, 44/9, Владимир, Владимирская обл., 600009',
                 TransportCompanies.SHORT_NAME_TRANSPORTER: 'Авто Регресс 3',
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_IP,
@@ -58,7 +58,7 @@ class ValidTransportCompanies:
             {
                 'name': 'Создание транспортной компании тип владения "ИП" без КПП',
                 'allureID': '54543',
-                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс',
+                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс 4',
                 TransportCompanies.REGISTERED_ADDRESS_TRANSPORTER: 'ул. Мира, 44/9, Владимир, Владимирская обл., 600009',
                 TransportCompanies.SHORT_NAME_TRANSPORTER: 'Авто Регресс 4',
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_IP,
@@ -74,7 +74,7 @@ class ValidTransportCompanies:
             {
                 'name': 'Создание транспортной компании тип владения "ОАО" и её последующее удаление ',
                 'allureID': '54544',
-                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс',
+                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс 5',
                 TransportCompanies.REGISTERED_ADDRESS_TRANSPORTER: 'ул. Мира, 44/9, Владимир, Владимирская обл., 600009',
                 TransportCompanies.SHORT_NAME_TRANSPORTER: 'Авто Регресс 5',
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_OAO,
@@ -91,7 +91,7 @@ class ValidTransportCompanies:
             {
                 'name': 'Создание транспортной компании тип владения "АО" и её последующее удаление ',
                 'allureID': '54545',
-                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс',
+                TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER: 'Автотестовая транспортная компания Регресс 6',
                 TransportCompanies.REGISTERED_ADDRESS_TRANSPORTER: 'ул. Мира, 44/9, Владимир, Владимирская обл., 600009',
                 TransportCompanies.SHORT_NAME_TRANSPORTER: 'Авто Регресс 6',
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_AO,
