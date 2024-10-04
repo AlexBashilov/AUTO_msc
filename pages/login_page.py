@@ -23,7 +23,7 @@ class Login:
         try:
             self.helper.wait_for_element_visible(login_button).click()
             self.helper.wait_for_element_visible(login_field)
-        except:
+        except Exception:
             self.helper.wait_for_element_visible(login_button).click()
             self.helper.wait_for_element_visible(login_field)
 

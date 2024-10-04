@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from testData.transport_companies import TransportCompanies
 from testData.error_transport_companies_messages import ErrorTransportCompaniesMessages
 

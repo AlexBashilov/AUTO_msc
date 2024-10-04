@@ -106,9 +106,8 @@ class TransportCompaniesPage:
     def delete_first_transport_company_on_the_list(self, tkInfo):
         self.helper.wait_for_element_visible('[data-qa^="action-delete-modal"]', 15).click()
         self.helper.wait_for_element_visible(self.ACCEPT_BUTTON, 15)
-        assert (self.helper.wait_for_element_visible('[data-qa="typo-delete-tc"]').text == tkInfo[
-            TransportCompanies.SHORT_NAME_TRANSPORTER],
-                'Сообщение при удалении не содержит краткое имя ТК!')
+        assert self.helper.wait_for_element_visible('[data-qa="typo-delete-tc"]').text == tkInfo[
+            TransportCompanies.SHORT_NAME_TRANSPORTER], 'Сообщение при удалении не содержит краткое имя ТК!'
         self.helper.wait_for_element_visible(self.ACCEPT_BUTTON, 15).click()
         self.helper.wait_for_element_invisibility(self.ACCEPT_BUTTON, 15)
 
@@ -126,5 +125,5 @@ class TransportCompaniesPage:
     @allure.step('Проверить ошибку при создании транспортной компании')
     def check_error_message_after_save_transport_company(self, expectedError):
         self.helper.wait_for_element_visible(self.SAVE_BUTTON).click()
-        assert (self.helper.wait_for_element_visible('[data-qa^="error-message"]').text == expectedError,
-                'Сообщение об ошибке не совпадает!')
+        assert self.helper.wait_for_element_visible(
+            '[data-qa^="error-message"]').text == expectedError, 'Сообщение об ошибке не совпадает!'
