@@ -35,7 +35,7 @@ class TransportCompanies:
             self.KPP_TRANSPORTER: fake.random_number(digits=9, fix_len=True),
             self.INN_TRANSPORTER: fake.random_number(digits=12),
             self.CONTRACT_NUMBER: fake.random_number(digits=20),
-            self.CONTRACT_DATE: fake.date(pattern='%d%m%Y'),
+            self.CONTRACT_DATE: fake.date(pattern='%d-%m-%Y'),
             self.CONTACT_FACE_TRANSPORTER: fake.name(),
             self.POSITION_OF_CONTACT_PERSON: fake.job(),
             self.PHONE_NUMBER: fake.phone_number(),
