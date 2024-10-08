@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from faker import Faker
 
+
 @dataclass
 class TransportCompanies:
     FULL_NAME_OF_THE_TRANSPORTER = 'Полное наименование перевозчика'
