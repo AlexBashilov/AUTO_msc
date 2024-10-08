@@ -69,7 +69,7 @@ class TransportCompaniesPage:
                 tkInfo[TransportCompanies.CONTRACT_NUMBER])
 
         if TransportCompanies.CONTRACT_DATE in tkInfo:
-            self.helper.wait_for_element_visible('[data-qa="tk-contract-date"]').click()
+            self.helper.wait_for_element_visible('[data-qa="tk-contract-date"]')
             self.helper.fill_field(
                 '[data-qa="tk-contract-date"] input',
                 tkInfo[TransportCompanies.CONTRACT_DATE])
