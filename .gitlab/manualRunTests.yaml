@@ -26,6 +26,11 @@
     paths:
       - .cache/pip
       - venv/
+  artifacts:
+    when: always
+    paths:
+      - _output/
+    expire_in: 1 day
 
 ###################################### Стадия тестов wms-test
 integrtest-1:
