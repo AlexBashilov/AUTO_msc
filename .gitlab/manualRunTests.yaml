@@ -15,7 +15,7 @@
     - virtualenv venv
     - source venv/bin/activate
   script:
-    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT --reruns 2 tests/ --alluredir _output
+    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/ --alluredir _output
   after_script:
     - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
