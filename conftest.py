@@ -82,8 +82,3 @@ def pytest_runtest_makereport(item):
                 )
         except Exception:
             print("Не удалось получить скриншот")
-
-
-@pytest.fixture(scope='session', autouse=True)
-def faker_session_locale():
-    return ['ru_RU']

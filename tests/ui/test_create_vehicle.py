@@ -16,12 +16,12 @@ class TestCreateVehicle:
     invalidVehicle = InvalidVehicle().list_of_invalid_vehicle_parameters()
 
     @pytest.mark.parametrize("example", validVehicle)
-    def test_create_vehicle_and_delete(self, driver, faker, example):
+    def test_create_vehicle_and_delete(self, driver, example):
         base = Base(driver)
         login = Login(driver)
         tc = TransportCompaniesPage(driver)
         vehicle = VehiclePage(driver)
-        transport_company = TransportCompanies().generate_random_tc(example['name'], faker)
+        transport_company = TransportCompanies().generate_random_tc(example['name'])
 
         allure.dynamic.title('Создание транспортного средства с типом ТС ' + example['name'])
         allure.dynamic.id(example['allureID'])
@@ -45,12 +45,12 @@ class TestCreateVehicle:
         tc.check_lack_transport_company_on_the_list(transport_company)
 
     @pytest.mark.parametrize("example", invalidVehicle)
-    def test_create_invalid_vehicle(self, driver, faker, example):
+    def test_create_invalid_vehicle(self, driver, example):
         base = Base(driver)
         login = Login(driver)
         tc = TransportCompaniesPage(driver)
         vehicle = VehiclePage(driver)
-        transport_company = TransportCompanies().generate_random_tc(example['name'], faker)
+        transport_company = TransportCompanies().generate_random_tc(example['name'])
 
         allure.dynamic.title(example['name'])
         allure.dynamic.id(example['allureID'])
@@ -72,13 +72,13 @@ class TestCreateVehicle:
         tc.check_lack_transport_company_on_the_list(transport_company)
 
     @pytest.mark.parametrize("example", validVehicle)
-    def test_select_exist_vehicle(self, driver, faker, example):
+    def test_select_exist_vehicle(self, driver, example):
         base = Base(driver)
         login = Login(driver)
         tc = TransportCompaniesPage(driver)
         vehicle = VehiclePage(driver)
-        transport_company_first = TransportCompanies().generate_random_tc(example['name'], faker)
-        transport_company_second = TransportCompanies().generate_random_tc(example['name'], faker)
+        transport_company_first = TransportCompanies().generate_random_tc(example['name'])
+        transport_company_second = TransportCompanies().generate_random_tc(example['name'])
 
         allure.dynamic.title('Добавление уже существующего ТС в ТК с типом ТС ' + example['name'])
         allure.dynamic.id(example['allureID'])
