@@ -1,11 +1,10 @@
 import os
 import allure
-import datetime
 import pytest
 from allure_commons.types import AttachmentType
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options as chrome_options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from _pytest.fixtures import FixtureRequest
@@ -53,12 +52,12 @@ def get_webdriver() -> WebDriver:
         )
 
 
-def get_chrome_options(headless=True):
+def get_chrome_options(headless=True) -> ChromeOptions:
     """
     Получение настроек для браузера chrome
     :return:
     """
-    options = chrome_options()
+    options = ChromeOptions()
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1920,1080")
     options.add_argument("--ignore-certificate-errors")
