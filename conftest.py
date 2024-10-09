@@ -16,7 +16,7 @@ DIRECTORY_PATH = os.path.dirname(os.path.abspath(__file__))
 @pytest.fixture(scope="function")
 def driver(request: FixtureRequest) -> WebDriver:
     """
-    Получение объекта webdriver с возможностью сделать скриншот при падении автотеста
+    Получение объекта webdriver
     """
     test_name = request.node.name
     print(
@@ -30,17 +30,11 @@ def driver(request: FixtureRequest) -> WebDriver:
         request.cls.driver = driver
     print("Запустить браузер для тестов...\n")
     yield driver
-    # if not request.node.rep_call.passed:
-    #     take_screenshot(driver, test_name)
-    #     url_error = f"Url на котором упал автотест {driver.current_url}"
-    #     with allure.step(url_error):
-    #         pass
-    #     print(f"Сделан скриншот места падения теста\n{url_error}\n")
     print("\nЗавершить сеанс браузера...")
     driver.quit()
 
 
-def get_webdriver():
+def get_webdriver() -> WebDriver:
     """
     Получение объекта webdriver
     :return: объект webdriver
@@ -72,25 +66,6 @@ def get_chrome_options(headless=True):
     if headless:
         options.add_argument("--headless")
     return options
-
-
-def take_screenshot(driver: WebDriver, test_name):
-    """
-    Делаем скриншот
-    :param driver: объект webdriver
-    :param test_name: имя теста
-    """
-    date_now = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    filename = f"{test_name}_{date_now}.png"
-    os.makedirs(os.path.join(DIRECTORY_PATH, "_output"), exist_ok=True)
-    screenshot_file_path = os.path.join(DIRECTORY_PATH, "_output", filename)
-    png = driver.get_screenshot_as_png()
-    allure.attach(
-        png, name="Скриншот места падения теста", attachment_type=AttachmentType.PNG
-    )
-
-    with open(screenshot_file_path, "wb") as f:
-        f.write(png)
 
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
