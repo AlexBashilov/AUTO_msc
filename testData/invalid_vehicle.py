@@ -4,7 +4,7 @@ from faker import Faker
 
 class InvalidVehicle:
     def list_of_invalid_vehicle_parameters(self):
-        fake = Faker(['ru_RU'])
+        fake = Faker()
         return [
             {
                 'name': 'Создание ТС типа фургон без марки',

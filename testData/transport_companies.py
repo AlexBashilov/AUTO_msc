@@ -24,7 +24,7 @@ class TransportCompanies:
     EMAIL = 'Почта контактного лица'
 
     def generate_random_tc(self, case_name):
-        fake = Faker(['ru_RU'])
+        fake = Faker()
 
         tc = {
             self.FULL_NAME_OF_THE_TRANSPORTER: 'ТК для кейса ' + case_name + str(fake.random_number(digits=3)),
