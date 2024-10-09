@@ -9,7 +9,7 @@ from pages.vehicle_page import VehiclePage
 from testData.transport_companies import TransportCompanies
 from testData.invalid_vehicle import InvalidVehicle
 from testData.valid_vehicle import ValidVehicle
-from faker import Faker
+
 
 class TestCreateVehicle:
     validVehicle = ValidVehicle().list_of_vehicle_parameters()
