@@ -16,7 +16,7 @@ class ValidVehicle:
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
                 Vehicles.CAPACITY_CENTIMETERS: '18',
                 Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
                 Vehicles.PAYLOAD: '10'
             },
             {
@@ -26,7 +26,7 @@ class ValidVehicle:
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_TRUCK,
                 Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_VOLVO,
                 Vehicles.MODEL_VEHICLE: 'FH-TRUCK 6x4',
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
             },
             {
                 'name': 'полуприцеп',
@@ -35,7 +35,7 @@ class ValidVehicle:
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_SEMITRAILER,
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_40,
                 Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
                 Vehicles.PAYLOAD: '15'
             },
             {
@@ -47,7 +47,7 @@ class ValidVehicle:
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
                 Vehicles.CAPACITY_CENTIMETERS: '18',
                 Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
                 Vehicles.PAYLOAD: '10'
             },
             {
@@ -59,7 +59,7 @@ class ValidVehicle:
                 Vehicles.MODEL_VEHICLE: '53215',
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
                 Vehicles.CAPACITY_CENTIMETERS: '18',
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
                 Vehicles.PAYLOAD: '10'
             },
             {
@@ -68,7 +68,7 @@ class ValidVehicle:
                 'allureIdExistVehicle': '49163',
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_TRUCK,
                 Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_VOLVO,
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
             },
             {
                 'name': 'полуприцеп без типа кузова',
@@ -76,7 +76,7 @@ class ValidVehicle:
                 'allureIdExistVehicle': '37074',
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_SEMITRAILER,
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_40,
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
                 Vehicles.PAYLOAD: '105'
             },
         ]

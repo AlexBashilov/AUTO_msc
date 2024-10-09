@@ -14,7 +14,7 @@ class InvalidVehicle:
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
                 Vehicles.CAPACITY_CENTIMETERS: '18',
                 Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
                 Vehicles.PAYLOAD: '10',
                 'error': 'Поле обязательно для заполнения.'
             },
@@ -39,7 +39,7 @@ class InvalidVehicle:
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
                 Vehicles.CAPACITY_CENTIMETERS: '18',
                 Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
                 'error': 'Поле обязательно для заполнения.'
             },
             {
@@ -47,7 +47,7 @@ class InvalidVehicle:
                 'allureID': '39714',
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_TRUCK,
                 Vehicles.MODEL_VEHICLE: 'FH-TRUCK 6x4',
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
                 'error': 'Поле обязательно для заполнения.'
             },
             {
@@ -73,6 +73,6 @@ class InvalidVehicle:
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_SEMITRAILER,
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_40,
                 Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
-                Vehicles.NUMBER: fake.bothify('?###??##'),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
                 'error': 'Поле обязательно для заполнения.'
             }, ]
