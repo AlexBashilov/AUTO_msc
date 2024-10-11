@@ -1,12 +1,11 @@
 import requests
-#import pytest
-#from tests.test_create_item import response
+from decouple import config
 
-#otvet = response.request.body[id]
+URL_GetOne = config('LOCALHOST_Get_One')
 
-res = requests.get('http://localhost:8080/book_cost_items/get_only_one/60')
 
-#@pytest.mark.parametrize
+res = requests.get(URL_GetOne)
+
 def test_get_only_one():
     assert res.status_code == 200
 

@@ -1,7 +1,11 @@
 import requests
-#from tests.settings import LOCALHOST
+from decouple import config
 
-res = requests.get('http://localhost:8080/book_cost_items/get_all')
+
+URL_GetAll = config('LOCALHOST_Get_All')
+
+
+res = requests.get(URL_GetAll)
 
 
 def test_get_all():
