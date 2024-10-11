@@ -15,8 +15,7 @@ class TestCreateVehicle:
     validVehicle = ValidVehicle().list_of_vehicle_parameters()
     invalidVehicle = InvalidVehicle().list_of_invalid_vehicle_parameters()
 
-    @pytest.mark.parametrize("example", validVehicle, ids=[validVehicle['allureID'] for validVehicle in validVehicle])
-    @allure.title("Создание транспортного средства с типом ТС {example['name']}")
+    @pytest.mark.parametrize("example", validVehicle)
     def test_create_vehicle_and_delete(self, driver, example):
         base = Base(driver)
         login = Login(driver)
@@ -24,8 +23,8 @@ class TestCreateVehicle:
         vehicle = VehiclePage(driver)
         transport_company = TransportCompanies().generate_random_tc(example['name'])
 
-        # allure.dynamic.title('Создание транспортного средства с типом ТС ' + example['name'])
-        # allure.dynamic.id(example['allureID'])
+        allure.dynamic.title('Создание транспортного средства с типом ТС ' + example['name'])
+        allure.dynamic.id(example['allureID'])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()
