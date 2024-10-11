@@ -13,6 +13,7 @@ class VehiclePage:
 
     def __init__(self, driver):
         self.helper = HelperWd(driver)
+        self.driver = driver
 
     @allure.step('Нажать на кнопку "Добавить ТС"')
     def create_vehicle(self):
@@ -88,8 +89,9 @@ class VehiclePage:
 
     @allure.step('Проверить что на странице нет указанного транспортного средства')
     def check_lack_vehicle_on_the_list(self, vehicleInfo):
+        self.driver.refresh()
         self.helper.wait_for_element_visible(self.VEHICLE_NUMBER_FILTER, 15)
-        self.helper.fill_field_with_delay(
+        self.helper.fill_field(
             self.VEHICLE_NUMBER_FILTER,
             vehicleInfo[Vehicles.NUMBER]
         )
