@@ -25,7 +25,6 @@
         pip install ruff
         ruff check --output-format=github .
       continue-on-error: true
-
     steps:
           - uses: actions/checkout@v4
           - name: Setup Python
