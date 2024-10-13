@@ -1,4 +1,4 @@
-  name: code_checking
+  name: Audit
 
   on:
     push:
@@ -6,9 +6,9 @@
     pull_request:
       branches: [main]
 
-  jobs: code_checking
+  jobs:
 
-    code_checking:
+    audit:
       runs-on: ubuntu-20.04
   steps:
   - uses: actions/checkout@v4
