@@ -1,4 +1,4 @@
-  name: code checking
+  name: code_checking
 
   on:
     push:
