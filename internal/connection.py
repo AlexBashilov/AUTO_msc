@@ -1,7 +1,6 @@
 import psycopg2
 from psycopg2 import OperationalError
 from decouple import config
-from serialiser import get_json_data
 
 PosgteSQLConfig = config('PosgteSQLConfig')
 
@@ -35,9 +34,7 @@ connection = create_connection(
 )
 select_users = "SELECT guid FROM book_cost_items WHERE id = 5"
 users = execute_read_query(connection, select_users)
-users = ''.join(str(users))
-print(users)
-if '04758184-78c7-455f-91ac-dcb169b9350c' == ''.join(map(str, users)):
+if '04758184-78c7-455f-91ac-dcb169b9350c' in str(users):
     print('OK')
 else: print('error')
 
