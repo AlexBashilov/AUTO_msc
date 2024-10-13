@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2 import OperationalError
 from decouple import config
 
-PosgteSQLConfig = config('PosgteSQLConfig')
+#PosgteSQLConfig = config('PosgteSQLConfig')
 
 def create_connection(db_name, db_user, db_password, db_host, db_port):
     connection = None
