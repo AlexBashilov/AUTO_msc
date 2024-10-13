@@ -36,7 +36,8 @@ select_users = "SELECT guid FROM book_cost_items WHERE id = 5"
 users = execute_read_query(connection, select_users)
 if '04758184-78c7-455f-91ac-dcb169b9350c' in str(users):
     print('OK')
-else: print('error')
+else: 
+    print('error')
 
 
 connection.close()
