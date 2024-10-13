@@ -14,7 +14,7 @@ class TestCreateItems:
     
     def test_create_item(self, client):
         body = RequestCreateItems(
-            item_name=str('fantomas4'),
+            item_name=str('fantomas6'),
             guid=str(uuid.uuid4()),
             description=str('opisanie')
         )

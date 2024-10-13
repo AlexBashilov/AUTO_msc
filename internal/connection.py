@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2 import OperationalError
-from decouple import config
+#from decouple import config
 
 #PosgteSQLConfig = config('PosgteSQLConfig')
 
