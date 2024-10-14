@@ -16,7 +16,7 @@ class TestCreateVehicle:
     invalidVehicle = InvalidVehicle().list_of_invalid_vehicle_parameters()
 
     @pytest.mark.parametrize("example", validVehicle)
-    def test_create_vehicle_and_delete(self, driver, example):
+    def test_create_valid_vehicle(self, driver, example):
         base = Base(driver)
         login = Login(driver)
         tc = TransportCompaniesPage(driver)

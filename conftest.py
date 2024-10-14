@@ -9,8 +9,6 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from _pytest.fixtures import FixtureRequest
 
-DIRECTORY_PATH = os.path.dirname(os.path.abspath(__file__))
-
 
 @pytest.fixture(scope="function")
 def driver(request: FixtureRequest) -> WebDriver:

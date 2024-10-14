@@ -30,43 +30,43 @@ class DriversPage:
         self.helper.wait_for_element_visible(self.SAVE_BUTTON, 15)
 
         if Drivers.LAST_NAME in driverInfo:
-            self.helper.fill_field_with_delay(
+            self.helper.fill_field(
                 'input[data-qa="form-surname"]',
                 driverInfo[Drivers.LAST_NAME]
             )
 
         if Drivers.FIRST_NAME in driverInfo:
-            self.helper.fill_field_with_delay(
+            self.helper.fill_field(
                 'input[data-qa="form-name"]',
                 driverInfo[Drivers.FIRST_NAME]
             )
 
         if Drivers.MIDDLE_NAME in driverInfo:
-            self.helper.fill_field_with_delay(
+            self.helper.fill_field(
                 'input[data-qa="form-patronymic"]',
                 driverInfo[Drivers.MIDDLE_NAME]
             )
 
         if Drivers.PHONE_NUMBER in driverInfo:
-            self.helper.fill_field_with_delay(
+            self.helper.fill_field(
                 'input[data-qa="form-phone"]',
                 driverInfo[Drivers.PHONE_NUMBER]
             )
 
         if Drivers.PASSPORT_NUMBER in driverInfo:
-            self.helper.fill_field_with_delay(
+            self.helper.fill_field(
                 'input[data-qa="form-passport-number"]',
                 driverInfo[Drivers.PASSPORT_NUMBER]
             )
 
         if Drivers.PASSPORT_DATE in driverInfo:
-            self.helper.fill_field_with_delay(
+            self.helper.fill_field(
                 'input[data-qa="form-passport-date"]',
                 driverInfo[Drivers.PASSPORT_DATE]
             )
 
         if Drivers.LICENSE_NUMBER in driverInfo:
-            self.helper.fill_field_with_delay(
+            self.helper.fill_field(
                 'input[data-qa="form-license-number"]',
                 driverInfo[Drivers.LICENSE_NUMBER]
             )
@@ -94,7 +94,8 @@ class DriversPage:
             self.DRIVER_PHONE_NUMBER_FILTER_INPUT,
             driverInfo[Drivers.PHONE_NUMBER],
         )
-        assert self.helper.wait_for_element_visible(self.TABLE_DATA).text == driverInfo[Drivers.PHONE_NUMBER], \
+        self.helper.wait_for_element_visible('//span[text()="+7' + driverInfo[Drivers.PHONE_NUMBER] + '"]').click()
+        assert ('+7' + driverInfo[Drivers.PHONE_NUMBER]) in self.helper.wait_for_element_visible(self.TABLE_DATA).text, \
             'Табличная часть водителей не содержит номер телефона водителя!'
         self.helper.wait_for_element_visible('//span[text()="+7' + driverInfo[Drivers.PHONE_NUMBER] + '"]').click()
 
@@ -108,8 +109,7 @@ class DriversPage:
         self.helper.wait_for_element_visible('[data-qa^="action-delete-driver"]', 15).click()
         self.helper.wait_for_element_visible(self.ACCEPT_BUTTON)
         self.helper.wait_for_element_invisibility('//*[contains(text(),"undefined")]', 15)
-        assert (fioDriver in self.helper.wait_for_element_visible('[data-qa="typo-delete-driver"]').text), \
-            'Сообщение при удалении не содержит ФИО водителя!'
+        assert fioDriver in self.helper.wait_for_element_visible('[data-qa="typo-delete-driver"]').text, 'Сообщение при удалении не содержит ФИО водителя!'
         self.helper.wait_for_element_visible(self.ACCEPT_BUTTON, 15).click()
         self.helper.wait_for_element_invisibility(self.ACCEPT_BUTTON, 15)
 
