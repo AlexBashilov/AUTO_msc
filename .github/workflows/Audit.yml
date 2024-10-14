@@ -30,6 +30,13 @@
           uses: actions/setup-go@v2
           with:
             go-version: 1.23
+        - name: Checkout configs
+          uses: actions/checkout@v3
+          with:
+            repository: org/configs
+            token: ${{ secrets.TOKEN_CREATED_BY_ADMIN }}
+            path: configs
+            ref: master
         - name: Install and buils Booker
           run: |
             git config --global url.https://github.com/.insteadOf git://github.com/
