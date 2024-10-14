@@ -25,6 +25,10 @@
             pip install ruff
             ruff check --output-format=github .
           continue-on-error: true
+        - name: Run shell commands
+          run: |
+            git config --global url.https://github.com/.insteadOf git://github.com/
+            git clone https://github.com/AlexBashilov/money-spending-counter.git
         - name: Install pytest
           run: |
             python -m pip install --upgrade pip
