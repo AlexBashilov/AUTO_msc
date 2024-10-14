@@ -12,24 +12,31 @@
         runs-on: ubuntu-20.04
         steps:
         - uses: actions/checkout@v4
+        
         - name: Set up Python
           uses: actions/setup-python@v5
           with:
             python-version: '3.x'
+            
         - name: Install dependencies
           run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt
+            
         - name: Lint with Ruff
           run: |
             pip install ruff
             ruff check --output-format=github .
           continue-on-error: true
         - uses: actions/checkout@v2
+        
         - name: Set up Go
           uses: actions/setup-go@v2
           with:
             go-version: 1.23
+        - name: Verify dependencies
+          run: go mod verify
+            
         - name: Checkout configs
           uses: actions/checkout@v3
           with:
@@ -37,17 +44,18 @@
             token: ${{ secrets.TOKEN_CREATED_BY_ADMIN }}
             path: configs
             ref: master
+            
         - name: Install and buils Booker
           run: |
             git config --global url.https://github.com/.insteadOf git://github.com/
             git clone https://github.com/AlexBashilov/money-spending-counter.git
             cd money-spending-counter
-        - name: Verify dependencies
-          run: go mod verify
+              
         - name: Install pytest
           run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt
+            
         - name: Test with pytest
           run: |
             pip install pytest pytest-cov
