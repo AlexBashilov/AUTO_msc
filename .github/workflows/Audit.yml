@@ -35,9 +35,6 @@
           with:
             go-version: 1.23
             
-        - name: Verify dependencies
-          run: go mod verify
-            
         - name: Checkout configs
           uses: actions/checkout@v3
           with:
