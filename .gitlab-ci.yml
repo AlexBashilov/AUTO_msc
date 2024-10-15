@@ -4,7 +4,7 @@ variables:
     value: "5"
     description: "Укажите количество потоков для запуска автотестов"
   DEFAULT_CHANNEL_ID: '5ygdz4813jgp3b9x8j3yzzw6be'
-  ALLURE_LAUNCH_NAME: 'AUTOTESTS Python - ${CI_COMMIT_REF_NAME} - ${GITLAB_USER_LOGIN}'
+  ALLURE_LAUNCH_NAME: 'Запуск автотестов на ${STAGE} стенде - ${CI_COMMIT_REF_NAME} - ${GITLAB_USER_LOGIN}'
 
 ###################################### Докер образ
 image: harbor.vseinstrumenti.ru/dockerhub/library/python:3.12-bullseye

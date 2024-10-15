@@ -20,8 +20,13 @@ class Login:
         user_credentials = self.get_credentials()
         login_button = '#signInBtn'
 
-        self.helper.wait_for_element_visible(login_button).click()
-        self.helper.wait_for_element_visible(login_field)
+        try:
+            self.helper.wait_for_element_visible(login_button).click()
+            self.helper.wait_for_element_visible(login_field)
+        except Exception:
+            self.helper.wait_for_element_visible(login_button).click()
+            self.helper.wait_for_element_visible(login_field)
+
         self.helper.fill_field(login_field, user_credentials['login'])
         self.helper.fill_field('[name="user_password"][type="password"]', user_credentials['password'])
         self.helper.wait_for_element_visible('//h1[text()="Вход"]/following::a[contains(@class , "primary")]').click()

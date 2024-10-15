@@ -15,7 +15,7 @@
     - virtualenv venv
     - source venv/bin/activate
   script:
-    - ./allurectl watch --results _output -- pytest tests/ --alluredir _output
+    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/ --alluredir _output
   after_script:
     - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
@@ -26,6 +26,11 @@
     paths:
       - .cache/pip
       - venv/
+  artifacts:
+    when: always
+    paths:
+      - _output/
+    expire_in: 1 day
 
 ###################################### Стадия тестов wms-test
 integrtest-1:

@@ -1,21 +1,19 @@
 import os
 import allure
-import datetime
 import pytest
 from allure_commons.types import AttachmentType
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options as chrome_options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-
-DIRECTORY_PATH = os.path.dirname(os.path.abspath(__file__))
+from _pytest.fixtures import FixtureRequest
 
 
 @pytest.fixture(scope="function")
-def driver(request):
+def driver(request: FixtureRequest) -> WebDriver:
     """
-    Получение объекта webdriver с возможностью сделать скриншот при падении автотеста
+    Получение объекта webdriver
     """
     test_name = request.node.name
     print(
@@ -29,17 +27,11 @@ def driver(request):
         request.cls.driver = driver
     print("Запустить браузер для тестов...\n")
     yield driver
-    if not request.node.rep_call.passed:
-        take_screenshot(driver, test_name)
-        url_error = f"Url на котором упал автотест {driver.current_url}"
-        with allure.step(url_error):
-            pass
-        print(f"Сделан скриншот места падения теста\n{url_error}\n")
     print("\nЗавершить сеанс браузера...")
     driver.quit()
 
 
-def get_webdriver():
+def get_webdriver() -> WebDriver:
     """
     Получение объекта webdriver
     :return: объект webdriver
@@ -58,12 +50,12 @@ def get_webdriver():
         )
 
 
-def get_chrome_options(headless=True):
+def get_chrome_options(headless=True) -> ChromeOptions:
     """
     Получение настроек для браузера chrome
     :return:
     """
-    options = chrome_options()
+    options = ChromeOptions()
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1920,1080")
     options.add_argument("--ignore-certificate-errors")
@@ -73,28 +65,18 @@ def get_chrome_options(headless=True):
     return options
 
 
-def take_screenshot(driver: WebDriver, test_name):
-    """
-    Делаем скриншот
-    :param driver: объект webdriver
-    :param test_name: имя теста
-    """
-    date_now = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    filename = f"{test_name}_{date_now}.png"
-    os.makedirs(os.path.join(DIRECTORY_PATH, "_output"), exist_ok=True)
-    screenshot_file_path = os.path.join(DIRECTORY_PATH, "_output", filename)
-    png = driver.get_screenshot_as_png()
-    allure.attach(
-        png, name="Скриншот места падения теста", attachment_type=AttachmentType.PNG
-    )
-
-    with open(screenshot_file_path, "wb") as f:
-        f.write(png)
-
-
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item):
     outcome = yield
     rep = outcome.get_result()
-    setattr(item, "rep_" + rep.when, rep)
-    return rep
+    if rep.when == "call" and rep.failed:
+        try:
+            if "driver" in item.fixturenames:
+                driver: WebDriver = item.funcargs["driver"]
+                allure.attach(
+                    driver.get_screenshot_as_png(),
+                    name="Скриншот места падения теста",
+                    attachment_type=AttachmentType.PNG,
+                )
+        except Exception:
+            print("Не удалось получить скриншот")
