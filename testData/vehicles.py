@@ -14,7 +14,7 @@ class Vehicles:
     PALLET_CAPACITY = 'Вместимость палет'
     PALLET_CAPACITY_10 = '10'
     PALLET_CAPACITY_40 = '40'
-    CAPACITY_CENTIMETERS = 'Вместимость м³'
+    CAPACITY_VOLUME = 'Вместимость м³'
     BODY_TYPE = 'Тип кузова'
     BODY_TYPE_TENT = 'Тент'
     OWNERSHIP_TYPE = 'Тип владения ТС'
