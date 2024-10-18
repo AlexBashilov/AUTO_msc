@@ -2,9 +2,7 @@ import uuid
 from http import HTTPStatus
 
 import allure
-import pytest
 
-from api_utils.api_client import ApiClient
 from api_utils.utils import assert_schema, assert_response_code, assert_error_message
 from api_utils.vehicle_api import get_vehicle
 from api_utils.models.getVehicle_models import GetVehicleResponseSchema, GetVehicleErrorSchema, GetVehicleRequestSchema, \
@@ -12,10 +10,6 @@ from api_utils.models.getVehicle_models import GetVehicleResponseSchema, GetVehi
 
 
 class TestGetVehicle:
-    @pytest.fixture(scope='class')
-    def client(self):
-        return ApiClient()
-
     @allure.id(38875)
     @allure.title('Получение ТС по id')
     def test_get_vehicle(self, client):

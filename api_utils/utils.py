@@ -1,17 +1,12 @@
 from typing import Type
 
 import allure
+from allure_commons.types import AttachmentType
 from pydantic import BaseModel
 
 
 @allure.step("Проверить что ответ соответствует схеме")
 def assert_schema(response, model: Type[BaseModel]):
-    """
-    Проверяет тело ответа на соответствие его схеме механизмами pydantic
-    :param response: ответ от сервера
-    :param model: модель, по которой будет проверяться схема json
-    :raises ValidationError: если тело ответа не соответствует схеме
-    """
     body = response.json()
     if isinstance(body, list):
         for item in body:
@@ -30,3 +25,10 @@ def assert_error_message(expected_error, actual_error):
     assert (
             actual_error == expected_error
     ), "Текст ошибки отличается от ожидаемого"
+
+
+def post_request(client, body: BaseModel, route):
+    allure.dynamic.title('Отправить POST запрос на ручку ' + route)
+    response = client.post(route, json=body.dict())
+    allure.attach(response.content, name="Ответ", attachment_type=AttachmentType.JSON)
+    return response

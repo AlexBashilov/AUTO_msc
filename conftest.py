@@ -8,6 +8,8 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from _pytest.fixtures import FixtureRequest
+from api_utils.api_client import ApiClient
+from utils import db_connect as DataBase
 
 
 @pytest.fixture(scope="function")
@@ -80,3 +82,15 @@ def pytest_runtest_makereport(item):
                 )
         except Exception:
             print("Не удалось получить скриншот")
+
+
+@pytest.fixture(scope='session')
+def client():
+    return ApiClient()
+
+
+@pytest.fixture(scope='session', autouse=True)
+def db_connection():
+    connection = DataBase.open_connection()
+    yield connection
+    DataBase.close_connection()
