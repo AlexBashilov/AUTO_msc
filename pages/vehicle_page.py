@@ -42,10 +42,10 @@ class VehiclePage:
             self.helper.wait_for_element_visible('[data-qa="form-capacity"]').click()
             self.helper.wait_for_element_visible('//*[@data-qa="form-capacity"]//span[text()="' + vehicleInfo[Vehicles.PALLET_CAPACITY] + '"]').click()
 
-        if Vehicles.CAPACITY_CENTIMETERS in vehicleInfo:
+        if Vehicles.CAPACITY_VOLUME in vehicleInfo:
             self.helper.fill_field(
                 'input[data-qa="form-capacity-square"]',
-                vehicleInfo[Vehicles.CAPACITY_CENTIMETERS]
+                vehicleInfo[Vehicles.CAPACITY_VOLUME]
             )
 
         if Vehicles.BODY_TYPE in vehicleInfo:
