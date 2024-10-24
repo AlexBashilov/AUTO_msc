@@ -29,8 +29,8 @@ class SqlQueries:
 
     @allure.step("Создать нового водителя в таблице driver")
     def insert_new_driver(self, driver: DriversDB):
-        request_insert = f"""INSERT INTO driver (surname, name, patronymic, phone_number, passport_full_number, passport_date, state, created_at, license_number) 
-        VALUES ('{driver.surname}', '{driver.name}', '{driver.patronymic}', '{driver.phone_number}', '{driver.passport_full_number}', 
+        request_insert = f"""INSERT INTO driver (surname, name, patronymic, phone_number, passport_full_number, passport_date, state, created_at, license_number)
+        VALUES ('{driver.surname}', '{driver.name}', '{driver.patronymic}', '{driver.phone_number}', '{driver.passport_full_number}',
         '{driver.passport_date}', '{driver.state}', '{driver.created_at}', '{driver.license_number}') RETURNING id"""
         return self.__execute_request_update_insert_delete(request_insert)[0][0]
 
@@ -41,7 +41,7 @@ class SqlQueries:
 
     @allure.step("Создать новое ТС в таблице vehicle")
     def insert_new_vehicle(self, vehicle: VehicleDB):
-        request_insert = f"""INSERT INTO vehicle (vehicle_type_id, number, brand, model, vehicle_ownership_type_id, capacity_type_id, capacity_volume, cargo_body_type_id, weight_capacity, created_at, updated_at) 
+        request_insert = f"""INSERT INTO vehicle (vehicle_type_id, number, brand, model, vehicle_ownership_type_id, capacity_type_id, capacity_volume, cargo_body_type_id, weight_capacity, created_at, updated_at)
         VALUES ('{vehicle.vehicle_type_id}', '{vehicle.number}', '{vehicle.brand}', '{vehicle.model}', '{vehicle.vehicle_ownership_type_id}',
         '{vehicle.capacity_type_id}', '{vehicle.capacity_volume}', '{vehicle.cargo_body_type_id}', '{vehicle.weight_capacity}',
         '{vehicle.created_at}', '{vehicle.updated_at}') RETURNING id"""
