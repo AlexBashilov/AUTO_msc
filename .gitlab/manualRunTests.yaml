@@ -57,7 +57,7 @@ send_report:
   needs:
     - tests
   script:
-    - source venv/bin/activate; python autobot.py
+    - source venv/bin/activate; python reporter.py
   tags:
     - ci-docker
   cache:
