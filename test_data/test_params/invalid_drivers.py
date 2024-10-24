@@ -1,5 +1,5 @@
-from testData.drivers import Drivers
-from testData.error_drivers_messages import ErrorDriversMessages
+from test_data.drivers import Drivers
+from test_data.error_drivers_messages import ErrorDriversMessages
 from faker import Faker
 
 

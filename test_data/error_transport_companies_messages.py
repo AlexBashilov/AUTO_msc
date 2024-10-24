@@ -1,8 +1,10 @@
-from dataclasses import dataclass
+import enum
 
 
-@dataclass
-class ErrorTransportCompaniesMessages:
+class ErrorTransportCompaniesMessages(enum.StrEnum):
+    """
+    Ошибки при создании транспортных компаний
+    """
     KPP_BLANK = 'Ошибка валидации запроса: Kpp: cannot be blank.'
     OGRN_BLANK = 'Ошибка валидации запроса: Ogrn: cannot be blank.'
     INN_BLANK = 'Ошибка валидации запроса: Inn: cannot be blank.'

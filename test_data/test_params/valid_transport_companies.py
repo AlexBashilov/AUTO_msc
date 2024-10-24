@@ -1,9 +1,10 @@
-from testData.transport_companies import TransportCompanies
+from test_data.transport_companies import TransportCompanies
 from faker import Faker
 
 
 class ValidTransportCompanies:
-    def list_of_transport_companies_parameters(self):
+    @staticmethod
+    def list_of_transport_companies_parameters():
         fake = Faker('ru_RU')
 
         return [

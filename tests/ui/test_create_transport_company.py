@@ -4,15 +4,15 @@ import pytest
 from pages.base_page import Base
 from pages.login_page import Login
 from pages.transport_companies_page import TransportCompaniesPage
-from testData.invalid_transport_companies import InvalidTransportCompanies
-from testData.valid_transport_companies import ValidTransportCompanies
+from test_data.test_params.invalid_transport_companies import InvalidTransportCompanies
+from test_data.test_params.valid_transport_companies import ValidTransportCompanies
 
 
 class TestCreateTransportCompany:
-    validTransportCompanies = ValidTransportCompanies().list_of_transport_companies_parameters()
-    invalidTransportCompanies = InvalidTransportCompanies().list_of_invalid_transport_companies_parameters()
+    valid_transport_companies = ValidTransportCompanies().list_of_transport_companies_parameters()
+    invalid_transport_companies = InvalidTransportCompanies().list_of_invalid_transport_companies_parameters()
 
-    @pytest.mark.parametrize("example", validTransportCompanies)
+    @pytest.mark.parametrize("example", valid_transport_companies)
     def test_create_transport_company_and_delete(self, driver, example):
         base = Base(driver)
         login = Login(driver)
@@ -30,7 +30,7 @@ class TestCreateTransportCompany:
         tc.delete_first_transport_company_on_the_list(example)
         tc.check_lack_transport_company_on_the_list(example)
 
-    @pytest.mark.parametrize("example", invalidTransportCompanies)
+    @pytest.mark.parametrize("example", invalid_transport_companies)
     def test_create_invalid_transport_company(self, driver, example):
         base = Base(driver)
         login = Login(driver)

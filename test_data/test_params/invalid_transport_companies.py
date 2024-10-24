@@ -1,5 +1,5 @@
-from testData.transport_companies import TransportCompanies
-from testData.error_transport_companies_messages import ErrorTransportCompaniesMessages
+from test_data.transport_companies import TransportCompanies
+from test_data.error_transport_companies_messages import ErrorTransportCompaniesMessages
 
 
 class InvalidTransportCompanies:

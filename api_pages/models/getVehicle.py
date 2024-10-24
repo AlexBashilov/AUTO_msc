@@ -1,5 +1,4 @@
-from typing import List
-
+from typing import List, Optional
 from pydantic import BaseModel
 
 
@@ -14,11 +13,16 @@ class GetVehicleRequestSchema(BaseModel):
 
 class VehicleData(BaseModel):
     id: int
-    transportCompanyIds: List[int]
+    transportCompanyIds: Optional[List[int]] = None
     typeId: int
     number: str
     brandId: int
-    weightCapacity: int | None
+    model:  Optional[str] = None
+    ownershipTypeId:  Optional[int] = None
+    capacityTypeId:  Optional[int] = None
+    capacityVolume:  Optional[int] = None
+    cargoBodyTypeId:  Optional[int] = None
+    weightCapacity:  Optional[float] = None
     hasActiveTrip: bool
 
 

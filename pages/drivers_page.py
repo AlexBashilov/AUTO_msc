@@ -1,6 +1,6 @@
 import allure
 from helperpackage import HelperWd
-from testData.drivers import Drivers
+from test_data.drivers import Drivers
 
 
 class DriversPage:

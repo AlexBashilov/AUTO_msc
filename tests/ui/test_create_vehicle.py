@@ -6,16 +6,16 @@ from pages.login_page import Login
 from pages.transport_companies_page import TransportCompaniesPage
 from pages.vehicle_page import VehiclePage
 
-from testData.transport_companies import TransportCompanies
-from testData.invalid_vehicle import InvalidVehicle
-from testData.valid_vehicle import ValidVehicle
+from test_data.transport_companies import TransportCompanies
+from test_data.test_params.invalid_vehicle import InvalidVehicle
+from test_data.test_params.valid_vehicle import ValidVehicle
 
 
 class TestCreateVehicle:
-    validVehicle = ValidVehicle().list_of_vehicle_parameters()
-    invalidVehicle = InvalidVehicle().list_of_invalid_vehicle_parameters()
+    valid_vehicle = ValidVehicle().list_of_vehicle_parameters()
+    invalid_vehicle = InvalidVehicle().list_of_invalid_vehicle_parameters()
 
-    @pytest.mark.parametrize("example", validVehicle)
+    @pytest.mark.parametrize("example", valid_vehicle)
     def test_create_valid_vehicle(self, driver, example):
         base = Base(driver)
         login = Login(driver)
@@ -44,7 +44,7 @@ class TestCreateVehicle:
         tc.delete_first_transport_company_on_the_list(transport_company)
         tc.check_lack_transport_company_on_the_list(transport_company)
 
-    @pytest.mark.parametrize("example", invalidVehicle)
+    @pytest.mark.parametrize("example", invalid_vehicle)
     def test_create_invalid_vehicle(self, driver, example):
         base = Base(driver)
         login = Login(driver)
@@ -71,7 +71,7 @@ class TestCreateVehicle:
         tc.delete_first_transport_company_on_the_list(transport_company)
         tc.check_lack_transport_company_on_the_list(transport_company)
 
-    @pytest.mark.parametrize("example", validVehicle)
+    @pytest.mark.parametrize("example", valid_vehicle)
     def test_select_exist_vehicle(self, driver, example):
         base = Base(driver)
         login = Login(driver)
