@@ -4,7 +4,7 @@
   dependencies:
     - install
   except:
-    - api_utils
+    - api_pages
     - triggers
     - pipelines
   when: manual

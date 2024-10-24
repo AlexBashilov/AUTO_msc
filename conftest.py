@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from _pytest.fixtures import FixtureRequest
-from api_utils.api_client import ApiClient
+from utils.api_utils import ApiClient
 from utils import db_connect as DataBase
 
 
@@ -92,5 +92,7 @@ def client():
 @pytest.fixture(scope='session', autouse=True)
 def db_connection():
     connection = DataBase.open_connection()
+    print("\nУстановлено соединение с базой данных")
     yield connection
-    DataBase.close_connection()
+    connection.close()
+    print("\nСоединение с базой данных закрыто")

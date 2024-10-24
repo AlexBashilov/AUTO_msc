@@ -1,6 +1,6 @@
 import allure
 from helperpackage import HelperWd
-from testData.vehicles import Vehicles
+from test_data.vehicles import Vehicles
 
 
 class VehiclePage:

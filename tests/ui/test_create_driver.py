@@ -6,20 +6,20 @@ from pages.login_page import Login
 from pages.transport_companies_page import TransportCompaniesPage
 from pages.drivers_page import DriversPage
 
-from testData.transport_companies import TransportCompanies
-from testData.valid_drivers import ValidDrivers
-from testData.invalid_drivers import InvalidDrivers
-from testData.error_drivers_messages import ErrorDriversMessages
-from testData.drivers import Drivers
+from test_data.transport_companies import TransportCompanies
+from test_data.test_params.valid_drivers import ValidDrivers
+from test_data.test_params.invalid_drivers import InvalidDrivers
+from test_data.error_drivers_messages import ErrorDriversMessages
+from test_data.drivers import Drivers
 from faker import Faker
 
 
 class TestCreateDriver:
-    validDrivers = ValidDrivers().list_of_drivers_parameters()
-    invalidDrivers = InvalidDrivers().list_of_invalid_drivers_parameters()
-    sameParametersDrivers = InvalidDrivers().list_of_same_drivers_parameters()
+    valid_drivers = ValidDrivers().list_of_drivers_parameters()
+    invalid_drivers = InvalidDrivers().list_of_invalid_drivers_parameters()
+    same_parameters_drivers = InvalidDrivers().list_of_same_drivers_parameters()
 
-    @pytest.mark.parametrize("example", validDrivers)
+    @pytest.mark.parametrize("example", valid_drivers)
     def test_create_valid_driver(self, driver, example):
         base = Base(driver)
         login = Login(driver)
@@ -49,7 +49,7 @@ class TestCreateDriver:
         tc.delete_first_transport_company_on_the_list(transport_company)
         tc.check_lack_transport_company_on_the_list(transport_company)
 
-    @pytest.mark.parametrize("example", invalidDrivers)
+    @pytest.mark.parametrize("example", invalid_drivers)
     def test_create_invalid_driver(self, driver, example):
         base = Base(driver)
         login = Login(driver)
@@ -77,7 +77,7 @@ class TestCreateDriver:
         tc.delete_first_transport_company_on_the_list(transport_company)
         tc.check_lack_transport_company_on_the_list(transport_company)
 
-    @pytest.mark.parametrize("example", sameParametersDrivers)
+    @pytest.mark.parametrize("example", same_parameters_drivers)
     def test_create_driver_with_same_parameters(self, driver, example):
         base = Base(driver)
         login = Login(driver)

@@ -21,22 +21,15 @@ class Route:
 
     @allure.step('Проверить наименование активных элементов на странице')
     def check_route_page_elements(self):
-        self.helper.wait_for_element_visible('h2')
         assert self.helper.wait_for_element_visible('h2').text == 'Маршруты'
         self.helper.wait_for_element_visible('[data-qa="active-switch"]')
         assert self.helper.wait_for_element_visible(
             '[data-qa="active-switch"]').text == 'Маршруты с шаблонами'
-        self.helper.wait_for_element_visible('#clearFilters')
         assert self.helper.wait_for_element_visible('#clearFilters').text == 'Очистить фильтры'
-        self.helper.wait_for_element_visible(self.CREATE_BUTTON)
         assert self.helper.wait_for_element_visible(self.CREATE_BUTTON).text == 'Создать новый маршрут'
-        self.helper.wait_for_element_visible(self.FIRST_POINT_FILTER)
         assert self.helper.wait_for_element_visible(self.FIRST_POINT_FILTER).text == 'Поиск по первой точке'
-        self.helper.wait_for_element_visible('#anyPointFilter')
         assert self.helper.wait_for_element_visible('#anyPointFilter').text == 'Поиск по любой точке'
-        self.helper.wait_for_element_visible(self.LAST_POINT_FILTER)
         assert self.helper.wait_for_element_visible(self.LAST_POINT_FILTER).text == 'Поиск по последней точке'
-        self.helper.wait_for_element_visible('#routeNameFilter')
         assert self.helper.wait_for_element_visible('#routeNameFilter').text == 'Поиск по названию маршрута'
 
     @allure.step('Нажать на кнопку "Создать маршрут"')

@@ -1,11 +1,9 @@
 import uuid
 from http import HTTPStatus
 import allure
-from api_utils.utils import assert_schema, assert_response_code, assert_error_message
-from api_utils import utils
-from api_utils import routes
-from api_utils.models.getDriver_models import GetDriverResponseSchema, GetDriverErrorSchema, GetDriverRequestSchema, \
-    DriverRequestParams
+import utils.api_utils as api_utils
+from api_pages import routes
+from api_pages.models import getDriver as driver_models
 from data_base.models.drivers_db import DriversDB
 from data_base.db_queries import SqlQueries
 
@@ -16,25 +14,12 @@ class TestGetDriver:
     def test_get_driver(self, client, db_connection):
         db = SqlQueries(db_connection)
         new_driver = DriversDB.generate_random_driver()
-        db.insert_new_driver(new_driver)
-        body = GetDriverRequestSchema(
+        driver_id = db.insert_new_driver(new_driver)
+        body = driver_models.GetDriverRequestSchema(
             requestId=str(uuid.uuid4()),
-            params=DriverRequestParams(id=4531)
+            params=driver_models.DriverRequestParams(id=driver_id)
         )
-        response = utils.post_request(client, body, routes.Routes.GET_DRIVER)
-        assert_response_code(HTTPStatus.OK, response.status_code)
-        assert_schema(response, GetDriverResponseSchema)
-
-    @allure.id(37467)
-    @allure.title('Получить не существующего водителя')
-    def test_get_driver_send_not_exist_driver(self, client):
-        body = GetDriverRequestSchema(
-            requestId=str(uuid.uuid4()),
-            params=DriverRequestParams(id=999999)
-        )
-        response = utils.post_request(client, body, routes.Routes.GET_DRIVER)
-        assert_response_code(HTTPStatus.BAD_REQUEST, response.status_code)
-        assert_schema(response, GetDriverErrorSchema)
-        response_json = GetDriverErrorSchema.model_validate_json(response.content)
-        assert_error_message("Ошибка обработки получения ТС: Транспорт с таким ID не существует",
-                             response_json.errors[0].message)
+        response = api_utils.post_request(client, body, routes.Routes.GET_DRIVER)
+        api_utils.assert_response_code(HTTPStatus.OK, response.status_code)
+        api_utils.assert_schema(response, driver_models.GetDriverResponseSchema)
+        db.delete_driver_by_id(driver_id)

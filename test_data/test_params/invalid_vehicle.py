@@ -1,4 +1,4 @@
-from testData.vehicles import Vehicles
+from test_data.vehicles import Vehicles
 from faker import Faker
 
 

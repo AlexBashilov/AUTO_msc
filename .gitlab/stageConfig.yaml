@@ -2,19 +2,19 @@
 .var-test-1:
   variables:
     STAGE: 1
-    TMS_DSN_DB: 'pgsql:host=intgr-test-db-tms-api_utils.ox1.dev;port=10001;dbname=tms-api_utils'
+    TMS_DSN_DB: 'pgsql:host=intgr-test-db-tms-api_pages.ox1.dev;port=10001;dbname=tms-api_pages'
 
 .var-test-2:
   variables:
     STAGE: 2
-    TMS_DSN_DB: 'pgsql:host=intgr-test-db-tms-api_utils.ox1.dev;port=10002;dbname=tms-api_utils'
+    TMS_DSN_DB: 'pgsql:host=intgr-test-db-tms-api_pages.ox1.dev;port=10002;dbname=tms-api_pages'
 
 .var-test-3:
   variables:
     STAGE: 3
-    TMS_DSN_DB: 'pgsql:host=intgr-test-db-tms-api_utils.ox1.dev;port=10003;dbname=tms-api_utils'
+    TMS_DSN_DB: 'pgsql:host=intgr-test-db-tms-api_pages.ox1.dev;port=10003;dbname=tms-api_pages'
 
 .var-test-4:
   variables:
     STAGE: 4
-    TMS_DSN_DB: 'pgsql:host=intgr-test-db-tms-api_utils.ox1.dev;port=10004;dbname=tms-api_utils'
+    TMS_DSN_DB: 'pgsql:host=intgr-test-db-tms-api_pages.ox1.dev;port=10004;dbname=tms-api_pages'

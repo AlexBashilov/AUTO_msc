@@ -1,4 +1,4 @@
-from testData.transport_companies import TransportCompanies
+from test_data.transport_companies import TransportCompanies
 from faker import Faker
 
 

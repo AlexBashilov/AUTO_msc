@@ -22,16 +22,6 @@ def open_connection() -> connection:
     return _connection
 
 
-def close_connection():
-    global _connection
-    if _connection:
-        try:
-            _connection.close()
-        except psycopg2.Error as e:
-            raise Exception(f"Произошла ошибка '{e}' при отключении от базы данных")
-    return _connection
-
-
 def get_db_port(stage) -> Text:
     stage = stage
     if len(stage) > 1:

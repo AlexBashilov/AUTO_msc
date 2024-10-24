@@ -2,6 +2,7 @@ from typing import Text, List
 import allure
 from utils.db_connect import connection
 from data_base.models.drivers_db import DriversDB
+from data_base.models.vehicle_db import VehicleDB
 
 
 class SqlQueries:
@@ -16,13 +17,37 @@ class SqlQueries:
         return result
 
     @allure.step("Выполнить sql запрос UPDATE/INSERT/DELETE")
-    def __execute_request_update_insert_delete(self, request: Text) -> None:
+    def __execute_request_update_insert_delete(self, request: Text):
         with self.__connect_db.cursor() as cursor:
             cursor.execute(request)
             self.__connect_db.commit()
+            if cursor.description:
+                result = cursor.fetchall()
+                return result
+            else:
+                return None
 
     @allure.step("Создать нового водителя в таблице driver")
     def insert_new_driver(self, driver: DriversDB):
         request_insert = f"""INSERT INTO driver (surname, name, patronymic, phone_number, passport_full_number, passport_date, state, created_at, license_number) 
-        VALUES ('{driver.surname}', '{driver.name}', '{driver.patronymic}', '{driver.phone_number}', '{driver.passport_full_number}', '{driver.passport_date}', '{driver.state}', '{driver.created_at}', '{driver.license_number}')"""
-        self.__execute_request_update_insert_delete(request_insert)
+        VALUES ('{driver.surname}', '{driver.name}', '{driver.patronymic}', '{driver.phone_number}', '{driver.passport_full_number}', 
+        '{driver.passport_date}', '{driver.state}', '{driver.created_at}', '{driver.license_number}') RETURNING id"""
+        return self.__execute_request_update_insert_delete(request_insert)[0][0]
+
+    @allure.step("Удалить водителя в таблице driver по ID")
+    def delete_driver_by_id(self, driver):
+        request_delete = f"""DELETE from driver WHERE id={driver}"""
+        return self.__execute_request_update_insert_delete(request_delete)
+
+    @allure.step("Создать новое ТС в таблице vehicle")
+    def insert_new_vehicle(self, vehicle: VehicleDB):
+        request_insert = f"""INSERT INTO vehicle (vehicle_type_id, number, brand, model, vehicle_ownership_type_id, capacity_type_id, capacity_volume, cargo_body_type_id, weight_capacity, created_at, updated_at) 
+        VALUES ('{vehicle.vehicle_type_id}', '{vehicle.number}', '{vehicle.brand}', '{vehicle.model}', '{vehicle.vehicle_ownership_type_id}',
+        '{vehicle.capacity_type_id}', '{vehicle.capacity_volume}', '{vehicle.cargo_body_type_id}', '{vehicle.weight_capacity}',
+        '{vehicle.created_at}', '{vehicle.updated_at}') RETURNING id"""
+        return self.__execute_request_update_insert_delete(request_insert)[0][0]
+
+    @allure.step("Удалить ТС в таблице vehicle по ID")
+    def delete_vehicle_by_id(self, vehicle):
+        request_delete = f"""DELETE from vehicle WHERE id={vehicle}"""
+        return self.__execute_request_update_insert_delete(request_delete)
