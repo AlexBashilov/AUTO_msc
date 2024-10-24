@@ -19,6 +19,7 @@
   after_script:
     - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
     - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
+    - python reporter.py
   tags:
     - ci-docker
   cache:
@@ -32,7 +33,7 @@
       - _output/
     expire_in: 1 day
 
-###################################### Стадия тестов wms-test
+###################################### Стадия тестов
 integrtest-1:
   extends: .manual_run_template
   variables: !reference [.var-test-1, variables]
@@ -48,3 +49,17 @@ integrtest-3:
 integrtest-4:
   extends: .manual_run_template
   variables: !reference [.var-test-4, variables]
+
+
+#################################### Отправить отчет о прохождении тестов
+send_report:
+  stage: report
+  script:
+    - source venv/bin/activate; python autobot.py
+  tags:
+    - ci-docker
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/pip
+      - venv/

@@ -17,6 +17,7 @@ stages:
   - install
   - linters
   - tests
+  - report
 
 ###################################### Подключаемые конфиги
 include:
