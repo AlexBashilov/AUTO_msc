@@ -3,7 +3,8 @@ from faker import Faker
 
 
 class ValidVehicle:
-    def list_of_vehicle_parameters(self):
+    @staticmethod
+    def list_of_vehicle_parameters():
         fake = Faker('ru_RU')
         return [
             {
@@ -12,17 +13,76 @@ class ValidVehicle:
                 'allureIdExistVehicle': '49158',
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_VAN,
                 Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_KAMAZ,
-                Vehicles.MODEL_VEHICLE: '53215',
+                Vehicles.MODEL_VEHICLE: '65207',
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
-                Vehicles.CAPACITY_CENTIMETERS: '18',
+                Vehicles.CAPACITY_VOLUME: '18',
+                Vehicles.PAYLOAD: '10',
                 Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
-                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
-                Vehicles.PAYLOAD: '10'
+                Vehicles.OWNERSHIP_TYPE: Vehicles.OWNERSHIP_TYPE_OWNED,
+                Vehicles.NUMBER: fake.bothify('?###??##').upper()
+            },
+            {
+                'name': 'фургон без модели',
+                'allureID': '39711',
+                'allureIdExistVehicle': '49161',
+                Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_VAN,
+                Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_KAMAZ,
+                Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
+                Vehicles.CAPACITY_VOLUME: '18',
+                Vehicles.PAYLOAD: '10',
+                Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
+                Vehicles.OWNERSHIP_TYPE: Vehicles.OWNERSHIP_TYPE_OWNED,
+                Vehicles.NUMBER: fake.bothify('?###??##').upper()
+            },
+            {
+                'name': 'фургон без типа тента',
+                'allureID': '39713',
+                'allureIdExistVehicle': '49162',
+                Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_VAN,
+                Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_KAMAZ,
+                Vehicles.MODEL_VEHICLE: '65207',
+                Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
+                Vehicles.CAPACITY_VOLUME: '18',
+                Vehicles.PAYLOAD: '10',
+                Vehicles.OWNERSHIP_TYPE: Vehicles.OWNERSHIP_TYPE_OWNED,
+                Vehicles.NUMBER: fake.bothify('?###??##').upper()
+            },
+            {
+                'name': 'фургон без типа владения',
+                'allureID': '58007',
+                'allureIdExistVehicle': '58009',
+                Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_VAN,
+                Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_KAMAZ,
+                Vehicles.MODEL_VEHICLE: 'KAMAZ',
+                Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
+                Vehicles.CAPACITY_VOLUME: '18',
+                Vehicles.PAYLOAD: '10',
+                Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
+                Vehicles.NUMBER: fake.bothify('?###??##').upper()
             },
             {
                 'name': 'тягач',
                 'allureID': '27611',
                 'allureIdExistVehicle': '49159',
+                Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_TRUCK,
+                Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_VOLVO,
+                Vehicles.MODEL_VEHICLE: 'FH-TRUCK 6x4',
+                Vehicles.OWNERSHIP_TYPE: Vehicles.OWNERSHIP_TYPE_OWNED,
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
+            },
+            {
+                'name': 'тягач без модели',
+                'allureID': '39715',
+                'allureIdExistVehicle': '49163',
+                Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_TRUCK,
+                Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_VOLVO,
+                Vehicles.OWNERSHIP_TYPE: Vehicles.OWNERSHIP_TYPE_OWNED,
+                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
+            },
+            {
+                'name': 'тягач без типа владения',
+                'allureID': '58010',
+                'allureIdExistVehicle': '58011',
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_TRUCK,
                 Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_VOLVO,
                 Vehicles.MODEL_VEHICLE: 'FH-TRUCK 6x4',
@@ -34,41 +94,10 @@ class ValidVehicle:
                 'allureIdExistVehicle': '49160',
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_SEMITRAILER,
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_40,
+                Vehicles.CAPACITY_VOLUME: '18',
+                Vehicles.PAYLOAD: '15',
                 Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
-                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
-                Vehicles.PAYLOAD: '15'
-            },
-            {
-                'name': 'фургон без модели',
-                'allureID': '39711',
-                'allureIdExistVehicle': '49161',
-                Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_VAN,
-                Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_KAMAZ,
-                Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
-                Vehicles.CAPACITY_CENTIMETERS: '18',
-                Vehicles.BODY_TYPE: Vehicles.BODY_TYPE_TENT,
-                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
-                Vehicles.PAYLOAD: '10'
-            },
-            {
-                'name': 'фургон без типа тента',
-                'allureID': '39713',
-                'allureIdExistVehicle': '49162',
-                Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_VAN,
-                Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_KAMAZ,
-                Vehicles.MODEL_VEHICLE: '53215',
-                Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_10,
-                Vehicles.CAPACITY_CENTIMETERS: '18',
-                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
-                Vehicles.PAYLOAD: '10'
-            },
-            {
-                'name': 'тягач без модели',
-                'allureID': '39715',
-                'allureIdExistVehicle': '49163',
-                Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_TRUCK,
-                Vehicles.MARK_VEHICLE: Vehicles.MARK_VEHICLE_VOLVO,
-                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
+                Vehicles.NUMBER: fake.bothify('?###??##').upper()
             },
             {
                 'name': 'полуприцеп без типа кузова',
@@ -76,7 +105,8 @@ class ValidVehicle:
                 'allureIdExistVehicle': '37074',
                 Vehicles.TYPE_VEHICLE: Vehicles.TYPE_VEHICLE_SEMITRAILER,
                 Vehicles.PALLET_CAPACITY: Vehicles.PALLET_CAPACITY_40,
-                Vehicles.NUMBER: fake.bothify('?###??##').upper(),
-                Vehicles.PAYLOAD: '105'
+                Vehicles.CAPACITY_VOLUME: '18',
+                Vehicles.PAYLOAD: '105',
+                Vehicles.NUMBER: fake.bothify('?###??##').upper()
             },
         ]
