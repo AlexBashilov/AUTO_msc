@@ -54,8 +54,8 @@ integrtest-4:
 #################################### Отправить отчет о прохождении тестов
 send_report:
   stage: report
-  dependencies:
-    - tests
+  needs:
+    - integrtest-4
   script:
     - source venv/bin/activate; python reporter.py
   tags:
