@@ -54,6 +54,8 @@ integrtest-4:
 #################################### Отправить отчет о прохождении тестов
 send_report:
   stage: report
+  needs:
+    - tests
   script:
     - source venv/bin/activate; python autobot.py
   tags:
