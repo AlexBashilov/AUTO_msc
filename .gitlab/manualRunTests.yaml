@@ -18,7 +18,7 @@ manual_run:
     - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/api/ --alluredir _output
   after_script:
     - echo ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}" >> .env
-    - source venv/bin/activate; python reporter.py
+#    - source venv/bin/activate; python reporter.py
     - cat .env
   tags:
     - ci-docker
@@ -28,6 +28,8 @@ manual_run:
       - .cache/pip
       - venv/
   artifacts:
+    reports:
+      dotenv: .env
     when: always
     paths:
       - _output/
