@@ -17,11 +17,7 @@ manual_run:
   script:
     - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/api/ --alluredir _output
   after_script:
-    - echo "\n" >> .env
-    - cat .env
-    - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}" >> .env
-#    - source venv/bin/activate; python reporter.py
-    - cat .env
+    - echo -e "\n$(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")" >> .env
   tags:
     - ci-docker
   cache:
