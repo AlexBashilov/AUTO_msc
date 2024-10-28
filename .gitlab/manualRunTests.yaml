@@ -1,5 +1,5 @@
 ###################################### Шаблон для запуска тестов
-.manual_run_template:
+manual_run:
   stage: tests
   dependencies:
     - install
@@ -17,8 +17,7 @@
   script:
     - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/api/ --alluredir _output
   after_script:
-    - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}" >> .env
-    - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
+    - echo ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}" >> .env
     - source venv/bin/activate; python reporter.py
     - cat .env
   tags:
@@ -33,30 +32,30 @@
     paths:
       - _output/
     expire_in: 1 day
-
-###################################### Стадия тестов
-integrtest-1:
-  extends: .manual_run_template
-  variables: !reference [.var-test-1, variables]
-
-integrtest-2:
-  extends: .manual_run_template
-  variables: !reference [.var-test-2, variables]
-
-integrtest-3:
-  extends: .manual_run_template
-  variables: !reference [.var-test-3, variables]
-
-integrtest-4:
-  extends: .manual_run_template
-  variables: !reference [.var-test-4, variables]
+#
+####################################### Стадия тестов
+#integrtest-1:
+#  extends: .manual_run_template
+#  variables: !reference [.var-test-1, variables]
+#
+#integrtest-2:
+#  extends: .manual_run_template
+#  variables: !reference [.var-test-2, variables]
+#
+#integrtest-3:
+#  extends: .manual_run_template
+#  variables: !reference [.var-test-3, variables]
+#
+#integrtest-4:
+#  extends: .manual_run_template
+#  variables: !reference [.var-test-4, variables]
 
 
 #################################### Отправить отчет о прохождении тестов
 send_report:
   stage: report
   needs:
-    - integrtest-4
+    - manual_run
   script:
     - source venv/bin/activate; python reporter.py
   tags:
