@@ -1,5 +1,5 @@
-###################################### Шаблон для запуска тестов
-.manual_run_template:
+###################################### Запустить автотесты в ручном режиме
+tests:
   stage: tests
   dependencies:
     - install
@@ -17,8 +17,7 @@
   script:
     - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/ --alluredir _output
   after_script:
-    - ./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}"
-    - export $(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
+    - echo -e "\n$(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")" >> .env
   tags:
     - ci-docker
   cache:
@@ -27,24 +26,25 @@
       - .cache/pip
       - venv/
   artifacts:
+    reports:
+      dotenv: .env
     when: always
     paths:
       - _output/
     expire_in: 1 day
 
-###################################### Стадия тестов wms-test
-integrtest-1:
-  extends: .manual_run_template
-  variables: !reference [.var-test-1, variables]
-
-integrtest-2:
-  extends: .manual_run_template
-  variables: !reference [.var-test-2, variables]
-
-integrtest-3:
-  extends: .manual_run_template
-  variables: !reference [.var-test-3, variables]
-
-integrtest-4:
-  extends: .manual_run_template
-  variables: !reference [.var-test-4, variables]
+#################################### Отправить отчет о прохождении тестов
+send_report:
+  stage: report
+  needs:
+    - job: tests
+      artifacts: true
+  script:
+    - source venv/bin/activate; python reporter.py
+  tags:
+    - ci-docker
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/pip
+      - venv/
