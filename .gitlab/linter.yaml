@@ -1,4 +1,4 @@
-Lint:
+lint:
   stage: linters
   script:
     - pip install virtualenv flake8

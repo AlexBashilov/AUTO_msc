@@ -1,5 +1,5 @@
 ###################################### Запустить автотесты в ручном режиме
-run_tests:
+tests:
   stage: tests
   dependencies:
     - install
@@ -15,7 +15,7 @@ run_tests:
     - virtualenv venv
     - source venv/bin/activate
   script:
-    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/api/ --alluredir _output
+    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/ --alluredir _output
   after_script:
     - echo -e "\n$(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")" >> .env
   tags:
@@ -37,7 +37,7 @@ run_tests:
 send_report:
   stage: report
   needs:
-    - job: run_tests
+    - job: tests
       artifacts: true
   script:
     - source venv/bin/activate; python reporter.py
