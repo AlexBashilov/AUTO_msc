@@ -3,14 +3,14 @@ variables:
   STREAM_COUNT:
     value: "5"
     description: "Укажите количество потоков для запуска автотестов"
+  STAGE:
+    value: "1"
+    description: "Укажите номер стенда"
   MESSENGER_ENDPOINT: 'https://msg.vseinstrumenti.ru/api/v4/'
   CHANNEL_ID: '5ygdz4813jgp3b9x8j3yzzw6be'
   ALLURE_LAUNCH_NAME: 'Запуск автотестов на ${STAGE} стенде - ${CI_COMMIT_REF_NAME} - ${GITLAB_USER_LOGIN}'
   DB_HOST: 'intgr-test-db-tms-api.ox1.dev'
   DB_NAME: 'tms-api'
-  STAGE:
-    value: "1"
-    description: "Укажите номер стенда"
 
 
 ###################################### Докер образ
