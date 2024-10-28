@@ -1,5 +1,5 @@
-###################################### Шаблон для запуска тестов
-manual_run:
+###################################### Запустить автотесты в ручном режиме
+run_tests:
   stage: tests
   dependencies:
     - install
@@ -32,30 +32,12 @@ manual_run:
     paths:
       - _output/
     expire_in: 1 day
-#
-####################################### Стадия тестов
-#integrtest-1:
-#  extends: .manual_run_template
-#  variables: !reference [.var-test-1, variables]
-#
-#integrtest-2:
-#  extends: .manual_run_template
-#  variables: !reference [.var-test-2, variables]
-#
-#integrtest-3:
-#  extends: .manual_run_template
-#  variables: !reference [.var-test-3, variables]
-#
-#integrtest-4:
-#  extends: .manual_run_template
-#  variables: !reference [.var-test-4, variables]
-
 
 #################################### Отправить отчет о прохождении тестов
 send_report:
   stage: report
   needs:
-    - job: manual_run
+    - job: run_tests
       artifacts: true
   script:
     - source venv/bin/activate; python reporter.py
