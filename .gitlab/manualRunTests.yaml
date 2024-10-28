@@ -57,7 +57,8 @@ manual_run:
 send_report:
   stage: report
   needs:
-    - manual_run
+    - job: build
+      artifacts: true
   script:
     - source venv/bin/activate; python reporter.py
   tags:
