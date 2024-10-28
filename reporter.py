@@ -45,7 +45,7 @@ def get_message(result: ResultTestrun, username) -> str:
     Сформировать сообщение
     :return:
     """
-    service_name = os.getenv('CI_PROJECT_NAME')
+    service_name = os.getenv('CI_PROJECT_NAME').upper()
     stage = os.getenv('STAGE')
     test_group = os.getenv('TEST_GROUP')
     branch = os.getenv('CI_COMMIT_REF_NAME')
