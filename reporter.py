@@ -78,13 +78,19 @@ def get_result_testrun() -> ResultTestrun:
 
     all_result = ResultTestrun()
 
-    response = requests.get(
-        url=allure_endpoint + "api/rs/launch/" + allure_launchID + "/statistic",
-        headers={
-            "Content-type": "application/json",
-            "Authorization": f"Api-Token {allure_token}",
-        },
-    )
+    try:
+        response = requests.get(
+            url=allure_endpoint + "api/rs/launch/" + allure_launchID + "/statistic",
+            headers={
+                "Content-type": "application/json",
+                "Authorization": f"Api-Token {allure_token}",
+            },
+        )
+        print(response.json())
+    except Exception as e:
+        raise Exception(
+            f"Не удалось получить статистику по рану. Ошибка {e}"
+        )
 
     for result in response.json():
         if result['status'] == 'passed':
@@ -100,13 +106,18 @@ def get_result_testrun() -> ResultTestrun:
 def find_user_id(messenger_endpoint, messenger_token) -> str:
     gitlab_email = os.getenv('GITLAB_USER_EMAIL')
 
-    response = requests.get(
-        url=messenger_endpoint + "users/email/" + gitlab_email,
-        headers={
-            "Content-type": "application/json",
-            "Authorization": f"Bearer {messenger_token}",
-        },
-    )
+    try:
+        response = requests.get(
+            url=messenger_endpoint + "users/email/" + gitlab_email,
+            headers={
+                "Content-type": "application/json",
+                "Authorization": f"Bearer {messenger_token}",
+            },
+        )
+    except Exception as e:
+        raise Exception(
+            f"Не удалось получить пользователя, который запустил пайплайн. Ошибка {e}"
+        )
     if response.json()['username']:
         return response.json()['username']
 
