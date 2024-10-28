@@ -17,7 +17,9 @@ manual_run:
   script:
     - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/api/ --alluredir _output
   after_script:
-    - echo (./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}") >> .env
+    - RESULT=$(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")
+    - echo RESULT
+    - echo RESULT >> .env
 #    - source venv/bin/activate; python reporter.py
     - cat .env
   tags:
