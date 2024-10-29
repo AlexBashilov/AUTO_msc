@@ -14,7 +14,7 @@ class TestCreateItems:
     
     def test_create_item(self, client):
         body = RequestCreateItems(
-            item_name=str('fantomas6'),
+            item_name=str('fantomas7'),
             guid=str(uuid.uuid4()),
             description=str('opisanie')
         )
@@ -30,7 +30,10 @@ def test_get_only_one_new_item():
     select_users = "SELECT guid FROM book_cost_items WHERE guid = '04758184-78c7-455f-91ac-dcb169b9350c'"
     users = execute_read_query(connection, select_users)
     connection.close()
+    print(users)
     assert '04758184-78c7-455f-91ac-dcb169b9350c' in str(users)
 
 def test_delete_item():
     pass
+
+test_get_only_one_new_item()
