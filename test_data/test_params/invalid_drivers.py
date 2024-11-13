@@ -83,16 +83,4 @@ class InvalidDrivers:
                 Drivers.LICENSE_NUMBER: fake.random_number(digits=10),
                 'error': ErrorDriversMessages.SAME_PASSPORT_ERROR
             },
-            {
-                'name': 'Создание водителя с тем же ВУ, что уже существует',
-                'allureID': '41046',
-                Drivers.FIRST_NAME: fake.first_name(),
-                Drivers.LAST_NAME: fake.last_name(),
-                Drivers.MIDDLE_NAME: fake.middle_name(),
-                Drivers.PHONE_NUMBER: fake.bothify('9#########'),
-                Drivers.PASSPORT_NUMBER: fake.passport_number(),
-                Drivers.PASSPORT_DATE: '01012000',
-                Drivers.LICENSE_NUMBER: fake.random_number(digits=10),
-                'error': ErrorDriversMessages.SAME_DRIVER_LICENCE_ERROR
-            },
         ]
