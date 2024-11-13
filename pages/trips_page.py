@@ -20,4 +20,4 @@ class TripsPage:
         self.helper.wait_for_element_visible('//span[text()="Номер ТС"]')
         self.helper.wait_for_element_visible('//span//span[text()="Водитель"]')
         self.helper.wait_for_element_visible('//span[text()=" Сбросить фильтры "]')
-        self.helper.wait_for_element_visible('//span[text()=" Скачать дэшборд "]')
+        self.helper.wait_for_element_visible('//span[text()=" Скачать дашборд "]')
