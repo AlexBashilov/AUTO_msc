@@ -40,7 +40,8 @@ send_report:
     - job: tests
       artifacts: true
   script:
-    - source venv/bin/activate; python reporter.py
+    - source venv/bin/activate
+    - helperpackage_send_report
   tags:
     - ci-docker
   cache:
