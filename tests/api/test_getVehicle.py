@@ -10,14 +10,14 @@ from data_base.db_queries import SqlQueries
 
 class TestGetVehicle:
     @allure.id(38875)
-    @allure.title('Получение ТС по id')
+    @allure.title("Получение ТС по id")
     def test_get_vehicle(self, client, db_connection):
         db = SqlQueries(db_connection)
         new_vehicle = VehicleDB.generate_random_vehicle()
         vehicle_id = db.insert_new_vehicle(new_vehicle)
         body = vehicle_models.GetVehicleRequestSchema(
             requestId=str(uuid.uuid4()),
-            params=vehicle_models.VehicleRequestParams(id=vehicle_id)
+            params=vehicle_models.VehicleRequestParams(id=vehicle_id),
         )
         response = api_utils.post_request(client, body, routes.Routes.GET_VEHICLE)
         api_utils.assert_response_code(HTTPStatus.OK, response.status_code)
@@ -25,15 +25,19 @@ class TestGetVehicle:
         db.delete_vehicle_by_id(vehicle_id)
 
     @allure.id(37053)
-    @allure.title('Получить не существующее транспортное средство')
+    @allure.title("Получить не существующее транспортное средство")
     def test_get_vehicle_send_not_exist_vehicle(self, client):
         body = vehicle_models.GetVehicleRequestSchema(
             requestId=str(uuid.uuid4()),
-            params=vehicle_models.VehicleRequestParams(id=999999)
+            params=vehicle_models.VehicleRequestParams(id=999999),
         )
         response = api_utils.post_request(client, body, routes.Routes.GET_VEHICLE)
         api_utils.assert_response_code(HTTPStatus.BAD_REQUEST, response.status_code)
         api_utils.assert_schema(response, vehicle_models.GetVehicleErrorSchema)
-        response_json = vehicle_models.GetVehicleErrorSchema.model_validate_json(response.content)
-        api_utils.assert_error_message("Ошибка обработки получения ТС: Транспорт с таким ID не существует",
-                                       response_json.errors[0].message)
+        response_json = vehicle_models.GetVehicleErrorSchema.model_validate_json(
+            response.content
+        )
+        api_utils.assert_error_message(
+            "Ошибка обработки получения ТС: Транспорт с таким ID не существует",
+            response_json.errors[0].message,
+        )

@@ -23,13 +23,13 @@ class VehicleDB:
     @staticmethod
     @allure.step("Сгенерировать данные для добавления нового ТС в БД")
     def generate_random_vehicle():
-        fake = Faker('ru_RU')
+        fake = Faker("ru_RU")
 
         return VehicleDB(
             vehicle_type_id=fake.random_int(1, 3),
-            number=fake.bothify('?###??##').upper(),
+            number=fake.bothify("?###??##").upper(),
             brand=fake.random_int(1, 50),
-            model='Автотест',
+            model="Автотест",
             vehicle_ownership_type_id=fake.random_int(1, 4),
             capacity_type_id=fake.random_int(1, 10),
             capacity_volume=fake.random_int(1, 100),

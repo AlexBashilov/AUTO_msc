@@ -31,7 +31,7 @@ install:
     - virtualenv venv
     - source venv/bin/activate
   script:
-    - pip install -Ur requirements.txt
+    - pip install -r requirements.txt
   cache:
     key: "$CI_COMMIT_REF_SLUG"
     paths:

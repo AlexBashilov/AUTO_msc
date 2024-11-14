@@ -41,10 +41,7 @@ def get_webdriver() -> WebDriver:
     selenium_remote = os.getenv("SELENIUM_REMOTE")
     if selenium_remote:
         opts = get_chrome_options()
-        return webdriver.Remote(
-            command_executor=selenium_remote,
-            options=opts
-        )
+        return webdriver.Remote(command_executor=selenium_remote, options=opts)
     else:
         return webdriver.Chrome(
             service=ChromeService(ChromeDriverManager().install()),
@@ -84,12 +81,12 @@ def pytest_runtest_makereport(item):
             print("Не удалось получить скриншот")
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def client() -> ApiClient:
     return ApiClient()
 
 
-@pytest.fixture(scope='session', autouse=True)
+@pytest.fixture(scope="session", autouse=True)
 def db_connection():
     connection = DataBase.open_connection()
     print("\nУстановлено соединение с базой данных")

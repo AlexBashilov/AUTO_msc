@@ -17,12 +17,12 @@ class VehicleData(BaseModel):
     typeId: int
     number: str
     brandId: int
-    model:  Optional[str] = None
-    ownershipTypeId:  Optional[int] = None
-    capacityTypeId:  Optional[int] = None
-    capacityVolume:  Optional[int] = None
-    cargoBodyTypeId:  Optional[int] = None
-    weightCapacity:  Optional[float] = None
+    model: Optional[str] = None
+    ownershipTypeId: Optional[int] = None
+    capacityTypeId: Optional[int] = None
+    capacityVolume: Optional[int] = None
+    cargoBodyTypeId: Optional[int] = None
+    weightCapacity: Optional[float] = None
     hasActiveTrip: bool
 
 
