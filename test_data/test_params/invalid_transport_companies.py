@@ -1,9 +1,11 @@
+from typing import List
+
 from test_data.transport_companies import TransportCompanies
 from test_data.error_transport_companies_messages import ErrorTransportCompaniesMessages
 
 
 class InvalidTransportCompanies:
-    def list_of_invalid_transport_companies_parameters(self):
+    def list_of_invalid_transport_companies_parameters(self) -> List[dict]:
         return [
             # { TO DO Раскоментить когда сделают задачу - TL-324 [Back] TMS ошибки при создании/редактировании ТК
             #     'name': 'Создание транспортной компании без юридического адреса',

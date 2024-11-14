@@ -18,7 +18,7 @@ class Base:
         self.helper.go_to_link('https://tms-ui-web.intgr-test-' + self.get_stage() + '.ox1.dev')
 
     @allure.step("Получить номер стенда")
-    def get_stage(self):
+    def get_stage(self) -> str:
         return os.getenv("STAGE")
 
     @allure.step("Перейти на страницу 'Маршруты'")

@@ -4,7 +4,7 @@ import allure
 import os
 from allure_commons.types import AttachmentType
 from pydantic import BaseModel
-from httpx import Client
+from httpx import Client, Response
 
 
 class ApiClient(Client):
@@ -39,7 +39,7 @@ def assert_error_message(expected_error, actual_error):
 
 
 @allure.step("Отправить POST запрос на ручку {1}")
-def post_request(client, body: BaseModel, route):
+def post_request(client, body: BaseModel, route) -> Response:
     response = client.post(route, json=body.dict())
     allure.attach(response.content, name="Ответ", attachment_type=AttachmentType.JSON)
     return response

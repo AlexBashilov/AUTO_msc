@@ -1,9 +1,11 @@
+from typing import List
+
 from test_data.drivers import Drivers
 from faker import Faker
 
 
 class ValidDrivers:
-    def list_of_drivers_parameters(self):
+    def list_of_drivers_parameters(self) -> List[dict]:
         fake = Faker('ru_RU')
         return [
             {

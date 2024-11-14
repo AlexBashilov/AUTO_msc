@@ -85,7 +85,7 @@ def pytest_runtest_makereport(item):
 
 
 @pytest.fixture(scope='session')
-def client():
+def client() -> ApiClient:
     return ApiClient()
 
 

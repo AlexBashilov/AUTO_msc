@@ -23,7 +23,7 @@ class TransportCompanies:
     PHONE_NUMBER = 'Номер телефона'
     EMAIL = 'Почта контактного лица'
 
-    def generate_random_tc(self, case_name):
+    def generate_random_tc(self, case_name) -> dict:
         fake = Faker('ru_RU')
 
         tc = {

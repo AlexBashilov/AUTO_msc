@@ -19,7 +19,7 @@ stages:
 #################################### Триггеры запуска pipline (web/api/push)
 workflow:
   rules:
-    - if: $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api" || $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "pipline"
+    - if: $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api" || $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "pipeline"
       when: always
 
 
@@ -69,7 +69,7 @@ tests:
   dependencies:
     - install
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "pipelines"'
+    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "pipeline"'
       when: always
     - when: manual
   before_script:

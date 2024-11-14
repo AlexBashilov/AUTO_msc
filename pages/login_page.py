@@ -9,13 +9,13 @@ class Login:
         self.helper = HelperWd(driver)
 
     @allure.step("Получить данные для авторизации под разными пользователя для каждого потока")
-    def get_credentials(self):
+    def get_credentials(self) -> dict:
         userCredentials = {'login': os.getenv('TMS_USER_LOGIN'), 'password': os.getenv('TMS_USER_PASS')}
 
         return userCredentials
 
     @allure.step("Выполнить логин в системе TMS")
-    def login_to_TMS(self):
+    def login_to_TMS(self) -> dict:
         login_field = '[name="user_name"][type="text"]'
         user_credentials = self.get_credentials()
         login_button = '#signInBtn'

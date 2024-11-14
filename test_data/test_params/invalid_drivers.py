@@ -1,10 +1,12 @@
+from typing import List
+
 from test_data.drivers import Drivers
 from test_data.error_drivers_messages import ErrorDriversMessages
 from faker import Faker
 
 
 class InvalidDrivers:
-    def list_of_invalid_drivers_parameters(self):
+    def list_of_invalid_drivers_parameters(self) -> List[dict]:
         fake = Faker('ru_RU')
         return [
             {
@@ -68,7 +70,7 @@ class InvalidDrivers:
                 Drivers.PASSPORT_DATE: '01012000',
             }, ]
 
-    def list_of_same_drivers_parameters(self):
+    def list_of_same_drivers_parameters(self) -> List[dict]:
         fake = Faker('ru_RU')
         return [
             {
