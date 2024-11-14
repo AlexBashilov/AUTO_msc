@@ -4,12 +4,7 @@ variables:
   STAGE:
     value: "1"
     description: "Укажите номер стенда, на котором будут запущены автотесты"
-  MESSENGER_ENDPOINT: "https://msg.vseinstrumenti.ru/api/v4/"
-  CHANNEL_ID: "5ygdz4813jgp3b9x8j3yzzw6be"
   ALLURE_LAUNCH_NAME: "Запуск автотестов на ${STAGE} стенде - ${CI_COMMIT_REF_NAME} - ${GITLAB_USER_LOGIN}"
-  DB_HOST: "intgr-test-db-tms-api.ox1.dev"
-  DB_NAME: "tms-api"
-
 
 ###################################### Докер образ
 image: harbor.vseinstrumenti.ru/dockerhub/library/python:3.12-bullseye
@@ -21,9 +16,102 @@ stages:
   - tests
   - report
 
-###################################### Подключаемые конфиги
-include:
-  - local: .gitlab/install.yaml
-  - local: .gitlab/linter.yaml
-  - local: .gitlab/manualRunTests.yaml
+#################################### Триггеры запуска pipline (web/api/push)
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api" || $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "pipline"
+      when: always
+
+
+###################################### Стадия install
+install:
+  stage: install
+  before_script:
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+  script:
+    - pip install -Ur requirements.txt
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/pip
+      - venv/
+  tags:
+    - ci-docker
+
+###################################### Линтеры
+lint:
+  stage: linters
+  script:
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - flake8 --color always
+    - black . --check
+  tags:
+    - ci-docker
+  except:
+    refs:
+      - schedules
+      - pipelines
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    policy: pull
+    paths:
+      - .cache/pip
+      - venv/
+  allow_failure: true
+
+###################################### Запустить автотесты в ручном режиме
+tests:
+  stage: tests
+  dependencies:
+    - install
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "pipelines"'
+      when: always
+    - when: manual
+  before_script:
+    - wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
+    - chmod +x ./allurectl
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+  script:
+    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/ --alluredir _output
+  after_script:
+    - echo -e "\n$(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")" >> .env
+  tags:
+    - ci-docker
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/pip
+      - venv/
+  artifacts:
+    reports:
+      dotenv: .env
+    when: always
+    paths:
+      - _output/
+    expire_in: 1 day
+
+#################################### Отправить отчет о прохождении тестов
+send_report:
+  stage: report
+  needs:
+    - job: tests
+      artifacts: true
+  script:
+    - source venv/bin/activate
+    - helperpackage_send_report
+  tags:
+    - ci-docker
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/pip
+      - venv/
+
 
