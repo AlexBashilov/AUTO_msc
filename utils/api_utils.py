@@ -11,6 +11,7 @@ class ApiClient(Client):
     """
     Расширение стандартного клиента httpx.
     """
+
     def __init__(self):
         super().__init__(base_url='https://tms-api-rest.intgr-test-' + os.getenv('STAGE') + '.ox1.dev/api')
 
@@ -37,8 +38,8 @@ def assert_error_message(expected_error, actual_error):
     ), "Текст ошибки отличается от ожидаемого"
 
 
+@allure.step("Отправить POST запрос на ручку {1}")
 def post_request(client, body: BaseModel, route):
-    allure.dynamic.title('Отправить POST запрос на ручку ' + route)
     response = client.post(route, json=body.dict())
     allure.attach(response.content, name="Ответ", attachment_type=AttachmentType.JSON)
     return response
