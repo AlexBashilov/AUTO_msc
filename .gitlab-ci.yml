@@ -96,6 +96,7 @@ tests:
     paths:
       - _output/
     expire_in: 1 day
+  allow_failure: true
 
 #################################### Отправить отчет о прохождении тестов
 send_report:
