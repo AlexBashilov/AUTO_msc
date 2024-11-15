@@ -89,7 +89,7 @@ class TestCreateVehicle:
         allure.dynamic.title(
             "Добавление уже существующего ТС в ТК с типом ТС " + example["name"]
         )
-        allure.dynamic.id(example["allureID"])
+        allure.dynamic.id(example["allureIdExistVehicle"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()
