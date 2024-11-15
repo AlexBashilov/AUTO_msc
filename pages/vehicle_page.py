@@ -17,8 +17,8 @@ class VehiclePage:
 
     @allure.step('Нажать на кнопку "Добавить ТС"')
     def create_vehicle(self):
-        self.helper.wait_for_element_visible(self.CREATE_VEHICLE_BUTTON, 15).click()
-        self.helper.wait_for_element_visible(self.SAVE_BUTTON, 15)
+        self.helper.wait_for_element_clickable(self.CREATE_VEHICLE_BUTTON, 15).click()
+        self.helper.wait_for_element_visible(self.SAVE_BUTTON, 30)
 
     @allure.step("Заполнить поля для создания транспортного средства")
     def fill_vehicle(self, vehicleInfo):
