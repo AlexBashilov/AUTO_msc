@@ -39,7 +39,11 @@ class Login:
         self.helper.wait_for_element_visible(
             '//h1[text()="Вход"]/following::a[contains(@class , "primary")]'
         ).click()
+        try:
+            self.helper.wait_for_element_visible(".b9lk9-", 10)
+            self.helper.wait_for_element_invisibility(".b9lk9-", 30)
+        except Exception:
+            self.helper.wait_for_element_invisibility(".b9lk9-", 30)
         self.helper.wait_for_element_visible("#accountBtn")
-        self.helper.wait_for_element_invisibility(".b9lk9-", 30)
 
         return user_credentials
