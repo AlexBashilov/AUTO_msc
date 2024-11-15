@@ -7,9 +7,9 @@ class TripsPage:
     def __init__(self, driver):
         self.helper = HelperWd(driver)
 
-    @allure.step('Проверить наименование активных элементов на странице')
+    @allure.step("Проверить наименование активных элементов на странице")
     def check_trips_page_elements(self):
-        assert self.helper.wait_for_element_visible('h2').text == 'Рейсы'
+        assert self.helper.wait_for_element_visible("h2").text == "Рейсы"
         self.helper.wait_for_element_visible('//span[text()="Время, от"]')
         self.helper.wait_for_element_visible('//span[text()="Дата первой точки"]')
         self.helper.wait_for_element_visible('//span[text()="Время, до"]')

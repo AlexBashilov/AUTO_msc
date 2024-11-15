@@ -4,15 +4,20 @@ import allure
 import os
 from allure_commons.types import AttachmentType
 from pydantic import BaseModel
-from httpx import Client
+from httpx import Client, Response
 
 
 class ApiClient(Client):
     """
     Расширение стандартного клиента httpx.
     """
+
     def __init__(self):
-        super().__init__(base_url='https://tms-api-rest.intgr-test-' + os.getenv('STAGE') + '.ox1.dev/api')
+        super().__init__(
+            base_url="https://tms-api-rest.intgr-test-"
+            + os.getenv("STAGE")
+            + ".ox1.dev/api"
+        )
 
 
 @allure.step("Проверить что ответ соответствует схеме")
@@ -32,13 +37,11 @@ def assert_response_code(expected_code, actual_code):
 
 @allure.step("Проверить текст ошибки")
 def assert_error_message(expected_error, actual_error):
-    assert (
-            actual_error == expected_error
-    ), "Текст ошибки отличается от ожидаемого"
+    assert actual_error == expected_error, "Текст ошибки отличается от ожидаемого"
 
 
-def post_request(client, body: BaseModel, route):
-    allure.dynamic.title('Отправить POST запрос на ручку ' + route)
+@allure.step("Отправить POST запрос на ручку {1}")
+def post_request(client, body: BaseModel, route) -> Response:
     response = client.post(route, json=body.dict())
     allure.attach(response.content, name="Ответ", attachment_type=AttachmentType.JSON)
     return response

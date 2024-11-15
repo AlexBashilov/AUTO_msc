@@ -9,8 +9,12 @@ from test_data.test_params.valid_transport_companies import ValidTransportCompan
 
 
 class TestCreateTransportCompany:
-    valid_transport_companies = ValidTransportCompanies().list_of_transport_companies_parameters()
-    invalid_transport_companies = InvalidTransportCompanies().list_of_invalid_transport_companies_parameters()
+    valid_transport_companies = (
+        ValidTransportCompanies().list_of_transport_companies_parameters()
+    )
+    invalid_transport_companies = (
+        InvalidTransportCompanies().list_of_invalid_transport_companies_parameters()
+    )
 
     @pytest.mark.parametrize("example", valid_transport_companies)
     def test_create_transport_company_and_delete(self, driver, example):
@@ -18,8 +22,8 @@ class TestCreateTransportCompany:
         login = Login(driver)
         tc = TransportCompaniesPage(driver)
 
-        allure.dynamic.title(example['name'])
-        allure.dynamic.id(example['allureID'])
+        allure.dynamic.title(example["name"])
+        allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()
@@ -36,11 +40,11 @@ class TestCreateTransportCompany:
         login = Login(driver)
         tc = TransportCompaniesPage(driver)
 
-        allure.dynamic.title(example['name'])
-        allure.dynamic.id(example['allureID'])
+        allure.dynamic.title(example["name"])
+        allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()
         tc.create_transport_company()
         tc.fill_transport_company(example)
-        tc.check_error_message_after_save_transport_company(example['error'])
+        tc.check_error_message_after_save_transport_company(example["error"])
