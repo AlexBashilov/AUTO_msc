@@ -153,7 +153,7 @@ class TransportCompaniesPage:
     def go_to_first_transport_company_on_the_list(self):
         self.helper.wait_for_element_visible('[href^="/transport-companies"]').click()
         self.helper.wait_for_page_loader()
-        self.helper.wait_for_element_visible('.transport-company-page')
+        self.helper.wait_for_element_visible(".transport-company-page")
 
     @allure.step("Проверить ошибку при создании транспортной компании")
     def check_error_message_after_save_transport_company(self, expectedError):
