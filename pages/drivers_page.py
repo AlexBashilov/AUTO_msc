@@ -124,12 +124,9 @@ class DriversPage:
         self.helper.wait_for_element_invisibility(
             '//*[contains(text(),"undefined")]', 15
         )
-        assert (
-            fioDriver
-            in self.helper.wait_for_element_visible(
-                '[data-qa="typo-delete-driver"]'
-            ).text
-        ), "Сообщение при удалении не содержит ФИО водителя!"
+        self.helper.wait_for_element_visible(
+            '//b[contains(text(),"' + fioDriver + '")]', 30
+        )
         self.helper.wait_for_element_visible(self.ACCEPT_BUTTON, 15).click()
         self.helper.wait_for_element_invisibility(self.ACCEPT_BUTTON, 15)
 

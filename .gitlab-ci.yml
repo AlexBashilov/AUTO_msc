@@ -73,15 +73,15 @@ tests:
       when: always
     - when: manual
   before_script:
-    - wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
+    - wget https://github.com/allure-framework/allurectl/releases/download/2.15.1/allurectl_linux_amd64 -O ./allurectl
     - chmod +x ./allurectl
     - pip install virtualenv
     - virtualenv venv
     - source venv/bin/activate
   script:
-    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/ --alluredir _output
+    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT --reruns 1 tests/ --alluredir _output
   after_script:
-    - echo -e "\n$(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")" >> .env
+    - echo -n -e "$(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")" >> .env_allure
   tags:
     - ci-docker
   cache:
@@ -91,7 +91,7 @@ tests:
       - venv/
   artifacts:
     reports:
-      dotenv: .env
+      dotenv: .env_allure
     when: always
     paths:
       - _output/
