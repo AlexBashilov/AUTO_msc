@@ -34,7 +34,7 @@ class Base:
         self.helper.wait_for_element_clickable(self.BURGER_MENU_BUTTON).click()
         self.helper.wait_for_element_visible("#transportCompaniesMenuItem").click()
         self.helper.wait_for_element_visible('//h2[text()="Транспортные компании"]')
-        self.helper.wait_for_element_visible("(//tbody//tr)[1]")
+        self.helper.wait_for_element_visible("//tbody//tr[1]")
 
     @allure.step("Закрыть модальное окно с информацией")
     def close_info_modal(self):
