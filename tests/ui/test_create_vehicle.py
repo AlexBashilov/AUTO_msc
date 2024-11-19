@@ -128,7 +128,7 @@ class TestCreateVehicle:
         tc.filter_transport_company(transport_company_second)
         tc.delete_first_transport_company_on_the_list(transport_company_second)
         tc.check_lack_transport_company_on_the_list(transport_company_second)
-        base.go_to_transport_companies_page()
+        base.refresh_page()
         tc.filter_transport_company(transport_company_first)
         tc.delete_first_transport_company_on_the_list(transport_company_first)
         tc.check_lack_transport_company_on_the_list(transport_company_first)

@@ -12,6 +12,7 @@ class Base:
 
     def __init__(self, driver):
         self.helper = HelperWd(driver)
+        self.driver = driver
 
     @allure.step("Перейти на главную страницу TMS")
     def go_to_main_page(self):
@@ -40,3 +41,7 @@ class Base:
     def close_info_modal(self):
         self.helper.wait_for_element_clickable(self.CANCEL_BUTTON).click()
         self.helper.wait_for_element_invisibility(self.CANCEL_BUTTON)
+
+    @allure.step("Обновить текущую страницу")
+    def refresh_page(self):
+        self.driver.refresh()
