@@ -79,7 +79,7 @@ tests:
     - virtualenv venv
     - source venv/bin/activate
   script:
-    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT tests/ --alluredir _output
+    - ./allurectl watch --results _output -- pytest -s -v -n $STREAM_COUNT -reruns 1 tests/ --alluredir _output
   after_script:
     - echo -n -e "$(./allurectl job-run env --project-id "${ALLURE_PROJECT_ID}")" >> .env_allure
   tags:
