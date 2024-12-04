@@ -1,9 +1,11 @@
 from datetime import datetime
+from typing import List
 
 from allure import step
 from helperpackage import HelperWd
 
 from data_base.db_queries import SqlQueries
+from test_data.route_filter import RouteFilter
 
 
 class Route:
@@ -87,9 +89,7 @@ class Route:
 
     @step('Добавить операцию в маршрут. Название точки - {1} Операция - {2}.')
     def addOperationInRoute(self, routePoint, operationType, unloadPoint = None):
-        try: # TODO надо переписать на нормальный метод, когда появится проверка на существование элемента в хелпере
-            self.helper.wait_for_element_visible(self.ADD_OPERATION_BUTTON, 2)
-        except:
+        if self.helper.check_element_on_page(self.ADD_OPERATION_BUTTON):
             self.helper.wait_for_element_visible(self.ADD_OPERATION_BUTTON).click()
         self.helper.wait_for_element_visible(self.POINT_NAME_SELECT).click()
         self.helper.fill_field(self.POINT_NAME_INPUT, routePoint)
@@ -133,29 +133,19 @@ class Route:
     @step('Проверить что маршруты отфильтровались по фильтру {1}')
     def checkFilteringRoutes(self, filter, filterPoint):
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')
-        rowCount = count(I->grabMultiple('//*[@id="routesTable"]//tbody//tr'))
-        for (i = 1 i <= rowCount ++i) {
-            filteringRouteName = I->grabTextFrom('//*[@id="routesTable"]//tr[' . i . ']//td[3]')
-            filteringRoutePoints = explode(' >> ', filteringRouteName)
-            switch (filter) {
-                case RouteFilter::FIRST_POINT_FILTER:
-                    I->assertEquals(filterPoint, filteringRoutePoints[0], 'Первая точка маршрута не совпадает')
-
-                    break
-                case RouteFilter::ANY_POINT_FILTER:
-                    I->assertStringContainsString(filterPoint, filteringRouteName, 'Точка не содержится в маршруте')
-
-                    break
-                case RouteFilter::LAST_POINT_FILTER:
-                    I->assertEquals(filterPoint, end(filteringRoutePoints), 'Последняя точка маршрута не совпадает')
-
-                    break
-                case RouteFilter::ROUTE_NAME_FILTER:
-                    I->assertEquals(filterPoint, filteringRouteName, 'Название маршрута не совпадает')
-
-                    break
-            }
-        }
+        rowCount = len(self.helper.grab_multiple('//*[@id="routesTable"]//tbody//tr'))
+        for i in range(rowCount):
+            filteringRouteName = self.helper.wait_for_element(f'//*[@id="routesTable"]//tr[{i}]//td[3]').text
+            filteringRoutePoints = filteringRouteName.split(' >> ')
+            match filter:
+                case RouteFilter.FIRST_POINT_FILTER:
+                    assert (filteringRoutePoints[0] == filterPoint, 'Первая точка маршрута не совпадает')
+                case RouteFilter.ANY_POINT_FILTER:
+                    assert (filteringRouteName == filterPoint, 'Точка не содержится в маршруте')
+                case RouteFilter.LAST_POINT_FILTER:
+                    assert (filteringRoutePoints[-1] == filterPoint, 'Последняя точка маршрута не совпадает')
+                case RouteFilter.ROUTE_NAME_FILTER:
+                    assert (filteringRouteName == filterPoint, 'Название маршрута не совпадает')
 
     @step('Отфильтровать маршруты по последней точке маршрута')
     def filteringRoutesByLastPoints(self, lastRoutePoint):
@@ -190,21 +180,20 @@ class Route:
 
     @step('Изменить состояние фильтра "Маршруты с активными шаблонами" на {1}')
     def filteringRoutesByActivity(self, isEnable):
-        toggleClass = I->grabAttributeFrom('[data-qa="active-switch"] label', 'class')
-        currentState = str_contains(toggleClass, 'active')
-        if currentState != isEnable:
+        toggle_class = self.helper.grab_attribute('[data-qa="active-switch"] label', 'class')
+        current_state = 'active' in toggle_class
+        if current_state != isEnable:
             self.helper.wait_for_element_visible('[data-qa="active-switch"] label').click()
 
     @step('Нажать на кнопку "Очистить фильтр" и проверить что фильтры очистились')
     def clearRouteFilter(self):
         self.helper.wait_for_element_visible('#clearFilters').click()
-        # TODO переписать ожидание элемента на получение текста элемента
-        assert (self.helper.wait_for_element_visible('(//div[@id="firstPointFilter"]//span)[4]', 2).text, 'Фильтр "Поиск по первой точке" не очищен')
-        assert (self.helper.wait_for_element_visible('(//div[@id="anyPointFilter"]//span)[4]', 2).text, 'Фильтр "Поиск по любой точке" не очищен')
-        assert (self.helper.wait_for_element_visible('(//div[@id="lastPointFilter"]//span)[4]', 2).text, 'Фильтр "Поиск по последней точке" не очищен')
-        assert (self.helper.wait_for_element_visible('(//div[@id="routeNameFilter"]//span)[4]', 2).text, 'Фильтр "Поиск по названию маршрута" не очищен')
+        assert (self.helper.wait_for_element('(//div[@id="firstPointFilter"]//span)[4]').text, 'Фильтр "Поиск по первой точке" не очищен')
+        assert (self.helper.wait_for_element('(//div[@id="anyPointFilter"]//span)[4]').text, 'Фильтр "Поиск по любой точке" не очищен')
+        assert (self.helper.wait_for_element('(//div[@id="lastPointFilter"]//span)[4]').text, 'Фильтр "Поиск по последней точке" не очищен')
+        assert (self.helper.wait_for_element('(//div[@id="routeNameFilter"]//span)[4]').text, 'Фильтр "Поиск по названию маршрута" не очищен')
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')
-        rowCount = count(I->grabMultiple('//*[@id="routesTable"]//tbody//tr'))
+        rowCount = len(self.helper.grab_multiple('//*[@id="routesTable"]//tbody//tr'))
         assert rowCount < 2, 'В выдаче менее 2ух рейсов! Фильтры не очистились'
 
     @step('Проверить корректное отображение созданного маршрута')
@@ -213,16 +202,15 @@ class Route:
         self.filteringRoutesByRouteName(routeName)
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')
 
-        # TODO переписать ожидание элемента на получение текста элемента
-        assert (self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[2]', 2).text == today,
+        assert (self.helper.wait_for_element('//*[@id="routesTable"]//td[2]').text == today,
                 'Дата создания маршрута не совпадает!')
-        assert (self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[3]', 2).text == routeName,
+        assert (self.helper.wait_for_element('//*[@id="routesTable"]//td[3]').text == routeName,
                 'Наименование маршрута не совпадает!')
-        assert (self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[4]', 2).text == routeDistrict,
+        assert (self.helper.wait_for_element('//*[@id="routesTable"]//td[4]').text == routeDistrict,
                 'Федеральный округ созданного рейса отличается!')
-        assert (self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[5]', 2).text == 'Нет',
+        assert (self.helper.wait_for_element('//*[@id="routesTable"]//td[5]').text == 'Нет',
                 'У созданного рейса есть активные шаблоны!')
-        assert (self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[6]', 2).text == userName,
+        assert (self.helper.wait_for_element('//*[@id="routesTable"]//td[6]').text == userName,
                 'Имя пользователя, создавшего рейс, не совпадает!')
 
     @step('Проверить что маршруты не отображаются')
@@ -246,9 +234,7 @@ class Route:
 
     @step('Проверить что нельзя добавить операцию разгрузки первой строкой')
     def checkLockUnloadOperation(self, routePoint, operationType):
-        try: # TODO надо переписать на нормальный метод, когда появится проверка на существование элемента в хелпере
-            self.helper.wait_for_element_visible(self.ADD_OPERATION_BUTTON, 2)
-        except:
+        if self.helper.check_element_on_page(self.ADD_OPERATION_BUTTON):
             self.helper.wait_for_element_visible(self.ADD_OPERATION_BUTTON).click()
         self.helper.wait_for_element_visible(self.POINT_NAME_SELECT).click()
         self.helper.fill_field(self.POINT_NAME_INPUT, routePoint)
