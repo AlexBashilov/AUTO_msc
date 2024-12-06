@@ -74,7 +74,9 @@ class SqlQueries:
 
     @allure.step("Удалить операции на точке по ID точки")
     def delete_route_operation_by_route_point_id(self, route_point_id):
-        request = f"""DELETE from route_operation WHERE route_point_id={route_point_id}"""
+        request = (
+            f"""DELETE from route_operation WHERE route_point_id={route_point_id}"""
+        )
         self.__execute_request_update_insert_delete(request)
 
     @allure.step("Удалить точку маршрута по ID точки")

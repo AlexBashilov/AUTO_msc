@@ -3,47 +3,34 @@ import pytest
 
 from pages.base_page import Base
 from pages.login_page import Login
-from pages.transport_companies_page import TransportCompaniesPage
-from pages.drivers_page import DriversPage
 from pages.route_page import RoutePage
-from test_data.transport_companies import TransportCompanies
-from test_data.test_params.valid_drivers import ValidDrivers
-from test_data.test_params.invalid_drivers import InvalidDrivers
-from test_data.error_drivers_messages import ErrorDriversMessages
-from test_data.drivers import Drivers
-from faker import Faker
+from test_data.test_params.valid_routes import ValidRoutes
 
 
 class TestCreateRoute:
     valid_routes = ValidRoutes().list_of_routes_parameters()
-    invalid_routes = InvalidDRoutes().list_of_invalid_routes_parameters()
+    # invalid_routes = InvalidDRoutes().list_of_invalid_routes_parameters()
 
     @pytest.mark.parametrize("example", valid_routes)
     def test_create_valid_routes(self, driver, example):
         base = Base(driver)
         login = Login(driver)
         route = RoutePage(driver)
-        routePoints = []
+        route_points = []
 
         allure.dynamic.title(example["name"])
         allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
-        login.login_to_TMS()
+        user_credentials = login.login_to_TMS()
         base.go_to_routes_page()
         route.create_route()
-
-
-
-        foreach (example['routePointOperation'] as pointOperation) {
-            routePage->addOperationInRoute(pointOperation['pointName'], pointOperation['operationType'], pointOperation['unloadPoint'])
-            if (!in_array(pointOperation['pointName'], routePoints))
-            {
-                routePoints[] = pointOperation['pointName']
-            }
-        }
-        routePage->setFederalDistrict(example['routeDistrict'])
-        routeName = routePage->getFullRouteName(routePoints)
-        routePage->deleteRouteFromDbByPoints(routeName)
-        routePage->saveRoute()
-        routePage->checkCreatedRoute(userCredentials['login'], routeName, example['routeDistrict'])
-        routePage->deleteFirstRoute()
+        for point_operation in example['routePointOperation']:
+            route.add_operation_in_route(point_operation['pointName'], point_operation['operationType'], point_operation['unloadPoint'])
+            if point_operation['pointName'] not in route_points:
+                    route_points.append(point_operation['pointName'])
+        route.set_federal_district(example['routeDistrict'])
+        route_name = route.get_full_route_name(route_points)
+        route.delete_route_from_db_by_points(route_name)
+        route.save_route()
+        route.check_created_route(user_credentials['login'], route_name, example['routeDistrict'])
+        route.delete_first_route()
