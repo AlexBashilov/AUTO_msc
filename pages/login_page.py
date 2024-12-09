@@ -15,6 +15,7 @@ class Login:
         userCredentials = {
             "login": os.getenv("TMS_USER_LOGIN"),
             "password": os.getenv("TMS_USER_PASS"),
+            "username": os.getenv("TMS_USER_LOGIN").replace('_', '-'),
         }
 
         return userCredentials
@@ -45,5 +46,6 @@ class Login:
         except Exception:
             self.helper.wait_for_element_invisibility(".b9lk9-", 30)
         self.helper.wait_for_element_visible("#accountBtn")
+
 
         return user_credentials

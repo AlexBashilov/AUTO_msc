@@ -42,7 +42,7 @@ class TestCreateRoute:
         route.delete_route_from_db_by_points(db_connection, route_name)
         route.save_route()
         route.check_created_route(
-            user_credentials["login"], route_name, example["routeDistrict"]
+            user_credentials["username"], route_name, example["routeDistrict"]
         )
         route.delete_first_route()
 
@@ -124,7 +124,7 @@ class TestCreateRoute:
         route.filtering_routes_by_first_points(route_points[0])
         route.filtering_routes_by_last_points(route_points[1])
         route.check_created_route(
-            user_credentials["login"], route_name, federal_distinct
+            user_credentials["username"], route_name, federal_distinct
         )
         route.create_route()
         route.add_operation_in_route(route_points[0], RouteOperationType.LOADING)
@@ -172,7 +172,7 @@ class TestCreateRoute:
         first_route_name = route.get_full_route_name(first_route_points)
         route.save_route()
         route.check_created_route(
-            user_credentials["login"], first_route_name, federal_distinct
+            user_credentials["username"], first_route_name, federal_distinct
         )
         route.create_route_based_on()
         route.check_open_route(route_point_operations)
@@ -187,7 +187,7 @@ class TestCreateRoute:
         second_route_points[1] = ShopList.MSK_KUBINKA_SHOP
         second_route_name = route.get_full_route_name(second_route_points)
         route.check_created_route(
-            user_credentials["login"], second_route_name, federal_distinct
+            user_credentials["username"], second_route_name, federal_distinct
         )
         route.delete_first_route()
         route.filtering_routes_by_route_name(first_route_name)

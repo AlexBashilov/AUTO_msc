@@ -1,7 +1,7 @@
 import allure
 from pages.base_page import Base
 from pages.login_page import Login
-from pages.route_page import Route
+from pages.route_page import RoutePage
 from pages.transport_companies_page import TransportCompaniesPage
 from pages.trips_page import TripsPage
 
@@ -12,7 +12,7 @@ class TestOpenPage:
     def test_open_route_page(self, driver):
         base = Base(driver)
         login = Login(driver)
-        route = Route(driver)
+        route = RoutePage(driver)
 
         base.go_to_main_page()
         login.login_to_TMS()
