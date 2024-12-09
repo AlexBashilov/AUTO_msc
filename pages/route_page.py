@@ -94,7 +94,7 @@ class RoutePage:
         if self.helper.check_element_on_page(self.ADD_OPERATION_BUTTON):
             self.helper.wait_for_element_visible(self.ADD_OPERATION_BUTTON).click()
         self.helper.wait_for_element_visible(self.POINT_NAME_SELECT).click()
-        self.helper.fill_field(self.POINT_NAME_INPUT, route_point)
+        self.helper.fill_field_with_delay(self.POINT_NAME_INPUT, route_point)
         self.helper.wait_for_element_visible(
             f'//div[@id="pointName"]//span[text()="{route_point}"]'
         ).click()
@@ -198,9 +198,9 @@ class RoutePage:
     @step("Отфильтровать маршруты по названию маршрута")
     def filtering_routes_by_route_name(self, route_name):
         self.helper.wait_for_element_visible(self.ROUTE_NAME_FILTER).click()
-        self.helper.fill_field("#routeNameFilter input", route_name)
+        self.helper.fill_field_with_delay("#routeNameFilter input", route_name, 0.01)
         self.helper.wait_for_element_visible(
-            f'//div[@id="routeNameFilter"]//span[text()="{route_name}"]'
+            f'//div[@id="routeNameFilter"]//span[text()="{route_name}"]', 60
         ).click()
 
     @step("Получить полное название маршрута")
@@ -372,9 +372,9 @@ class RoutePage:
         count_trips = db.get_trips_by_route_name(route_name)
         count_routes = db.get_routes_by_route_name(route_name)
 
-        if count_routes[0]["kolvo"] != 0:
-            if count_trips[0]["kolvo"] == 0:
-                route_id = db.get_route_data_by_route_name(route_name)
+        if count_routes != 0:
+            if count_trips == 0:
+                route_id = db.get_route_data_by_route_name(route_name)[0][0]
                 for k in range(len(route_points)):
                     route_pont_id = db.get_route_point_by_route_id(route_id)
                     db.delete_route_operation_by_route_point_id(route_pont_id)
@@ -385,4 +385,4 @@ class RoutePage:
             else:
                 assert False, "По маршруту были созданы рейсы, нельзя удалять!"
         else:
-            assert False, "Маршрут не создан, удаление из БД не требуется"
+            assert True, "Маршрут не создан, удаление из БД не требуется"

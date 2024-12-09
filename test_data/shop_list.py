@@ -7,7 +7,7 @@ class ShopList(str, Enum):
     """
 
     MSK_DOMODEDOVO_WAREHOUSE = 'МСК - Склад Домодедово'
-    NN_SUZDAL_SHOP_WAREHOUSE = 'НН - Суздальская магазин-склад'
+    NN_DOSKINO_WAREHOUSE = 'НН - Доскино Склад'
     SPB_WAREHOUSE = 'СПБ - РЦ Шушары Бадаевское'
     MRK_WAREHOUSE = 'МРК - Мурманск Магазин-склад'
     MRK_ATLANTIC_SHOP = 'МРК - Мурманск Атлантика Магазин'
