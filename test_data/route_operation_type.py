@@ -6,7 +6,8 @@ class RouteOperationType(str, Enum):
     Типы операций в маршрутах
     """
 
-    LOADING = 'Загрузка'
-    UNLOADING = 'Разгрузка'
+    LOADING = "Загрузка"
+    UNLOADING = "Разгрузка"
+
     def __str__(self) -> str:
         return self.value

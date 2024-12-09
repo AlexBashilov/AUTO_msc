@@ -10,28 +10,27 @@ class InvalidRoutes:
     def list_of_invalid_routes_parameters(self) -> List[dict]:
         return [
             {
-                'name': 'двумя точками загрузки и одной точкой разгрузки',
-                'allureID': '27599',
-                'expectedError': ErrorRoutesMessages.DIFFERENT_OPERATION_ERROR,
-                'routeDistrict': FederalDistrict.CFO_DISTRICT,
-                'routePointOperation':
-                    [
-                        {
-                            'pointName': ShopList.MSK_DOMODEDOVO_WAREHOUSE,
-                            'operationType': RouteOperationType.LOADING,
-                            'unloadPoint': None,
-                        },
-                        {
-                            'pointName': ShopList.NN_DOSKINO_WAREHOUSE,
-                            'operationType': RouteOperationType.UNLOADING,
-                            'unloadPoint': ShopList.MSK_DOMODEDOVO_WAREHOUSE,
-                        },
-                        {
-                            'pointName': ShopList.MSK_DOMODEDOVO_WAREHOUSE,
-                            'operationType': RouteOperationType.LOADING,
-                            'unloadPoint': None,
-                        }
-                    ],
+                "name": "двумя точками загрузки и одной точкой разгрузки",
+                "allureID": "27599",
+                "expectedError": ErrorRoutesMessages.DIFFERENT_OPERATION_ERROR,
+                "routeDistrict": FederalDistrict.CFO_DISTRICT,
+                "routePointOperation": [
+                    {
+                        "pointName": ShopList.MSK_DOMODEDOVO_WAREHOUSE,
+                        "operationType": RouteOperationType.LOADING,
+                        "unloadPoint": None,
+                    },
+                    {
+                        "pointName": ShopList.NN_DOSKINO_WAREHOUSE,
+                        "operationType": RouteOperationType.UNLOADING,
+                        "unloadPoint": ShopList.MSK_DOMODEDOVO_WAREHOUSE,
+                    },
+                    {
+                        "pointName": ShopList.MSK_DOMODEDOVO_WAREHOUSE,
+                        "operationType": RouteOperationType.LOADING,
+                        "unloadPoint": None,
+                    },
+                ],
             },
             # {
             #     'name': 'одной точкой загрузки и двумя точками разгрузки',
