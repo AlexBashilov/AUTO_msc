@@ -135,10 +135,7 @@ class RoutePage:
 
         self.helper.wait_for_element_visible(self.SAVE_ROUTE_BUTTON).click()
         self.helper.wait_for_element_visible(error_text)
-        assert (
-            self.helper.wait_for_element_visible(error_text).text == expected_error,
-            "Сообщение об ошибке не совпадает!",
-        )
+        assert self.helper.wait_for_element_visible(error_text).text == expected_error, "Сообщение об ошибке не совпадает!"
 
     @step("Отфильтровать маршруты по первой точке маршрута")
     def filtering_routes_by_first_points(self, first_route_point):
@@ -159,25 +156,15 @@ class RoutePage:
             filtering_route_points = filtering_route_name.split(" >> ")
             match filter:
                 case RouteFilter.FIRST_POINT_FILTER:
-                    assert (
-                        filtering_route_points[0] == filter_point,
-                        "Первая точка маршрута не совпадает",
-                    )
+                    assert filtering_route_points[0] == filter_point, "Первая точка маршрута не совпадает"
+
                 case RouteFilter.ANY_POINT_FILTER:
-                    assert (
-                        filtering_route_name == filter_point,
-                        "Точка не содержится в маршруте",
-                    )
+                    assert filtering_route_name == filter_point, "Точка не содержится в маршруте"
+
                 case RouteFilter.LAST_POINT_FILTER:
-                    assert (
-                        filtering_route_points[-1] == filter_point,
-                        "Последняя точка маршрута не совпадает",
-                    )
+                    assert filtering_route_points[-1] == filter_point, "Последняя точка маршрута не совпадает"
                 case RouteFilter.ROUTE_NAME_FILTER:
-                    assert (
-                        filtering_route_name == filter_point,
-                        "Название маршрута не совпадает",
-                    )
+                    assert filtering_route_name == filter_point, "Название маршрута не совпадает"
 
     @step("Отфильтровать маршруты по последней точке маршрута")
     def filtering_routes_by_last_points(self, last_route_point):
@@ -204,7 +191,7 @@ class RoutePage:
         ).click()
 
     @step("Получить полное название маршрута")
-    def get_full_route_name(self, route_points: List[str]):
+    def get_full_route_name(self, route_points: List[str]) -> str:
         route_name = ""
 
         if len(route_points) < 2:
@@ -230,28 +217,10 @@ class RoutePage:
     @step('Нажать на кнопку "Очистить фильтр" и проверить что фильтры очистились')
     def clear_route_filter(self):
         self.helper.wait_for_element_visible("#clearFilters").click()
-        assert (
-            self.helper.wait_for_element(
-                '(//div[@id="firstPointFilter"]//span)[4]'
-            ).text,
-            'Фильтр "Поиск по первой точке" не очищен',
-        )
-        assert (
-            self.helper.wait_for_element('(//div[@id="anyPointFilter"]//span)[4]').text,
-            'Фильтр "Поиск по любой точке" не очищен',
-        )
-        assert (
-            self.helper.wait_for_element(
-                '(//div[@id="lastPointFilter"]//span)[4]'
-            ).text,
-            'Фильтр "Поиск по последней точке" не очищен',
-        )
-        assert (
-            self.helper.wait_for_element(
-                '(//div[@id="routeNameFilter"]//span)[4]'
-            ).text,
-            'Фильтр "Поиск по названию маршрута" не очищен',
-        )
+        assert self.helper.wait_for_element('(//div[@id="firstPointFilter"]//span)[4]').text, 'Фильтр "Поиск по первой точке" не очищен'
+        assert self.helper.wait_for_element('(//div[@id="anyPointFilter"]//span)[4]').text, 'Фильтр "Поиск по любой точке" не очищен'
+        assert self.helper.wait_for_element('(//div[@id="lastPointFilter"]//span)[4]').text, 'Фильтр "Поиск по последней точке" не очищен'
+        assert self.helper.wait_for_element('(//div[@id="routeNameFilter"]//span)[4]').text, 'Фильтр "Поиск по названию маршрута" не очищен'
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')
         row_count = len(self.helper.grab_multiple('//*[@id="routesTable"]//tbody//tr'))
         assert row_count < 2, "В выдаче менее 2ух рейсов! Фильтры не очистились"
@@ -262,29 +231,11 @@ class RoutePage:
         self.filtering_routes_by_route_name(route_name)
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')
 
-        assert (
-            self.helper.wait_for_element('//*[@id="routesTable"]//td[2]').text == today,
-            "Дата создания маршрута не совпадает!",
-        )
-        assert (
-            self.helper.wait_for_element('//*[@id="routesTable"]//td[3]').text
-            == route_name,
-            "Наименование маршрута не совпадает!",
-        )
-        assert (
-            self.helper.wait_for_element('//*[@id="routesTable"]//td[4]').text
-            == route_district,
-            "Федеральный округ созданного рейса отличается!",
-        )
-        assert (
-            self.helper.wait_for_element('//*[@id="routesTable"]//td[5]').text == "Нет",
-            "У созданного рейса есть активные шаблоны!",
-        )
-        assert (
-            self.helper.wait_for_element('//*[@id="routesTable"]//td[6]').text
-            == user_name,
-            "Имя пользователя, создавшего рейс, не совпадает!",
-        )
+        assert self.helper.wait_for_element('//*[@id="routesTable"]//td[2]').text == today, "Дата создания маршрута не совпадает!"
+        assert self.helper.wait_for_element('//*[@id="routesTable"]//td[3]').text == route_name, "Наименование маршрута не совпадает!"
+        assert self.helper.wait_for_element('//*[@id="routesTable"]//td[4]').text == route_district, "Федеральный округ созданного рейса отличается!"
+        assert self.helper.wait_for_element('//*[@id="routesTable"]//td[5]').text == "Нет",  "У созданного рейса есть активные шаблоны!"
+        assert self.helper.wait_for_element('//*[@id="routesTable"]//td[6]').text == user_name, "Имя пользователя, создавшего рейс, не совпадает!"
 
     @step("Проверить что маршруты не отображаются")
     def check_empty_route(self):
@@ -325,39 +276,23 @@ class RoutePage:
     )
     def check_open_route(self, route_point_operations):
         for i in range(len(route_point_operations)):
-            assert (
-                self.helper.wait_for_element_visible(
+            assert self.helper.wait_for_element_visible(
                     f'//div[@data-qa="table-route-operations"]//tbody//tr[{i + 1}]//td[1]//span',
                     2,
-                ).text
-                == str(i + 1),
-                "Номер операции не совпадает!",
-            )
-            assert (
-                self.helper.wait_for_element_visible(
+                ).text == str(i + 1), "Номер операции не совпадает!"
+            assert self.helper.wait_for_element_visible(
                     f'//div[@data-qa="table-route-operations"]//tbody//tr[{i + 1}]//td[2]//span',
                     2,
-                ).text
-                == route_point_operations[i]["pointName"],
-                "Название точки не совпадает!",
-            )
-            assert (
-                self.helper.wait_for_element_visible(
+                ).text == route_point_operations[i]["pointName"], "Название точки не совпадает!"
+            assert self.helper.wait_for_element_visible(
                     f'//div[@data-qa="table-route-operations"]//tbody//tr[{i + 1}]//td[3]//span',
                     2,
-                ).text
-                == route_point_operations[i]["operationType"],
-                "Тип операции не совпадает!",
-            )
+                ).text == route_point_operations[i]["operationType"], "Тип операции не совпадает!"
             if route_point_operations[i]["unloadPoint"]:
-                assert (
-                    self.helper.wait_for_element_visible(
+                assert self.helper.wait_for_element_visible(
                         f'//div[@data-qa="table-route-operations"]//tbody//tr[{i + 1}]//td[4]//span',
                         2,
-                    ).text
-                    == route_point_operations[i]["unloadPoint"],
-                    "Точка разгрузки не совпадает!",
-                )
+                    ).text == route_point_operations[i]["unloadPoint"], "Точка разгрузки не совпадает!"
 
     @step("Удалить операцию из маршрута по её номеру")
     def delete_operation_in_route_by_number(self, number_of_operation):
