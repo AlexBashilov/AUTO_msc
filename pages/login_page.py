@@ -47,5 +47,4 @@ class Login:
             self.helper.wait_for_element_invisibility(".b9lk9-", 30)
         self.helper.wait_for_element_visible("#accountBtn")
 
-
         return user_credentials
