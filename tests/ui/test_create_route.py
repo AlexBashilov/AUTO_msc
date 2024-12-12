@@ -170,6 +170,7 @@ class TestCreateRoute:
             first_route_points.append(point_operation["pointName"])
         route.set_federal_district(federal_distinct)
         first_route_name = route.get_full_route_name(first_route_points)
+        route.delete_route_from_db_by_points(db_connection, first_route_name)
         route.save_route()
         route.check_created_route(
             user_credentials["username"], first_route_name, federal_distinct
@@ -182,10 +183,11 @@ class TestCreateRoute:
             RouteOperationType.UNLOADING,
             ShopList.MSK_DOMODEDOVO_WAREHOUSE,
         )
-        route.save_route()
         second_route_points = first_route_points
         second_route_points[1] = ShopList.MSK_KUBINKA_SHOP
         second_route_name = route.get_full_route_name(second_route_points)
+        route.delete_route_from_db_by_points(db_connection, second_route_points)
+        route.save_route()
         route.check_created_route(
             user_credentials["username"], second_route_name, federal_distinct
         )

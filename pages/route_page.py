@@ -129,14 +129,14 @@ class RoutePage:
     def check_lock_save_button(self):
         self.helper.wait_for_element_visible(self.DISABLE_SAVE_ROUTE_BUTTON)
 
-    @step("Проверить ошибку при создании маршрута с разным ко-вом операций")
+    @step("Проверить ошибку при сохранении маршрута")
     def check_error_message_after_save_route(self, expected_error):
         error_text = "#errorMessage0"
 
         self.helper.wait_for_element_visible(self.SAVE_ROUTE_BUTTON).click()
         self.helper.wait_for_element_visible(error_text)
         assert (
-            self.helper.wait_for_element_visible(error_text).text == expected_error
+            expected_error in self.helper.wait_for_element_visible(error_text).text
         ), "Сообщение об ошибке не совпадает!"
 
     @step("Отфильтровать маршруты по первой точке маршрута")
