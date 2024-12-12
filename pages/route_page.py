@@ -327,11 +327,11 @@ class RoutePage:
             ), "Тип операции не совпадает!"
             if route_point_operations[i]["unloadPoint"]:
                 assert (
-                    self.helper.wait_for_element_visible(
+                    route_point_operations[i]["unloadPoint"]
+                    in self.helper.wait_for_element_visible(
                         f'//div[@data-qa="table-route-operations"]//tbody//tr[{i + 1}]//td[4]//span',
                         2,
                     ).text
-                    == route_point_operations[i]["unloadPoint"]
                 ), "Точка разгрузки не совпадает!"
 
     @step("Удалить операцию из маршрута по её номеру")
