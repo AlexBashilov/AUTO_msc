@@ -203,14 +203,16 @@ class RoutePage:
     @step("Получить полное название маршрута")
     def get_full_route_name(self, route_points: List[dict]) -> str:
         route_name = ""
+        previous_route_point_name = ""
 
         if len(route_points) < 2:
             assert False, "Маршрут состоит менее чем из двух точек!"
         for i in range(len(route_points)):
             if i == (len(route_points) - 1):
                 route_name = route_name + route_points[i]["pointName"]
-            else:
+            elif previous_route_point_name != route_points[i]["pointName"]:
                 route_name = route_name + route_points[i]["pointName"] + " >> "
+            previous_route_point_name = route_points[i]["pointName"]
         return route_name
 
     @step('Изменить состояние фильтра "Маршруты с активными шаблонами" на {1}')
