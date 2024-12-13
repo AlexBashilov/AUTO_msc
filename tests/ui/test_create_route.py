@@ -172,7 +172,9 @@ class TestCreateRoute:
         federal_distinct = FederalDistrict.CFO_DISTRICT
         first_route_name = route.get_full_route_name(route_point_operations)
         route.delete_route_from_db_by_points(db_connection, first_route_name)
-        second_route_name = route.get_full_route_name([route_point_operations[0], new_point_operations])
+        second_route_name = route.get_full_route_name(
+            [route_point_operations[0], new_point_operations]
+        )
         route.delete_route_from_db_by_points(db_connection, second_route_name)
 
         base.go_to_main_page()
