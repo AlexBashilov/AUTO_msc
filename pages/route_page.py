@@ -201,16 +201,16 @@ class RoutePage:
         ).click()
 
     @step("Получить полное название маршрута")
-    def get_full_route_name(self, route_points: List[str]) -> str:
+    def get_full_route_name(self, route_points: List[dict]) -> str:
         route_name = ""
 
         if len(route_points) < 2:
             assert False, "Маршрут состоит менее чем из двух точек!"
         for i in range(len(route_points)):
             if i == (len(route_points) - 1):
-                route_name = route_name + route_points[i]
+                route_name = route_name + route_points[i]["pointName"]
             else:
-                route_name = route_name + route_points[i] + " >> "
+                route_name = route_name + route_points[i]["pointName"] + " >> "
         return route_name
 
     @step('Изменить состояние фильтра "Маршруты с активными шаблонами" на {1}')
@@ -329,7 +329,7 @@ class RoutePage:
                 assert (
                     route_point_operations[i]["unloadPoint"]
                     in self.helper.wait_for_element_visible(
-                        f'//div[@data-qa="table-route-operations"]//tbody//tr[{i + 1}]//td[4]//span',
+                        f'//div[@data-qa="table-route-operations"]//tbody//tr[{i + 1}]//td[4]//div//div//span[2]',
                         2,
                     ).text
                 ), "Точка разгрузки не совпадает!"

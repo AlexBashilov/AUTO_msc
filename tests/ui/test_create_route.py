@@ -21,7 +21,8 @@ class TestCreateRoute:
         base = Base(driver)
         login = Login(driver)
         route = RoutePage(driver)
-        route_points = []
+        route_name = route.get_full_route_name(example["routePointOperation"])
+        route.delete_route_from_db_by_points(db_connection, route_name)
 
         allure.dynamic.title(f'Создание маршрута с {example["name"]}')
         allure.dynamic.id(example["allureID"])
@@ -35,11 +36,7 @@ class TestCreateRoute:
                 point_operation["operationType"],
                 point_operation["unloadPoint"],
             )
-            if point_operation["pointName"] not in route_points:
-                route_points.append(point_operation["pointName"])
         route.set_federal_district(example["routeDistrict"])
-        route_name = route.get_full_route_name(route_points)
-        route.delete_route_from_db_by_points(db_connection, route_name)
         route.save_route()
         route.check_created_route(
             user_credentials["username"], route_name, example["routeDistrict"]
@@ -106,31 +103,44 @@ class TestCreateRoute:
         base = Base(driver)
         login = Login(driver)
         route = RoutePage(driver)
-        route_points = [ShopList.MSK_DOMODEDOVO_WAREHOUSE, ShopList.MSK_SEVASTOPOL_SHOP]
+        route_point_operations = [
+            {
+                "pointName": ShopList.MSK_DOMODEDOVO_WAREHOUSE,
+                "operationType": RouteOperationType.LOADING,
+                "unloadPoint": None,
+            },
+            {
+                "pointName": ShopList.MSK_SEVASTOPOL_SHOP,
+                "operationType": RouteOperationType.UNLOADING,
+                "unloadPoint": ShopList.MSK_DOMODEDOVO_WAREHOUSE,
+            },
+        ]
         federal_distinct = FederalDistrict.CFO_DISTRICT
-        route_name = route.get_full_route_name(route_points)
+        route_name = route.get_full_route_name(route_point_operations)
         route.delete_route_from_db_by_points(db_connection, route_name)
 
         base.go_to_main_page()
         user_credentials = login.login_to_TMS()
         base.go_to_routes_page()
         route.create_route()
-        route.add_operation_in_route(route_points[0], RouteOperationType.LOADING)
-        route.add_operation_in_route(
-            route_points[1], RouteOperationType.UNLOADING, route_points[0]
-        )
+        for point_operation in route_point_operations:
+            route.add_operation_in_route(
+                point_operation["pointName"],
+                point_operation["operationType"],
+                point_operation["unloadPoint"],
+            )
         route.set_federal_district(federal_distinct)
         route.save_route()
-        route.filtering_routes_by_first_points(route_points[0])
-        route.filtering_routes_by_last_points(route_points[1])
         route.check_created_route(
             user_credentials["username"], route_name, federal_distinct
         )
         route.create_route()
-        route.add_operation_in_route(route_points[0], RouteOperationType.LOADING)
-        route.add_operation_in_route(
-            route_points[1], RouteOperationType.UNLOADING, route_points[0]
-        )
+        for point_operation in route_point_operations:
+            route.add_operation_in_route(
+                point_operation["pointName"],
+                point_operation["operationType"],
+                point_operation["unloadPoint"],
+            )
         route.set_federal_district(federal_distinct)
         route.check_error_message_after_save_route(ErrorRoutesMessages.SAME_ROUTE_ERROR)
         route.close_create_route_window()
@@ -154,8 +164,16 @@ class TestCreateRoute:
                 "unloadPoint": ShopList.MSK_DOMODEDOVO_WAREHOUSE,
             },
         ]
+        new_point_operations = {
+            "pointName": ShopList.MSK_KUBINKA_SHOP,
+            "operationType": RouteOperationType.UNLOADING,
+            "unloadPoint": ShopList.MSK_DOMODEDOVO_WAREHOUSE,
+        }
         federal_distinct = FederalDistrict.CFO_DISTRICT
-        first_route_points = []
+        first_route_name = route.get_full_route_name(route_point_operations)
+        route.delete_route_from_db_by_points(db_connection, first_route_name)
+        second_route_name = route.get_full_route_name([route_point_operations[0], new_point_operations])
+        route.delete_route_from_db_by_points(db_connection, second_route_name)
 
         base.go_to_main_page()
         user_credentials = login.login_to_TMS()
@@ -167,10 +185,7 @@ class TestCreateRoute:
                 point_operation["operationType"],
                 point_operation["unloadPoint"],
             )
-            first_route_points.append(point_operation["pointName"])
         route.set_federal_district(federal_distinct)
-        first_route_name = route.get_full_route_name(first_route_points)
-        route.delete_route_from_db_by_points(db_connection, first_route_name)
         route.save_route()
         route.check_created_route(
             user_credentials["username"], first_route_name, federal_distinct
@@ -179,14 +194,10 @@ class TestCreateRoute:
         route.check_open_route(route_point_operations)
         route.delete_operation_in_route_by_number(2)
         route.add_operation_in_route(
-            ShopList.MSK_KUBINKA_SHOP,
-            RouteOperationType.UNLOADING,
-            ShopList.MSK_DOMODEDOVO_WAREHOUSE,
+            new_point_operations["pointName"],
+            new_point_operations["operationType"],
+            new_point_operations["unloadPoint"],
         )
-        second_route_points = first_route_points
-        second_route_points[1] = ShopList.MSK_KUBINKA_SHOP
-        second_route_name = route.get_full_route_name(second_route_points)
-        route.delete_route_from_db_by_points(db_connection, second_route_points)
         route.save_route()
         route.check_created_route(
             user_credentials["username"], second_route_name, federal_distinct
