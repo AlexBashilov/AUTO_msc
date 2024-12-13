@@ -18,14 +18,14 @@ class TestCreateRoute:
 
     @pytest.mark.parametrize("example", valid_routes)
     def test_create_valid_routes(self, db_connection, driver, example):
+        allure.dynamic.title(f'Создание маршрута с {example["name"]}')
+        allure.dynamic.id(example["allureID"])
         base = Base(driver)
         login = Login(driver)
         route = RoutePage(driver)
         route_name = route.get_full_route_name(example["routePointOperation"])
         route.delete_route_from_db_by_points(db_connection, route_name)
 
-        allure.dynamic.title(f'Создание маршрута с {example["name"]}')
-        allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         user_credentials = login.login_to_TMS()
         base.go_to_routes_page()
@@ -45,12 +45,12 @@ class TestCreateRoute:
 
     @pytest.mark.parametrize("example", invalid_routes)
     def test_create_invalid_routes(self, db_connection, driver, example):
+        allure.dynamic.title(f'Создание маршрута с {example["name"]}')
+        allure.dynamic.id(example["allureID"])
         base = Base(driver)
         login = Login(driver)
         route = RoutePage(driver)
 
-        allure.dynamic.title(f'Создание маршрута с {example["name"]}')
-        allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_routes_page()
