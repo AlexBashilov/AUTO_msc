@@ -151,7 +151,7 @@ class RoutePage:
     def check_filtering_routes(self, filter, filter_point):
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')
         row_count = len(self.helper.grab_multiple('//*[@id="routesTable"]//tbody//tr'))
-        for i in range(row_count):
+        for i in range(1, row_count + 1):
             filtering_route_name = self.helper.wait_for_element(
                 f'//*[@id="routesTable"]//tr[{i}]//td[3]'
             ).text
