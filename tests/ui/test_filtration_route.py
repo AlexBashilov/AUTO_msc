@@ -72,12 +72,12 @@ class TestFiltrationRoute:
             {
                 "pointName": ShopList.KIR_POPOVA_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
-                "unloadPoint": ShopList.KAZAN_WAREHOUSE,
+                "unloadPoint": "1 " + ShopList.KAZAN_WAREHOUSE,
             },
             {
                 "pointName": ShopList.KIR_MOSCOW_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
-                "unloadPoint": ShopList.KAZAN_WAREHOUSE,
+                "unloadPoint": "2 " + ShopList.KAZAN_WAREHOUSE,
             },
         ]
         federal_distinct = FederalDistrict.CFO_DISTRICT
@@ -123,12 +123,12 @@ class TestFiltrationRoute:
                 "unloadPoint": None,
             },
             {
-                "pointName": ShopList.KIR_PROFSOUZE_SHOP,
+                "pointName": ShopList.KIR_WORCA_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
                 "unloadPoint": ShopList.KAZAN_WAREHOUSE,
             },
             {
-                "pointName": ShopList.KIR_MOSCOW_SHOP,
+                "pointName": ShopList.KIR_PROFSOUZE_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
                 "unloadPoint": ShopList.KAZAN_WAREHOUSE,
             },
@@ -171,7 +171,7 @@ class TestFiltrationRoute:
                 "unloadPoint": None,
             },
             {
-                "pointName": ShopList.KIR_MOSCOW_SHOP,
+                "pointName": ShopList.KIR_MIXEEVA_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
                 "unloadPoint": ShopList.KAZAN_WAREHOUSE,
             },
@@ -256,7 +256,7 @@ class TestFiltrationRoute:
                 "unloadPoint": None,
             },
             {
-                "pointName": ShopList.KIR_POPOVA_SHOP,
+                "pointName": ShopList.KIR_KOLCOVA_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
                 "unloadPoint": ShopList.KAZAN_WAREHOUSE,
             },
