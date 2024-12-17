@@ -230,16 +230,16 @@ class RoutePage:
     def clear_route_filter(self):
         self.helper.wait_for_element_visible("#clearFilters").click()
         assert self.helper.wait_for_element(
-            '#firstPointFilter > div:nth-child(1) > span:nth-child(2)'
+            "#firstPointFilter > div:nth-child(1) > span:nth-child(2)"
         ).text, 'Фильтр "Поиск по первой точке" не очищен'
         assert self.helper.wait_for_element(
-            '#anyPointFilter > div:nth-child(1) > span:nth-child(2)'
+            "#anyPointFilter > div:nth-child(1) > span:nth-child(2)"
         ).text, 'Фильтр "Поиск по любой точке" не очищен'
         assert self.helper.wait_for_element(
-             '#lastPointFilter > div:nth-child(1) > span:nth-child(2)'
+            "#lastPointFilter > div:nth-child(1) > span:nth-child(2)"
         ).text, 'Фильтр "Поиск по последней точке" не очищен'
         assert self.helper.wait_for_element(
-            '#routeNameFilter > div:nth-child(1) > span:nth-child(2)'
+            "#routeNameFilter > div:nth-child(1) > span:nth-child(2)"
         ).text, 'Фильтр "Поиск по названию маршрута" не очищен'
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')
         row_count = len(self.helper.grab_multiple('//*[@id="routesTable"]//tbody//tr'))
