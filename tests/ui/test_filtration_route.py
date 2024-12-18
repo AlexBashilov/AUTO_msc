@@ -207,14 +207,14 @@ class TestFiltrationRoute:
         route = RoutePage(driver)
         route_point_operations = [
             {
-                "pointName": ShopList.KAZAN_WAREHOUSE,
+                "pointName": ShopList.PERM_WAREHOUSE,
                 "operationType": RouteOperationType.LOADING,
                 "unloadPoint": None,
             },
             {
-                "pointName": ShopList.KIR_SOVETSKAYA_SHOP,
+                "pointName": ShopList.PERM_LASVINSKAYA_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
-                "unloadPoint": ShopList.KAZAN_WAREHOUSE,
+                "unloadPoint": ShopList.PERM_WAREHOUSE,
             },
         ]
         federal_distinct = FederalDistrict.CFO_DISTRICT

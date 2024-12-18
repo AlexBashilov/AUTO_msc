@@ -243,7 +243,7 @@ class RoutePage:
         ).text, 'Фильтр "Поиск по названию маршрута" не очищен'
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')
         row_count = len(self.helper.grab_multiple('//*[@id="routesTable"]//tbody//tr'))
-        assert row_count < 2, "В выдаче менее 2ух рейсов! Фильтры не очистились"
+        assert row_count > 2, "В выдаче менее 2ух рейсов! Фильтры не очистились"
 
     @step("Проверить корректное отображение созданного маршрута")
     def check_created_route(self, user_name, route_name, route_district):
