@@ -148,7 +148,7 @@ class RoutePage:
         ).click()
 
     @step("Проверить что маршруты отфильтровались по фильтру {1}")
-    def check_filtering_routes(self, filter, filter_point):
+    def check_filtering_routes(self, filter_name, filter_point):
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')
         row_count = len(self.helper.grab_multiple('//*[@id="routesTable"]//tbody//tr'))
         for i in range(1, row_count + 1):
@@ -156,7 +156,7 @@ class RoutePage:
                 f'//*[@id="routesTable"]//tr[{i}]//td[3]'
             ).text
             filtering_route_points = filtering_route_name.split(" >> ")
-            match filter:
+            match filter_name:
                 case RouteFilter.FIRST_POINT_FILTER:
                     assert (
                         filtering_route_points[0] == filter_point
@@ -164,7 +164,7 @@ class RoutePage:
 
                 case RouteFilter.ANY_POINT_FILTER:
                     assert (
-                        filtering_route_name == filter_point
+                        filter_point in filtering_route_name
                     ), "Точка не содержится в маршруте"
 
                 case RouteFilter.LAST_POINT_FILTER:
@@ -229,16 +229,16 @@ class RoutePage:
     @step('Нажать на кнопку "Очистить фильтр" и проверить что фильтры очистились')
     def clear_route_filter(self):
         self.helper.wait_for_element_visible("#clearFilters").click()
-        assert self.helper.wait_for_element(
+        assert not self.helper.wait_for_element(
             "#firstPointFilter > div:nth-child(1) > span:nth-child(2)"
         ).text, 'Фильтр "Поиск по первой точке" не очищен'
-        assert self.helper.wait_for_element(
+        assert not self.helper.wait_for_element(
             "#anyPointFilter > div:nth-child(1) > span:nth-child(2)"
         ).text, 'Фильтр "Поиск по любой точке" не очищен'
-        assert self.helper.wait_for_element(
+        assert not self.helper.wait_for_element(
             "#lastPointFilter > div:nth-child(1) > span:nth-child(2)"
         ).text, 'Фильтр "Поиск по последней точке" не очищен'
-        assert self.helper.wait_for_element(
+        assert not self.helper.wait_for_element(
             "#routeNameFilter > div:nth-child(1) > span:nth-child(2)"
         ).text, 'Фильтр "Поиск по названию маршрута" не очищен'
         self.helper.wait_for_element_visible('//*[@id="routesTable"]//td[1]')

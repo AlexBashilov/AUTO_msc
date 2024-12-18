@@ -125,12 +125,12 @@ class TestFiltrationRoute:
             {
                 "pointName": ShopList.KIR_WORCA_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
-                "unloadPoint": ShopList.KAZAN_WAREHOUSE,
+                "unloadPoint": "1 " + ShopList.KAZAN_WAREHOUSE,
             },
             {
                 "pointName": ShopList.KIR_PROFSOUZE_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
-                "unloadPoint": ShopList.KAZAN_WAREHOUSE,
+                "unloadPoint": "2 " + ShopList.KAZAN_WAREHOUSE,
             },
         ]
         federal_distinct = FederalDistrict.CFO_DISTRICT
@@ -251,14 +251,14 @@ class TestFiltrationRoute:
         route = RoutePage(driver)
         route_point_operations = [
             {
-                "pointName": ShopList.KAZAN_WAREHOUSE,
+                "pointName": ShopList.PERM_WAREHOUSE,
                 "operationType": RouteOperationType.LOADING,
                 "unloadPoint": None,
             },
             {
-                "pointName": ShopList.KIR_KOLCOVA_SHOP,
+                "pointName": ShopList.PERM_OVERYATSKAYA_SHOP,
                 "operationType": RouteOperationType.UNLOADING,
-                "unloadPoint": ShopList.KAZAN_WAREHOUSE,
+                "unloadPoint": ShopList.PERM_WAREHOUSE,
             },
         ]
         federal_distinct = FederalDistrict.CFO_DISTRICT

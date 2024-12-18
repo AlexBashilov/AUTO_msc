@@ -27,6 +27,7 @@ class ShopList(str, Enum):
     KIR_SOVETSKAYA_SHOP = "КИР - Киров Советская Магазин"
     PERM_WAREHOUSE = "ПЕР - Пермь Стахановская Магазин-склад"
     PERM_UINSKAYA_SHOP = "ПЕР - Пермь Уинская Магазин"
+    PERM_OVERYATSKAYA_SHOP = "ПЕР - Пермь Оверятская Магазин"
     SPB_BEGOVAYA = "СПБ - Беговая ПВЗ"
 
     def __str__(self) -> str:
