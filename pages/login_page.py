@@ -15,6 +15,7 @@ class Login:
         userCredentials = {
             "login": os.getenv("TMS_USER_LOGIN"),
             "password": os.getenv("TMS_USER_PASS"),
+            "username": os.getenv("TMS_USER_LOGIN").replace("_", "-"),
         }
 
         return userCredentials
