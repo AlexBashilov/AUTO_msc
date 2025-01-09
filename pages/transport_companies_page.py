@@ -41,19 +41,19 @@ class TransportCompaniesPage:
     def fill_transport_company(self, tkInfo):
         if TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-full-name"] input',
+                '[data-qa="tk-full-name"]',
                 tkInfo[TransportCompanies.FULL_NAME_OF_THE_TRANSPORTER],
             )
 
         if TransportCompanies.REGISTERED_ADDRESS_TRANSPORTER in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-legal-address"] input',
+                '[data-qa="tk-legal-address"]',
                 tkInfo[TransportCompanies.REGISTERED_ADDRESS_TRANSPORTER],
             )
 
         if TransportCompanies.SHORT_NAME_TRANSPORTER in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-short-name"] input',
+                '[data-qa="tk-short-name"]',
                 tkInfo[TransportCompanies.SHORT_NAME_TRANSPORTER],
             )
 
@@ -67,47 +67,47 @@ class TransportCompaniesPage:
 
         if TransportCompanies.OGRN_TRANSPORTER in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-ogrn"] input', tkInfo[TransportCompanies.OGRN_TRANSPORTER]
+                '[data-qa="tk-ogrn"]', tkInfo[TransportCompanies.OGRN_TRANSPORTER]
             )
 
         if TransportCompanies.KPP_TRANSPORTER in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-kpp"] input', tkInfo[TransportCompanies.KPP_TRANSPORTER]
+                '[data-qa="tk-kpp"]', tkInfo[TransportCompanies.KPP_TRANSPORTER]
             )
 
         if TransportCompanies.INN_TRANSPORTER in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-inn"] input', tkInfo[TransportCompanies.INN_TRANSPORTER]
+                '[data-qa="tk-inn"]', tkInfo[TransportCompanies.INN_TRANSPORTER]
             )
 
         if TransportCompanies.CONTRACT_NUMBER in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-contract-number"] input',
+                '[data-qa="tk-contract-number"]',
                 tkInfo[TransportCompanies.CONTRACT_NUMBER],
             )
 
         if TransportCompanies.CONTRACT_DATE in tkInfo:
             self.helper.wait_for_element_visible('[data-qa="tk-contract-date"]')
             self.helper.fill_field(
-                '[data-qa="tk-contract-date"] input',
+                '[data-qa="tk-contract-date"]',
                 tkInfo[TransportCompanies.CONTRACT_DATE],
             )
 
         if TransportCompanies.CONTACT_FACE_TRANSPORTER in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-contact-person-full-name"] input',
+                '[data-qa="tk-contact-person-full-name"]',
                 tkInfo[TransportCompanies.CONTACT_FACE_TRANSPORTER],
             )
 
         if TransportCompanies.POSITION_OF_CONTACT_PERSON in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-position"] input',
+                '[data-qa="tk-position"]',
                 tkInfo[TransportCompanies.POSITION_OF_CONTACT_PERSON],
             )
 
         if TransportCompanies.PHONE_NUMBER in tkInfo:
             self.helper.fill_field(
-                '[data-qa="tk-phone-number"] input',
+                '[data-qa="tk-phone-number"]',
                 tkInfo[TransportCompanies.PHONE_NUMBER],
             )
 
