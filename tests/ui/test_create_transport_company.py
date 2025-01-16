@@ -9,9 +9,7 @@ from test_data.test_params.valid_transport_companies import ValidTransportCompan
 
 
 class TestCreateTransportCompany:
-    valid_transport_companies = (
-        ValidTransportCompanies().list_of_transport_companies_parameters()
-    )
+    valid_transport_companies = ValidTransportCompanies().list_of_transport_companies_parameters()
     invalid_transport_companies = (
         InvalidTransportCompanies().list_of_invalid_transport_companies_parameters()
     )

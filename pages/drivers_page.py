@@ -30,14 +30,10 @@ class DriversPage:
         self.helper.wait_for_element_visible(self.SAVE_BUTTON, 15)
 
         if Drivers.LAST_NAME in driverInfo:
-            self.helper.fill_field(
-                'input[data-qa="form-surname"]', driverInfo[Drivers.LAST_NAME]
-            )
+            self.helper.fill_field('input[data-qa="form-surname"]', driverInfo[Drivers.LAST_NAME])
 
         if Drivers.FIRST_NAME in driverInfo:
-            self.helper.fill_field(
-                'input[data-qa="form-name"]', driverInfo[Drivers.FIRST_NAME]
-            )
+            self.helper.fill_field('input[data-qa="form-name"]', driverInfo[Drivers.FIRST_NAME])
 
         if Drivers.MIDDLE_NAME in driverInfo:
             self.helper.fill_field(
@@ -45,9 +41,7 @@ class DriversPage:
             )
 
         if Drivers.PHONE_NUMBER in driverInfo:
-            self.helper.fill_field(
-                'input[data-qa="form-phone"]', driverInfo[Drivers.PHONE_NUMBER]
-            )
+            self.helper.fill_field('input[data-qa="form-phone"]', driverInfo[Drivers.PHONE_NUMBER])
 
         if Drivers.PASSPORT_NUMBER in driverInfo:
             self.helper.fill_field(
@@ -79,8 +73,7 @@ class DriversPage:
     def checkErrorMessageAfterSaveDriver(self, expectedError):
         self.helper.wait_for_element_visible(self.SAVE_BUTTON).click()
         assert (
-            self.helper.wait_for_element_visible('[data-qa^="error-message"]').text
-            == expectedError
+            self.helper.wait_for_element_visible('[data-qa^="error-message"]').text == expectedError
         ), "Сообщение об ошибке не совпадает!"
 
     @allure.step("Найти водителя по фильтру номера телефона")
@@ -94,9 +87,7 @@ class DriversPage:
         self.helper.wait_for_element_visible(
             '//span[text()="+7' + driverInfo[Drivers.PHONE_NUMBER] + '"]'
         ).click()
-        assert (
-            "+7" + driverInfo[Drivers.PHONE_NUMBER]
-        ) in self.helper.wait_for_element_visible(
+        assert ("+7" + driverInfo[Drivers.PHONE_NUMBER]) in self.helper.wait_for_element_visible(
             self.TABLE_DATA
         ).text, "Табличная часть водителей не содержит номер телефона водителя!"
         self.helper.wait_for_element_visible(
@@ -114,27 +105,17 @@ class DriversPage:
                 + driverInfo[Drivers.MIDDLE_NAME]
             )
         else:
-            fioDriver = (
-                driverInfo[Drivers.LAST_NAME] + " " + driverInfo[Drivers.FIRST_NAME]
-            )
-        self.helper.wait_for_element_visible(
-            '[data-qa^="action-delete-driver"]', 15
-        ).click()
+            fioDriver = driverInfo[Drivers.LAST_NAME] + " " + driverInfo[Drivers.FIRST_NAME]
+        self.helper.wait_for_element_visible('[data-qa^="action-delete-driver"]', 15).click()
         self.helper.wait_for_element_visible(self.ACCEPT_BUTTON)
-        self.helper.wait_for_element_invisibility(
-            '//*[contains(text(),"undefined")]', 15
-        )
-        self.helper.wait_for_element_visible(
-            '//b[contains(text(),"' + fioDriver + '")]', 30
-        )
+        self.helper.wait_for_element_invisibility('//*[contains(text(),"undefined")]', 15)
+        self.helper.wait_for_element_visible('//b[contains(text(),"' + fioDriver + '")]', 30)
         self.helper.wait_for_element_visible(self.ACCEPT_BUTTON, 15).click()
         self.helper.wait_for_element_invisibility(self.ACCEPT_BUTTON, 15)
 
     @allure.step("Проверить что на странице нет указанного водителя по номеру телефона")
     def checkLackDriverOnTheList(self, driverInfo):
-        self.helper.wait_for_element_visible(
-            self.DRIVER_PHONE_NUMBER_FILTER, 15
-        ).click()
+        self.helper.wait_for_element_visible(self.DRIVER_PHONE_NUMBER_FILTER, 15).click()
         self.helper.wait_for_element_visible(self.DRIVER_PHONE_NUMBER_FILTER_INPUT)
         self.helper.fill_field_with_delay(
             self.DRIVER_PHONE_NUMBER_FILTER_INPUT,

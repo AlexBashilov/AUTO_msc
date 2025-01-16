@@ -33,21 +33,16 @@ class RoutePage:
             self.helper.wait_for_element_visible('[data-qa="active-switch"]').text
             == "Маршруты с шаблонами"
         )
+        assert self.helper.wait_for_element_visible("#clearFilters").text == "Очистить фильтры"
         assert (
-            self.helper.wait_for_element_visible("#clearFilters").text
-            == "Очистить фильтры"
-        )
-        assert (
-            self.helper.wait_for_element_visible(self.CREATE_BUTTON).text
-            == "Создать новый маршрут"
+            self.helper.wait_for_element_visible(self.CREATE_BUTTON).text == "Создать новый маршрут"
         )
         assert (
             self.helper.wait_for_element_visible(self.FIRST_POINT_FILTER).text
             == "Поиск по первой точке"
         )
         assert (
-            self.helper.wait_for_element_visible("#anyPointFilter").text
-            == "Поиск по любой точке"
+            self.helper.wait_for_element_visible("#anyPointFilter").text == "Поиск по любой точке"
         )
         assert (
             self.helper.wait_for_element_visible(self.LAST_POINT_FILTER).text
@@ -163,18 +158,14 @@ class RoutePage:
                     ), "Первая точка маршрута не совпадает"
 
                 case RouteFilter.ANY_POINT_FILTER:
-                    assert (
-                        filter_point in filtering_route_name
-                    ), "Точка не содержится в маршруте"
+                    assert filter_point in filtering_route_name, "Точка не содержится в маршруте"
 
                 case RouteFilter.LAST_POINT_FILTER:
                     assert (
                         filtering_route_points[-1] == filter_point
                     ), "Последняя точка маршрута не совпадает"
                 case RouteFilter.ROUTE_NAME_FILTER:
-                    assert (
-                        filtering_route_name == filter_point
-                    ), "Название маршрута не совпадает"
+                    assert filtering_route_name == filter_point, "Название маршрута не совпадает"
 
     @step("Отфильтровать маршруты по последней точке маршрута")
     def filtering_routes_by_last_points(self, last_route_point):
@@ -217,14 +208,10 @@ class RoutePage:
 
     @step('Изменить состояние фильтра "Маршруты с активными шаблонами" на {1}')
     def filtering_routes_by_activity(self, is_enable):
-        toggle_class = self.helper.grab_attribute(
-            '[data-qa="active-switch"] label', "class"
-        )
+        toggle_class = self.helper.grab_attribute('[data-qa="active-switch"] label', "class")
         current_state = "active" in toggle_class
         if current_state != is_enable:
-            self.helper.wait_for_element_visible(
-                '[data-qa="active-switch"] label'
-            ).click()
+            self.helper.wait_for_element_visible('[data-qa="active-switch"] label').click()
 
     @step('Нажать на кнопку "Очистить фильтр" и проверить что фильтры очистились')
     def clear_route_filter(self):
@@ -255,19 +242,16 @@ class RoutePage:
             self.helper.wait_for_element('//*[@id="routesTable"]//td[2]').text == today
         ), "Дата создания маршрута не совпадает!"
         assert (
-            self.helper.wait_for_element('//*[@id="routesTable"]//td[3]').text
-            == route_name
+            self.helper.wait_for_element('//*[@id="routesTable"]//td[3]').text == route_name
         ), "Наименование маршрута не совпадает!"
         assert (
-            self.helper.wait_for_element('//*[@id="routesTable"]//td[4]').text
-            == route_district
+            self.helper.wait_for_element('//*[@id="routesTable"]//td[4]').text == route_district
         ), "Федеральный округ созданного рейса отличается!"
         assert (
             self.helper.wait_for_element('//*[@id="routesTable"]//td[5]').text == "Нет"
         ), "У созданного рейса есть активные шаблоны!"
         assert (
-            self.helper.wait_for_element('//*[@id="routesTable"]//td[6]').text
-            == user_name
+            self.helper.wait_for_element('//*[@id="routesTable"]//td[6]').text == user_name
         ), "Имя пользователя, создавшего рейс, не совпадает!"
 
     @step("Проверить что маршруты не отображаются")
@@ -304,9 +288,7 @@ class RoutePage:
         )
         self.helper.wait_for_element_visible(self.DISABLE_SAVE_ROUTE_BUTTON)
 
-    @step(
-        "Проверить операции у открытого на редактирование/созданного на основании маршрута"
-    )
+    @step("Проверить операции у открытого на редактирование/созданного на основании маршрута")
     def check_open_route(self, route_point_operations):
         for i in range(len(route_point_operations)):
             assert self.helper.wait_for_element_visible(

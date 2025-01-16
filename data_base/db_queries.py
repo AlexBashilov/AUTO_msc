@@ -44,7 +44,9 @@ class SqlQueries:
 
     @step("Получить ТК к которым привязан водитель по его ID")
     def get_tc_by_driver_id(self, driver_id) -> List:
-        request = f"""select * from link_driver_vs_transport_company where driver_id ='{driver_id}'"""
+        request = (
+            f"""select * from link_driver_vs_transport_company where driver_id ='{driver_id}'"""
+        )
         return self.__execute_request_select(request)
 
     @step("Удалить водителя в таблице driver и link_driver_vs_transport_company по ID")
@@ -72,12 +74,12 @@ class SqlQueries:
     @step("Получить кол-во рейсов по наименованию маршрута")
     def get_trips_by_route_name(self, routeName) -> int:
         request = f"""select count(*) AS kolvo from route right join trip on route.id = trip.route_id where name ='{routeName}'"""
-        return self.__execute_request_select(request)[0]['kolvo']
+        return self.__execute_request_select(request)[0]["kolvo"]
 
     @step("Получить кол-во маршрутов по наименованию")
     def get_routes_by_route_name(self, routeName) -> int:
         request = f"""select count(*) AS kolvo from route where name ='{routeName}'"""
-        return self.__execute_request_select(request)[0]['kolvo']
+        return self.__execute_request_select(request)[0]["kolvo"]
 
     @step("Получить данные по маршруту по наименованию")
     def get_route_data_by_route_name(self, routeName) -> List:
@@ -87,13 +89,11 @@ class SqlQueries:
     @step("Получить точки маршрута по его ID")
     def get_route_point_by_route_id(self, route_id) -> int:
         request = f"""select * from route_point where route_id={route_id}"""
-        return self.__execute_request_select(request)[0]['id']
+        return self.__execute_request_select(request)[0]["id"]
 
     @step("Удалить операции на точке по ID точки")
     def delete_route_operation_by_route_point_id(self, route_point_id):
-        request = (
-            f"""DELETE from route_operation WHERE route_point_id={route_point_id}"""
-        )
+        request = f"""DELETE from route_operation WHERE route_point_id={route_point_id}"""
         self.__execute_request_update_insert_delete(request)
 
     @step("Удалить точку маршрута по ID точки")
