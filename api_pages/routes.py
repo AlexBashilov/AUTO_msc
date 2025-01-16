@@ -8,6 +8,7 @@ class Routes(str, Enum):
 
     GET_VEHICLE = "/getVehicle"
     GET_VEHICLES = "/getVehicles"
+    CREATE_DRIVER = "/createDriver"
     GET_DRIVER = "/getDriver"
     GET_DRIVERS = "/getDrivers"
 

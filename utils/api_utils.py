@@ -2,6 +2,8 @@ from typing import Type
 
 import allure
 import os
+
+from allure_commons._allure import step
 from allure_commons.types import AttachmentType
 from pydantic import BaseModel
 from httpx import Client, Response
@@ -19,8 +21,7 @@ class ApiClient(Client):
             + ".ox1.dev/api"
         )
 
-
-@allure.step("Проверить что ответ соответствует схеме")
+@step("Проверить что ответ соответствует схеме")
 def assert_schema(response, model: Type[BaseModel]):
     body = response.json()
     if isinstance(body, list):
@@ -29,19 +30,82 @@ def assert_schema(response, model: Type[BaseModel]):
     else:
         model.model_validate(body, strict=True)
 
+    return model.model_validate(response.json())
 
-@allure.step("Проверить код ответа")
+
+@step("Проверить код ответа")
 def assert_response_code(expected_code, actual_code):
     assert actual_code == expected_code, f"Код ответа {actual_code}"
 
 
-@allure.step("Проверить текст ошибки")
+@step("Проверить текст ошибки")
 def assert_error_message(expected_error, actual_error):
     assert actual_error == expected_error, "Текст ошибки отличается от ожидаемого"
 
 
-@allure.step("Отправить POST запрос на ручку {1}")
+@step("Отправить POST запрос на ручку {2}")
 def post_request(client, body: BaseModel, route) -> Response:
-    response = client.post(route, json=body.dict())
-    allure.attach(response.content, name="Ответ", attachment_type=AttachmentType.JSON)
+    allure.attach(body.model_dump_json(), name="Отправленный запрос", attachment_type=AttachmentType.JSON,)
+    response = client.post(route, json=body.model_dump())
+    allure.attach(response.content, name="Полученный ответ", attachment_type=AttachmentType.JSON)
     return response
+
+
+@step("Сравнить данные ответа с ожидаемыми данными")
+def assert_response_data(expected_response: BaseModel, response):
+    diff = _compare_json(
+        expected_response.model_dump(exclude_none=True), response.json()
+    )
+    assert not diff, f"Данные в ответе отличаются от ожидаемых - {diff}"
+
+
+@step("Сравнить два json между собой")
+def _compare_json(
+    expected_json, actual_json, path=""
+) -> list[str]:
+    differences = []
+
+    if isinstance(expected_json, dict) and isinstance(actual_json, dict):
+        all_keys = set(expected_json.keys()).union(set(actual_json.keys()))
+
+        for key in all_keys:
+            full_path = f"{path}.{key}" if path else key
+
+            if key not in expected_json:
+                differences.append(f"Ключ '{full_path}' отсутствует в expected_json")
+            elif key not in actual_json:
+                differences.append(f"Ключ '{full_path}' отсутствует в actual_json")
+            else:
+                differences.extend(
+                    _compare_json(
+                        expected_json[key], actual_json[key], full_path
+                    )
+                )
+
+    elif isinstance(expected_json, list) and isinstance(actual_json, list):
+        min_len = min(len(expected_json), len(actual_json))
+        for index in range(min_len):
+            full_path = f"{path}[{index}]"
+            differences.extend(
+                _compare_json(
+                    expected_json[index], actual_json[index], full_path
+                )
+            )
+
+        if len(expected_json) > len(actual_json):
+            for index in range(min_len, len(expected_json)):
+                differences.append(
+                    f"В актуальном ответе не хватает объекта '{path}[{index}]': {expected_json[index]}"
+                )
+        elif len(actual_json) > len(expected_json):
+            for index in range(min_len, len(actual_json)):
+                differences.append(
+                    f"В актуальном ответе лишний объект '{path}[{index}]': {actual_json[index]}"
+                )
+
+    elif expected_json != actual_json:
+        differences.append(
+            f"Значение в '{path}' отличаются: ожидаемое - {expected_json} | актуальное - {actual_json}"
+        )
+
+    return differences
