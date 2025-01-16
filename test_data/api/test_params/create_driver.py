@@ -21,9 +21,9 @@ def create_valid_drivers_parameters() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
-            )
+            ),
         },
         {
             "name": "Создание водителя без отчества",
@@ -36,9 +36,9 @@ def create_valid_drivers_parameters() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
-            )
+            ),
         },
         {
             "name": "Создания водителя с несколькими ТК",
@@ -52,9 +52,9 @@ def create_valid_drivers_parameters() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
-            )
+            ),
         },
         {
             "name": "Создания водителя с паспортом в 20 символов",
@@ -68,9 +68,9 @@ def create_valid_drivers_parameters() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=str(fake.random_number(digits=20)),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
-            )
+            ),
         },
         {
             "name": "Проверка приведение номера паспорта к определенному виду",
@@ -82,13 +82,16 @@ def create_valid_drivers_parameters() -> List[dict]:
                     name=fake.first_name(),
                     patronymic=fake.middle_name(),
                     phoneNumber=fake.bothify("9#########"),
-                    passportFullNumber=fake.bothify(text=' ????!@*&#### ', letters='йцукенфывапasdfghQW'),
+                    passportFullNumber=fake.bothify(
+                        text=" ????!@*&#### ", letters="йцукенфывапasdfghQW"
+                    ),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
-            )
+            ),
         },
     ]
+
 
 def create_drivers_required_parameters() -> List[dict]:
     fake = Faker("ru_RU")
@@ -104,7 +107,7 @@ def create_drivers_required_parameters() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.TC_ID_REQUIRED_ERROR,
@@ -120,7 +123,7 @@ def create_drivers_required_parameters() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.SURNAME_REQUIRED_ERROR,
@@ -136,7 +139,7 @@ def create_drivers_required_parameters() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.NAME_REQUIRED_ERROR,
@@ -152,7 +155,7 @@ def create_drivers_required_parameters() -> List[dict]:
                     patronymic=fake.middle_name(),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.PHONE_NUMBER_REQUIRED_ERROR,
@@ -168,7 +171,7 @@ def create_drivers_required_parameters() -> List[dict]:
                     patronymic=fake.middle_name(),
                     phoneNumber=fake.bothify("9#########"),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.PASSPORT_FULL_NUMBER_REQUIRED_ERROR,
@@ -184,7 +187,7 @@ def create_drivers_required_parameters() -> List[dict]:
                     patronymic=fake.middle_name(),
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.PASSPORT_DATE_REQUIRED_ERROR,
@@ -200,12 +203,13 @@ def create_drivers_required_parameters() -> List[dict]:
                     patronymic=fake.middle_name(),
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
-                    passportDate=fake.date()
+                    passportDate=fake.date(),
                 )
             ),
             "expected_error": CreateDriverError.LICENSE_NUMBER_REQUIRED_ERROR,
-        }
+        },
     ]
+
 
 def create_drivers_errors() -> List[dict]:
     fake = Faker("ru_RU")
@@ -222,7 +226,7 @@ def create_drivers_errors() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.EMPTY_TC_ID_ERROR,
@@ -239,7 +243,7 @@ def create_drivers_errors() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.EMPTY_SURNAME_ERROR,
@@ -256,7 +260,7 @@ def create_drivers_errors() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.EMPTY_NAME_ERROR,
@@ -273,7 +277,7 @@ def create_drivers_errors() -> List[dict]:
                     phoneNumber="",
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.EMPTY_PHONE_NUMBER_ERROR,
@@ -290,7 +294,7 @@ def create_drivers_errors() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber="",
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.EMPTY_PASSPORT_NUMBER_ERROR,
@@ -307,7 +311,7 @@ def create_drivers_errors() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=fake.passport_number(),
                     passportDate=fake.date(),
-                    licenseNumber=""
+                    licenseNumber="",
                 )
             ),
             "expected_error": CreateDriverError.EMPTY_LICENSE_NUMBER_ERROR,
@@ -324,9 +328,9 @@ def create_drivers_errors() -> List[dict]:
                     phoneNumber=fake.bothify("9#########"),
                     passportFullNumber=str(fake.random_number(digits=21)),
                     passportDate=fake.date(),
-                    licenseNumber=str(fake.random_number(digits=10))
+                    licenseNumber=str(fake.random_number(digits=10)),
                 )
             ),
             "expected_error": CreateDriverError.PASSPORT_LENGTH_ERROR,
-        }
+        },
     ]

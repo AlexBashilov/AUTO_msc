@@ -21,8 +21,9 @@ class ApiClient(Client):
             + ".ox1.dev/api"
         )
 
+
 @step("Проверить что ответ соответствует схеме")
-def assert_schema(response, model: Type[BaseModel]):
+def assert_schema(response, model: Type[BaseModel]) -> BaseModel:
     body = response.json()
     if isinstance(body, list):
         for item in body:
@@ -45,9 +46,15 @@ def assert_error_message(expected_error, actual_error):
 
 @step("Отправить POST запрос на ручку {2}")
 def post_request(client, body: BaseModel, route) -> Response:
-    allure.attach(body.model_dump_json(), name="Отправленный запрос", attachment_type=AttachmentType.JSON,)
+    allure.attach(
+        body.model_dump_json(),
+        name="Отправленный запрос",
+        attachment_type=AttachmentType.JSON,
+    )
     response = client.post(route, json=body.model_dump())
-    allure.attach(response.content, name="Полученный ответ", attachment_type=AttachmentType.JSON)
+    allure.attach(
+        response.content, name="Полученный ответ", attachment_type=AttachmentType.JSON
+    )
     return response
 
 
@@ -60,9 +67,7 @@ def assert_response_data(expected_response: BaseModel, response):
 
 
 @step("Сравнить два json между собой")
-def _compare_json(
-    expected_json, actual_json, path=""
-) -> list[str]:
+def _compare_json(expected_json, actual_json, path="") -> list[str]:
     differences = []
 
     if isinstance(expected_json, dict) and isinstance(actual_json, dict):
@@ -77,9 +82,7 @@ def _compare_json(
                 differences.append(f"Ключ '{full_path}' отсутствует в actual_json")
             else:
                 differences.extend(
-                    _compare_json(
-                        expected_json[key], actual_json[key], full_path
-                    )
+                    _compare_json(expected_json[key], actual_json[key], full_path)
                 )
 
     elif isinstance(expected_json, list) and isinstance(actual_json, list):
@@ -87,9 +90,7 @@ def _compare_json(
         for index in range(min_len):
             full_path = f"{path}[{index}]"
             differences.extend(
-                _compare_json(
-                    expected_json[index], actual_json[index], full_path
-                )
+                _compare_json(expected_json[index], actual_json[index], full_path)
             )
 
         if len(expected_json) > len(actual_json):

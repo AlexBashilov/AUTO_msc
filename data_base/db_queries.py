@@ -1,5 +1,4 @@
 from typing import Text, List
-import allure
 from allure_commons._allure import step
 
 from utils.db_connect import connection
@@ -52,7 +51,9 @@ class SqlQueries:
     def delete_driver_by_id(self, driver):
         request_delete_driver = f"""DELETE from driver WHERE id={driver}"""
         self.__execute_request_update_insert_delete(request_delete_driver)
-        request_delete_link = f"""DELETE from link_driver_vs_transport_company WHERE driver_id={driver}"""
+        request_delete_link = (
+            f"""DELETE from link_driver_vs_transport_company WHERE driver_id={driver}"""
+        )
         self.__execute_request_update_insert_delete(request_delete_link)
 
     @step("Создать новое ТС в таблице vehicle")
