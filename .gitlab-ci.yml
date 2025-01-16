@@ -5,6 +5,7 @@ variables:
     value: "1"
     description: "Укажите номер стенда, на котором будут запущены автотесты"
   ALLURE_LAUNCH_NAME: "Запуск автотестов на ${STAGE} стенде - ${CI_COMMIT_REF_NAME} - ${GITLAB_USER_LOGIN}"
+  TEST_BRANCH: "${CI_COMMIT_REF_NAME}"
 
 ###################################### Докер образ
 image: harbor.vseinstrumenti.ru/dockerhub/library/python:3.12-bullseye
