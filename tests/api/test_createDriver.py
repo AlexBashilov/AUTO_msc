@@ -31,7 +31,9 @@ class TestCreateDriver:
             client, test_param["request_body"], routes.Routes.CREATE_DRIVER
         )
         api_utils.assert_response_code(HTTPStatus.OK, response.status_code)
-        response_model = api_utils.assert_schema(response, createDriver.CreateDriverResponseSchema)
+        response_model = api_utils.assert_schema(
+            response, createDriver.CreateDriverResponseSchema
+        )
         driver_data = db.get_driver_by_id(response_model.result.id)
         driver_tc = db.get_tc_by_driver_id(response_model.result.id)
         data_validation.create_driver_validation_data(
@@ -46,11 +48,15 @@ class TestCreateDriver:
         response = api_utils.post_request(
             client, test_param["request_body"], routes.Routes.CREATE_DRIVER
         )
-        api_utils.assert_response_code(HTTPStatus.UNPROCESSABLE_ENTITY, response.status_code)
+        api_utils.assert_response_code(
+            HTTPStatus.UNPROCESSABLE_ENTITY, response.status_code
+        )
         response_model = api_utils.assert_schema(
             response, createDriver.CreateDriverRequiredParamsErrorSchema
         )
-        api_utils.assert_error_message(test_param["expected_error"], response_model.message)
+        api_utils.assert_error_message(
+            test_param["expected_error"], response_model.message
+        )
 
     @pytest.mark.parametrize("test_param", create_drivers_errors())
     def test_create_driver_error(self, client, test_param):
@@ -60,7 +66,9 @@ class TestCreateDriver:
             client, test_param["request_body"], routes.Routes.CREATE_DRIVER
         )
         api_utils.assert_response_code(HTTPStatus.BAD_REQUEST, response.status_code)
-        response_model = api_utils.assert_schema(response, createDriver.CreateDriverErrorSchema)
+        response_model = api_utils.assert_schema(
+            response, createDriver.CreateDriverErrorSchema
+        )
         api_utils.assert_error_message(
             test_param["expected_error"], response_model.errors[0].message
         )
@@ -82,7 +90,9 @@ class TestCreateDriver:
                 licenseNumber=str(fake.random_number(digits=10)),
             )
         )
-        valid_response = api_utils.post_request(client, driver, routes.Routes.CREATE_DRIVER)
+        valid_response = api_utils.post_request(
+            client, driver, routes.Routes.CREATE_DRIVER
+        )
         api_utils.assert_response_code(HTTPStatus.OK, valid_response.status_code)
         valid_response_model = api_utils.assert_schema(
             valid_response, createDriver.CreateDriverResponseSchema
@@ -98,8 +108,12 @@ class TestCreateDriver:
                 )
             ]
         )
-        error_response = api_utils.post_request(client, driver, routes.Routes.CREATE_DRIVER)
-        api_utils.assert_response_code(HTTPStatus.BAD_REQUEST, error_response.status_code)
+        error_response = api_utils.post_request(
+            client, driver, routes.Routes.CREATE_DRIVER
+        )
+        api_utils.assert_response_code(
+            HTTPStatus.BAD_REQUEST, error_response.status_code
+        )
         api_utils.assert_schema(error_response, createDriver.CreateDriverErrorSchema)
         api_utils.assert_response_data(expected_error_response, error_response)
         db.delete_driver_by_id(valid_response_model.result.id)

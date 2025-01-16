@@ -8,7 +8,9 @@ class Login:
     def __init__(self, driver):
         self.helper = HelperWd(driver)
 
-    @allure.step("Получить данные для авторизации под разными пользователя для каждого потока")
+    @allure.step(
+        "Получить данные для авторизации под разными пользователя для каждого потока"
+    )
     def get_credentials(self) -> dict:
         userCredentials = {
             "login": os.getenv("TMS_USER_LOGIN"),

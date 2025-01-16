@@ -16,7 +16,9 @@ class ApiClient(Client):
 
     def __init__(self):
         super().__init__(
-            base_url="https://tms-api-rest.intgr-test-" + os.getenv("STAGE") + ".ox1.dev/api"
+            base_url="https://tms-api-rest.intgr-test-"
+            + os.getenv("STAGE")
+            + ".ox1.dev/api"
         )
 
 
@@ -50,13 +52,17 @@ def post_request(client, body: BaseModel, route) -> Response:
         attachment_type=AttachmentType.JSON,
     )
     response = client.post(route, json=body.model_dump())
-    allure.attach(response.content, name="Полученный ответ", attachment_type=AttachmentType.JSON)
+    allure.attach(
+        response.content, name="Полученный ответ", attachment_type=AttachmentType.JSON
+    )
     return response
 
 
 @step("Сравнить данные ответа с ожидаемыми данными")
 def assert_response_data(expected_response: BaseModel, response):
-    diff = _compare_json(expected_response.model_dump(exclude_none=True), response.json())
+    diff = _compare_json(
+        expected_response.model_dump(exclude_none=True), response.json()
+    )
     assert not diff, f"Данные в ответе отличаются от ожидаемых - {diff}"
 
 
@@ -75,13 +81,17 @@ def _compare_json(expected_json, actual_json, path="") -> list[str]:
             elif key not in actual_json:
                 differences.append(f"Ключ '{full_path}' отсутствует в actual_json")
             else:
-                differences.extend(_compare_json(expected_json[key], actual_json[key], full_path))
+                differences.extend(
+                    _compare_json(expected_json[key], actual_json[key], full_path)
+                )
 
     elif isinstance(expected_json, list) and isinstance(actual_json, list):
         min_len = min(len(expected_json), len(actual_json))
         for index in range(min_len):
             full_path = f"{path}[{index}]"
-            differences.extend(_compare_json(expected_json[index], actual_json[index], full_path))
+            differences.extend(
+                _compare_json(expected_json[index], actual_json[index], full_path)
+            )
 
         if len(expected_json) > len(actual_json):
             for index in range(min_len, len(expected_json)):

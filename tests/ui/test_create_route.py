@@ -75,7 +75,9 @@ class TestCreateRoute:
         login.login_to_TMS()
         base.go_to_routes_page()
         route.create_route()
-        route.add_operation_in_route(ShopList.MSK_DOMODEDOVO_WAREHOUSE, RouteOperationType.LOADING)
+        route.add_operation_in_route(
+            ShopList.MSK_DOMODEDOVO_WAREHOUSE, RouteOperationType.LOADING
+        )
         route.set_federal_district(FederalDistrict.CFO_DISTRICT)
         route.check_lock_save_button()
 
@@ -91,7 +93,9 @@ class TestCreateRoute:
         base.go_to_routes_page()
         route.create_route()
         route.set_federal_district(FederalDistrict.CFO_DISTRICT)
-        route.check_lock_unload_operation(ShopList.MSK_BAGRATION_SHOP, RouteOperationType.UNLOADING)
+        route.check_lock_unload_operation(
+            ShopList.MSK_BAGRATION_SHOP, RouteOperationType.UNLOADING
+        )
 
     @title("Создание уже существующего маршрута")
     @id("36446")
@@ -127,7 +131,9 @@ class TestCreateRoute:
             )
         route.set_federal_district(federal_distinct)
         route.save_route()
-        route.check_created_route(user_credentials["username"], route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], route_name, federal_distinct
+        )
         route.create_route()
         for point_operation in route_point_operations:
             route.add_operation_in_route(
@@ -183,7 +189,9 @@ class TestCreateRoute:
             )
         route.set_federal_district(federal_distinct)
         route.save_route()
-        route.check_created_route(user_credentials["username"], first_route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], first_route_name, federal_distinct
+        )
         route.create_route_based_on()
         route.check_open_route(route_point_operations)
         route.delete_operation_in_route_by_number(2)
@@ -193,7 +201,9 @@ class TestCreateRoute:
             new_point_operations["unloadPoint"],
         )
         route.save_route()
-        route.check_created_route(user_credentials["username"], second_route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], second_route_name, federal_distinct
+        )
         route.delete_first_route()
         route.filtering_routes_by_route_name(first_route_name)
         route.delete_first_route()

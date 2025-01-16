@@ -17,8 +17,12 @@ class ValidTransportCompanies:
                 + str(fake.random_number(digits=3)),
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_OOO,
                 TransportCompanies.OGRN_TRANSPORTER: fake.random_number(digits=15),
-                TransportCompanies.KPP_TRANSPORTER: fake.random_number(digits=9, fix_len=True),
-                TransportCompanies.INN_TRANSPORTER: fake.random_number(digits=12, fix_len=True),
+                TransportCompanies.KPP_TRANSPORTER: fake.random_number(
+                    digits=9, fix_len=True
+                ),
+                TransportCompanies.INN_TRANSPORTER: fake.random_number(
+                    digits=12, fix_len=True
+                ),
                 TransportCompanies.CONTRACT_NUMBER: fake.random_number(digits=20),
                 TransportCompanies.CONTRACT_DATE: "09012024",
                 TransportCompanies.CONTACT_FACE_TRANSPORTER: fake.name(),
@@ -35,8 +39,12 @@ class ValidTransportCompanies:
                 + str(fake.random_number(digits=3)),
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_ZAO,
                 TransportCompanies.OGRN_TRANSPORTER: fake.random_number(digits=15),
-                TransportCompanies.KPP_TRANSPORTER: fake.random_number(digits=9, fix_len=True),
-                TransportCompanies.INN_TRANSPORTER: fake.random_number(digits=12, fix_len=True),
+                TransportCompanies.KPP_TRANSPORTER: fake.random_number(
+                    digits=9, fix_len=True
+                ),
+                TransportCompanies.INN_TRANSPORTER: fake.random_number(
+                    digits=12, fix_len=True
+                ),
                 TransportCompanies.CONTRACT_NUMBER: fake.random_number(digits=20),
                 TransportCompanies.CONTRACT_DATE: "09012024",
                 TransportCompanies.CONTACT_FACE_TRANSPORTER: fake.name(),
@@ -53,8 +61,12 @@ class ValidTransportCompanies:
                 + str(fake.random_number(digits=3)),
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_IP,
                 TransportCompanies.OGRN_TRANSPORTER: fake.random_number(digits=15),
-                TransportCompanies.KPP_TRANSPORTER: fake.random_number(digits=9, fix_len=True),
-                TransportCompanies.INN_TRANSPORTER: fake.random_number(digits=12, fix_len=True),
+                TransportCompanies.KPP_TRANSPORTER: fake.random_number(
+                    digits=9, fix_len=True
+                ),
+                TransportCompanies.INN_TRANSPORTER: fake.random_number(
+                    digits=12, fix_len=True
+                ),
                 TransportCompanies.CONTRACT_NUMBER: fake.random_number(digits=20),
                 TransportCompanies.CONTRACT_DATE: "09012024",
                 TransportCompanies.CONTACT_FACE_TRANSPORTER: fake.name(),
@@ -71,7 +83,9 @@ class ValidTransportCompanies:
                 + str(fake.random_number(digits=3)),
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_IP,
                 TransportCompanies.OGRN_TRANSPORTER: fake.random_number(digits=15),
-                TransportCompanies.INN_TRANSPORTER: fake.random_number(digits=12, fix_len=True),
+                TransportCompanies.INN_TRANSPORTER: fake.random_number(
+                    digits=12, fix_len=True
+                ),
                 TransportCompanies.CONTRACT_NUMBER: fake.random_number(digits=20),
                 TransportCompanies.CONTRACT_DATE: "09012024",
                 TransportCompanies.CONTACT_FACE_TRANSPORTER: fake.name(),
@@ -88,8 +102,12 @@ class ValidTransportCompanies:
                 + str(fake.random_number(digits=3)),
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_OAO,
                 TransportCompanies.OGRN_TRANSPORTER: fake.random_number(digits=15),
-                TransportCompanies.KPP_TRANSPORTER: fake.random_number(digits=9, fix_len=True),
-                TransportCompanies.INN_TRANSPORTER: fake.random_number(digits=12, fix_len=True),
+                TransportCompanies.KPP_TRANSPORTER: fake.random_number(
+                    digits=9, fix_len=True
+                ),
+                TransportCompanies.INN_TRANSPORTER: fake.random_number(
+                    digits=12, fix_len=True
+                ),
                 TransportCompanies.CONTRACT_NUMBER: fake.random_number(digits=20),
                 TransportCompanies.CONTRACT_DATE: "09012024",
                 TransportCompanies.CONTACT_FACE_TRANSPORTER: fake.name(),
@@ -106,8 +124,12 @@ class ValidTransportCompanies:
                 + str(fake.random_number(digits=3)),
                 TransportCompanies.OWNERSHIP_FORM: TransportCompanies.OWNERSHIP_FORM_TYPE_AO,
                 TransportCompanies.OGRN_TRANSPORTER: fake.random_number(digits=15),
-                TransportCompanies.KPP_TRANSPORTER: fake.random_number(digits=9, fix_len=True),
-                TransportCompanies.INN_TRANSPORTER: fake.random_number(digits=12, fix_len=True),
+                TransportCompanies.KPP_TRANSPORTER: fake.random_number(
+                    digits=9, fix_len=True
+                ),
+                TransportCompanies.INN_TRANSPORTER: fake.random_number(
+                    digits=12, fix_len=True
+                ),
                 TransportCompanies.CONTRACT_NUMBER: fake.random_number(digits=20),
                 TransportCompanies.CONTRACT_DATE: "09012024",
                 TransportCompanies.CONTACT_FACE_TRANSPORTER: fake.name(),

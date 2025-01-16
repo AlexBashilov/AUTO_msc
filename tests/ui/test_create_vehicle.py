@@ -23,7 +23,9 @@ class TestCreateVehicle:
         vehicle = VehiclePage(driver)
         transport_company = TransportCompanies().generate_random_tc(example["name"])
 
-        allure.dynamic.title("Создание транспортного средства с типом ТС " + example["name"])
+        allure.dynamic.title(
+            "Создание транспортного средства с типом ТС " + example["name"]
+        )
         allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         login.login_to_TMS()
@@ -77,10 +79,16 @@ class TestCreateVehicle:
         login = Login(driver)
         tc = TransportCompaniesPage(driver)
         vehicle = VehiclePage(driver)
-        transport_company_first = TransportCompanies().generate_random_tc(example["name"])
-        transport_company_second = TransportCompanies().generate_random_tc(example["name"])
+        transport_company_first = TransportCompanies().generate_random_tc(
+            example["name"]
+        )
+        transport_company_second = TransportCompanies().generate_random_tc(
+            example["name"]
+        )
 
-        allure.dynamic.title("Добавление уже существующего ТС в ТК с типом ТС " + example["name"])
+        allure.dynamic.title(
+            "Добавление уже существующего ТС в ТК с типом ТС " + example["name"]
+        )
         allure.dynamic.id(example["allureIdExistVehicle"])
         base.go_to_main_page()
         login.login_to_TMS()

@@ -47,7 +47,9 @@ class TestFiltrationRoute:
         route.check_filtering_routes(
             RouteFilter.FIRST_POINT_FILTER, route_point_operations[0]["pointName"]
         )
-        route.check_created_route(user_credentials["username"], route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], route_name, federal_distinct
+        )
         route.delete_first_route()
 
     @title("Поиск маршрута по любой точке")
@@ -98,7 +100,9 @@ class TestFiltrationRoute:
         route.check_filtering_routes(
             RouteFilter.ANY_POINT_FILTER, route_point_operations[2]["pointName"]
         )
-        route.check_created_route(user_credentials["username"], route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], route_name, federal_distinct
+        )
         route.delete_first_route()
 
     @title("Поиск маршрута по последней точке")
@@ -149,7 +153,9 @@ class TestFiltrationRoute:
         route.check_filtering_routes(
             RouteFilter.LAST_POINT_FILTER, route_point_operations[-1]["pointName"]
         )
-        route.check_created_route(user_credentials["username"], route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], route_name, federal_distinct
+        )
         route.delete_first_route()
 
     @title("Поиск маршрута по названию маршрута")
@@ -188,7 +194,9 @@ class TestFiltrationRoute:
         route.save_route()
         route.filtering_routes_by_route_name(route_name)
         route.check_filtering_routes(RouteFilter.ROUTE_NAME_FILTER, route_name)
-        route.check_created_route(user_credentials["username"], route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], route_name, federal_distinct
+        )
         route.delete_first_route()
 
     @title("Очистка всех фильтров")
@@ -228,7 +236,9 @@ class TestFiltrationRoute:
         route.filtering_routes_by_first_points(route_point_operations[0]["pointName"])
         route.filtering_routes_by_any_points(route_point_operations[0]["pointName"])
         route.filtering_routes_by_last_points(route_point_operations[-1]["pointName"])
-        route.check_created_route(user_credentials["username"], route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], route_name, federal_distinct
+        )
         route.clear_route_filter()
         route.filtering_routes_by_route_name(route_name)
         route.delete_first_route()
@@ -267,9 +277,13 @@ class TestFiltrationRoute:
             )
         route.set_federal_district(federal_distinct)
         route.save_route()
-        route.check_created_route(user_credentials["username"], route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], route_name, federal_distinct
+        )
         route.filtering_routes_by_activity(True)
         route.check_empty_route()
         route.filtering_routes_by_activity(False)
-        route.check_created_route(user_credentials["username"], route_name, federal_distinct)
+        route.check_created_route(
+            user_credentials["username"], route_name, federal_distinct
+        )
         route.delete_first_route()

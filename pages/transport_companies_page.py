@@ -15,13 +15,21 @@ class TransportCompaniesPage:
 
     @allure.step("Проверить наименование активных элементов на странице")
     def check_transport_companies_page_elements(self):
-        assert self.helper.wait_for_element_visible("h2").text == "Транспортные компании"
+        assert (
+            self.helper.wait_for_element_visible("h2").text == "Транспортные компании"
+        )
         assert (
             self.helper.wait_for_element_visible("[data-qa=active-switch]").text
             == "Только с активными шаблонами"
         )
-        assert self.helper.wait_for_element_visible("#clearFilters").text == "Очистить фильтры"
-        assert self.helper.wait_for_element_visible(self.CREATE_BUTTON).text == "Добавить ТК"
+        assert (
+            self.helper.wait_for_element_visible("#clearFilters").text
+            == "Очистить фильтры"
+        )
+        assert (
+            self.helper.wait_for_element_visible(self.CREATE_BUTTON).text
+            == "Добавить ТК"
+        )
         self.helper.wait_for_element_visible(self.TRANSPORT_COMPANY_FILTER)
 
     @allure.step('Нажать на кнопку "Создать ТК"')
@@ -50,7 +58,9 @@ class TransportCompaniesPage:
             )
 
         if TransportCompanies.OWNERSHIP_FORM in tkInfo:
-            self.helper.wait_for_element_visible('[data-qa="tk-ownership-form-id"]').click()
+            self.helper.wait_for_element_visible(
+                '[data-qa="tk-ownership-form-id"]'
+            ).click()
             self.helper.wait_for_element_visible(
                 '//span[text()="' + tkInfo[TransportCompanies.OWNERSHIP_FORM] + '"]'
             ).click()
@@ -61,10 +71,14 @@ class TransportCompaniesPage:
             )
 
         if TransportCompanies.KPP_TRANSPORTER in tkInfo:
-            self.helper.fill_field('[data-qa="tk-kpp"]', tkInfo[TransportCompanies.KPP_TRANSPORTER])
+            self.helper.fill_field(
+                '[data-qa="tk-kpp"]', tkInfo[TransportCompanies.KPP_TRANSPORTER]
+            )
 
         if TransportCompanies.INN_TRANSPORTER in tkInfo:
-            self.helper.fill_field('[data-qa="tk-inn"]', tkInfo[TransportCompanies.INN_TRANSPORTER])
+            self.helper.fill_field(
+                '[data-qa="tk-inn"]', tkInfo[TransportCompanies.INN_TRANSPORTER]
+            )
 
         if TransportCompanies.CONTRACT_NUMBER in tkInfo:
             self.helper.fill_field(
@@ -145,5 +159,6 @@ class TransportCompaniesPage:
     def check_error_message_after_save_transport_company(self, expectedError):
         self.helper.wait_for_element_visible(self.SAVE_BUTTON).click()
         assert (
-            self.helper.wait_for_element_visible('[data-qa^="error-message"]').text == expectedError
+            self.helper.wait_for_element_visible('[data-qa^="error-message"]').text
+            == expectedError
         ), "Сообщение об ошибке не совпадает!"

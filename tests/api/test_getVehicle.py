@@ -34,7 +34,9 @@ class TestGetVehicle:
         response = api_utils.post_request(client, body, routes.Routes.GET_VEHICLE)
         api_utils.assert_response_code(HTTPStatus.BAD_REQUEST, response.status_code)
         api_utils.assert_schema(response, vehicle_models.GetVehicleErrorSchema)
-        response_json = vehicle_models.GetVehicleErrorSchema.model_validate_json(response.content)
+        response_json = vehicle_models.GetVehicleErrorSchema.model_validate_json(
+            response.content
+        )
         api_utils.assert_error_message(
             "Ошибка обработки получения ТС: Транспорт с таким ID не существует",
             response_json.errors[0].message,

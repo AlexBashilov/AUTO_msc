@@ -44,9 +44,7 @@ class SqlQueries:
 
     @step("Получить ТК к которым привязан водитель по его ID")
     def get_tc_by_driver_id(self, driver_id) -> List:
-        request = (
-            f"""select * from link_driver_vs_transport_company where driver_id ='{driver_id}'"""
-        )
+        request = f"""select * from link_driver_vs_transport_company where driver_id ='{driver_id}'"""
         return self.__execute_request_select(request)
 
     @step("Удалить водителя в таблице driver и link_driver_vs_transport_company по ID")
@@ -93,7 +91,9 @@ class SqlQueries:
 
     @step("Удалить операции на точке по ID точки")
     def delete_route_operation_by_route_point_id(self, route_point_id):
-        request = f"""DELETE from route_operation WHERE route_point_id={route_point_id}"""
+        request = (
+            f"""DELETE from route_operation WHERE route_point_id={route_point_id}"""
+        )
         self.__execute_request_update_insert_delete(request)
 
     @step("Удалить точку маршрута по ID точки")
