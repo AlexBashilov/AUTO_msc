@@ -2,8 +2,7 @@ from typing import Type
 
 import allure
 import os
-
-from allure_commons._allure import step
+from allure import step
 from allure_commons.types import AttachmentType
 from pydantic import BaseModel
 from httpx import Client, Response

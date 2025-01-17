@@ -1,8 +1,6 @@
 from datetime import datetime
-
-from allure_commons._allure import step
+from allure import step
 from pydantic import BaseModel
-
 from utils.base_utils import (
     none_to_empty_string,
     combined_dict_with_list,

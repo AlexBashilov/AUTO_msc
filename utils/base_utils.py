@@ -1,7 +1,6 @@
 import re
 from datetime import datetime, timedelta, timezone
-
-from allure_commons._allure import step
+from allure import step
 
 
 @step("Сгенерировать дату в формате ISO")

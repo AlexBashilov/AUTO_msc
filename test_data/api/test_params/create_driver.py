@@ -1,12 +1,9 @@
-from typing import List
-
 from api_pages.models import createDriver
 from faker import Faker
-
 from test_data.api.error_create_driver import CreateDriverError
 
 
-def create_valid_drivers_parameters() -> List[dict]:
+def create_valid_drivers_parameters() -> list[dict]:
     fake = Faker("ru_RU")
     return [
         {
@@ -93,7 +90,7 @@ def create_valid_drivers_parameters() -> List[dict]:
     ]
 
 
-def create_drivers_required_parameters() -> List[dict]:
+def create_drivers_required_parameters() -> list[dict]:
     fake = Faker("ru_RU")
     return [
         {
@@ -211,7 +208,7 @@ def create_drivers_required_parameters() -> List[dict]:
     ]
 
 
-def create_drivers_errors() -> List[dict]:
+def create_drivers_errors() -> list[dict]:
     fake = Faker("ru_RU")
     return [
         {
