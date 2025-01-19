@@ -1,4 +1,3 @@
-import allure
 import pytest
 
 from pages.base_page import Base
@@ -23,10 +22,6 @@ class TestCreateVehicle:
         vehicle = VehiclePage(driver)
         transport_company = TransportCompanies().generate_random_tc(example["name"])
 
-        allure.dynamic.title(
-            "Создание транспортного средства с типом ТС " + example["name"]
-        )
-        allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()
@@ -54,8 +49,7 @@ class TestCreateVehicle:
         vehicle = VehiclePage(driver)
         transport_company = TransportCompanies().generate_random_tc(example["name"])
 
-        allure.dynamic.title(example["name"])
-        allure.dynamic.id(example["allureID"])
+
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()
@@ -86,10 +80,6 @@ class TestCreateVehicle:
             example["name"]
         )
 
-        allure.dynamic.title(
-            "Добавление уже существующего ТС в ТК с типом ТС " + example["name"]
-        )
-        allure.dynamic.id(example["allureIdExistVehicle"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()

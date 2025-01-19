@@ -1,4 +1,3 @@
-import allure
 import pytest
 
 from pages.base_page import Base
@@ -27,8 +26,6 @@ class TestCreateDriver:
         drivers = DriversPage(driver)
         transport_company = TransportCompanies().generate_random_tc(example["name"])
 
-        allure.dynamic.title(example["name"])
-        allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()
@@ -57,8 +54,6 @@ class TestCreateDriver:
         drivers = DriversPage(driver)
         transport_company = TransportCompanies().generate_random_tc(example["name"])
 
-        allure.dynamic.title(example["name"])
-        allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()
@@ -86,8 +81,7 @@ class TestCreateDriver:
         transport_company = TransportCompanies().generate_random_tc(example["name"])
         fake = Faker("ru_RU")
 
-        allure.dynamic.title(example["name"])
-        allure.dynamic.id(example["allureID"])
+
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()

@@ -1,8 +1,6 @@
 from http import HTTPStatus
-import allure
 import pytest
 from faker import Faker
-from allure import title, id
 import utils.api_utils as api_utils
 from api_pages import routes
 from api_pages.models import createDriver

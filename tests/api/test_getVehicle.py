@@ -1,6 +1,5 @@
 import uuid
 from http import HTTPStatus
-import allure
 import utils.api_utils as api_utils
 from api_pages import routes
 from api_pages.models import getVehicle as vehicle_models
@@ -9,8 +8,7 @@ from data_base.db_queries import SqlQueries
 
 
 class TestGetVehicle:
-    @allure.id(38875)
-    @allure.title("Получение ТС по id")
+
     def test_get_vehicle(self, client, db_connection):
         db = SqlQueries(db_connection)
         new_vehicle = VehicleDB.generate_random_vehicle()
@@ -24,8 +22,7 @@ class TestGetVehicle:
         api_utils.assert_schema(response, vehicle_models.GetVehicleResponseSchema)
         db.delete_vehicle_by_id(vehicle_id)
 
-    @allure.id(37053)
-    @allure.title("Получить не существующее транспортное средство")
+
     def test_get_vehicle_send_not_exist_vehicle(self, client):
         body = vehicle_models.GetVehicleRequestSchema(
             requestId=str(uuid.uuid4()),

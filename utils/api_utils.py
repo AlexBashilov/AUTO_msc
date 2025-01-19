@@ -1,9 +1,9 @@
 from typing import Type
 
-import allure
+
 import os
-from allure import step
-from allure_commons.types import AttachmentType
+
+
 from pydantic import BaseModel
 from httpx import Client, Response
 
@@ -15,13 +15,11 @@ class ApiClient(Client):
 
     def __init__(self):
         super().__init__(
-            base_url="https://tms-api-rest.intgr-test-"
-            + os.getenv("STAGE")
-            + ".ox1.dev/api"
+            base_url=os.getenv("SANDBOX")
         )
 
 
-@step("Проверить что ответ соответствует схеме")
+
 def assert_schema(response, model: Type[BaseModel]) -> BaseModel:
     body = response.json()
     if isinstance(body, list):
@@ -33,31 +31,28 @@ def assert_schema(response, model: Type[BaseModel]) -> BaseModel:
     return model.model_validate(response.json())
 
 
-@step("Проверить код ответа")
+
 def assert_response_code(expected_code, actual_code):
     assert actual_code == expected_code, f"Код ответа {actual_code}"
 
 
-@step("Проверить текст ошибки")
+
 def assert_error_message(expected_error, actual_error):
     assert actual_error == expected_error, "Текст ошибки отличается от ожидаемого"
 
 
-@step("Отправить POST запрос на ручку {2}")
+
 def post_request(client, body: BaseModel, route) -> Response:
-    allure.attach(
-        body.model_dump_json(),
-        name="Отправленный запрос",
-        attachment_type=AttachmentType.JSON,
-    )
+
     response = client.post(route, json=body.model_dump())
-    allure.attach(
-        response.content, name="Полученный ответ", attachment_type=AttachmentType.JSON
-    )
+    return response
+
+def get_request(client, route) -> Response:
+    response = client.get(route)
     return response
 
 
-@step("Сравнить данные ответа с ожидаемыми данными")
+
 def assert_response_data(expected_response: BaseModel, response):
     diff = _compare_json(
         expected_response.model_dump(exclude_none=True), response.json()
@@ -65,7 +60,7 @@ def assert_response_data(expected_response: BaseModel, response):
     assert not diff, f"Данные в ответе отличаются от ожидаемых - {diff}"
 
 
-@step("Сравнить два json между собой")
+
 def _compare_json(expected_json, actual_json, path="") -> list[str]:
     differences = []
 

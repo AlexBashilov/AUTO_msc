@@ -1,4 +1,3 @@
-import allure
 import pytest
 
 from pages.base_page import Base
@@ -22,8 +21,6 @@ class TestCreateTransportCompany:
         login = Login(driver)
         tc = TransportCompaniesPage(driver)
 
-        allure.dynamic.title(example["name"])
-        allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()
@@ -40,8 +37,6 @@ class TestCreateTransportCompany:
         login = Login(driver)
         tc = TransportCompaniesPage(driver)
 
-        allure.dynamic.title(example["name"])
-        allure.dynamic.id(example["allureID"])
         base.go_to_main_page()
         login.login_to_TMS()
         base.go_to_transport_companies_page()

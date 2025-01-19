@@ -1,6 +1,4 @@
-import allure
 import pytest
-from allure import title, id
 from pages.base_page import Base
 from pages.login_page import Login
 from pages.route_page import RoutePage
@@ -18,8 +16,6 @@ class TestCreateRoute:
 
     @pytest.mark.parametrize("example", valid_routes)
     def test_create_valid_routes(self, db_connection, driver, example):
-        allure.dynamic.title(f'Создание маршрута с {example["name"]}')
-        allure.dynamic.id(example["allureID"])
         base = Base(driver)
         login = Login(driver)
         route = RoutePage(driver)
@@ -45,8 +41,6 @@ class TestCreateRoute:
 
     @pytest.mark.parametrize("example", invalid_routes)
     def test_create_invalid_routes(self, db_connection, driver, example):
-        allure.dynamic.title(f'Создание маршрута с {example["name"]}')
-        allure.dynamic.id(example["allureID"])
         base = Base(driver)
         login = Login(driver)
         route = RoutePage(driver)
@@ -64,8 +58,6 @@ class TestCreateRoute:
         route.set_federal_district(example["routeDistrict"])
         route.check_error_message_after_save_route(example["expectedError"])
 
-    @title("Создание маршрута с одной точкой загрузки")
-    @id("27549")
     def test_create_route_with_only_one_loading_point(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)
@@ -81,8 +73,6 @@ class TestCreateRoute:
         route.set_federal_district(FederalDistrict.CFO_DISTRICT)
         route.check_lock_save_button()
 
-    @title("Создание маршрута только с одной точкой разгрузки")
-    @id("27627")
     def test_create_route_with_only_one_unloading_point(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)
@@ -97,8 +87,6 @@ class TestCreateRoute:
             ShopList.MSK_BAGRATION_SHOP, RouteOperationType.UNLOADING
         )
 
-    @title("Создание уже существующего маршрута")
-    @id("36446")
     def test_create_exist_route(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)
@@ -146,8 +134,6 @@ class TestCreateRoute:
         route.close_create_route_window()
         route.delete_first_route()
 
-    @title("Создание маршрута на основании существующего маршрута")
-    @id("40482")
     def test_create_route_based_on(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)

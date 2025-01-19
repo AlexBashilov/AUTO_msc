@@ -1,4 +1,3 @@
-from allure import title, id
 from pages.base_page import Base
 from pages.login_page import Login
 from pages.route_page import RoutePage
@@ -9,8 +8,7 @@ from test_data.shop_list import ShopList
 
 
 class TestFiltrationRoute:
-    @title("Поиск маршрута по первой точке")
-    @id("27526")
+
     def test_check_filtration_by_first_point(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)
@@ -52,8 +50,6 @@ class TestFiltrationRoute:
         )
         route.delete_first_route()
 
-    @title("Поиск маршрута по любой точке")
-    @id("27349")
     def test_check_filtration_by_any_point(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)
@@ -105,8 +101,6 @@ class TestFiltrationRoute:
         )
         route.delete_first_route()
 
-    @title("Поиск маршрута по последней точке")
-    @id("27540")
     def test_check_filtration_by_last_point(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)
@@ -158,8 +152,6 @@ class TestFiltrationRoute:
         )
         route.delete_first_route()
 
-    @title("Поиск маршрута по названию маршрута")
-    @id("27505")
     def test_check_filtration_by_route_name(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)
@@ -199,8 +191,6 @@ class TestFiltrationRoute:
         )
         route.delete_first_route()
 
-    @title("Очистка всех фильтров")
-    @id("27716")
     def test_clear_all_filters(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)
@@ -243,8 +233,6 @@ class TestFiltrationRoute:
         route.filtering_routes_by_route_name(route_name)
         route.delete_first_route()
 
-    @title("Поиск маршрутов только с активными шаблонами")
-    @id("27541")
     def test_check_filtration_by_active_route(self, db_connection, driver):
         base = Base(driver)
         login = Login(driver)

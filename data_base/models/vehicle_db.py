@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 import datetime
 
-import allure
 from faker import Faker
 
 
@@ -20,8 +19,6 @@ class VehicleDB:
     updated_at: datetime
     id: int = None
 
-    @staticmethod
-    @allure.step("Сгенерировать данные для добавления нового ТС в БД")
     def generate_random_vehicle():
         fake = Faker("ru_RU")
 
