@@ -27,16 +27,27 @@ class SqlQueries:
             else:
                 return None
 
-    def insert_new_driver(self, driver: ItemsDB) -> int:
-        request_insert = f"""INSERT INTO driver (surname, name, patronymic, phone_number, passport_full_number, passport_date, state, created_at, license_number)
-        VALUES ('{driver.surname}', '{driver.name}', '{driver.patronymic}', '{driver.phone_number}', '{driver.passport_full_number}',
-        '{driver.passport_date}', '{driver.state}', '{driver.created_at}', '{driver.license_number}') RETURNING id"""
+    def insert_new_item(self, items: ItemsDB) -> int:
+        request_insert = f"""INSERT INTO book_cost_items (item_name, guid, description)
+        VALUES ('{items.item_name}', '{items.guid}', '{items.description}'
+        ) RETURNING id"""
         return self.__execute_request_update_insert_delete(request_insert)[0][0]
 
+    def get_all_items(self, items: ItemsDB) -> List:
+        request = f"""select * from book_cost_items"""
+        return self.__execute_request_select(request)
+    
+    
     def get_driver_by_id(self, driver_id) -> List:
         request = f"""select * from driver where id ='{driver_id}'"""
         return self.__execute_request_select(request)
 
+
+    def get_items_by_id(self, items: ItemsDB) -> List:
+        request = f"""select * from book_cost_items where guid ='{items.guid}'"""
+        return self.__execute_request_select(request)
+    
+    
     def get_tc_by_driver_id(self, driver_id) -> List:
         request = f"""select * from link_driver_vs_transport_company where driver_id ='{driver_id}'"""
         return self.__execute_request_select(request)

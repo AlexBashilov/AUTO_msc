@@ -40,6 +40,22 @@
         "documentation": {}
     },
     {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "List",
         "importPath": "typing",
         "description": "typing",
@@ -393,6 +409,14 @@
         "description": "utils.db_connect",
         "isExtraImport": true,
         "detail": "utils.db_connect",
+        "documentation": {}
+    },
+    {
+        "label": "ItemsDB",
+        "importPath": "data_base.models.Items_db",
+        "description": "data_base.models.Items_db",
+        "isExtraImport": true,
+        "detail": "data_base.models.Items_db",
         "documentation": {}
     },
     {
@@ -776,6 +800,14 @@
         "documentation": {}
     },
     {
+        "label": "GetItemsByID",
+        "importPath": "api_pages.models",
+        "description": "api_pages.models",
+        "isExtraImport": true,
+        "detail": "api_pages.models",
+        "documentation": {}
+    },
+    {
         "label": "getVehicle",
         "importPath": "api_pages.models",
         "description": "api_pages.models",
@@ -862,6 +894,22 @@
         "description": "test_data.api.test_params.create_driver",
         "isExtraImport": true,
         "detail": "test_data.api.test_params.create_driver",
+        "documentation": {}
+    },
+    {
+        "label": "GetOneItemsByIDResponseSchema",
+        "importPath": "api_pages.models.GetItemsByID",
+        "description": "api_pages.models.GetItemsByID",
+        "isExtraImport": true,
+        "detail": "api_pages.models.GetItemsByID",
+        "documentation": {}
+    },
+    {
+        "label": "GetOneItemsByIDDetailsResponse",
+        "importPath": "api_pages.models.GetItemsByID",
+        "description": "api_pages.models.GetItemsByID",
+        "isExtraImport": true,
+        "detail": "api_pages.models.GetItemsByID",
         "documentation": {}
     },
     {
@@ -1407,6 +1455,24 @@
         "documentation": {}
     },
     {
+        "label": "GetOneItemsByIDDetailsResponse",
+        "kind": 6,
+        "importPath": "api_pages.models.GetItemsByID",
+        "description": "api_pages.models.GetItemsByID",
+        "peekOfCode": "class GetOneItemsByIDDetailsResponse(BaseModel):\n    id: int\n    item_name: str\n    guid: str\n    description: str\nclass GetOneItemsByIDResponseSchema(BaseModel):\n    details: str\n    result: GetOneItemsByIDDetailsResponse",
+        "detail": "api_pages.models.GetItemsByID",
+        "documentation": {}
+    },
+    {
+        "label": "GetOneItemsByIDResponseSchema",
+        "kind": 6,
+        "importPath": "api_pages.models.GetItemsByID",
+        "description": "api_pages.models.GetItemsByID",
+        "peekOfCode": "class GetOneItemsByIDResponseSchema(BaseModel):\n    details: str\n    result: GetOneItemsByIDDetailsResponse",
+        "detail": "api_pages.models.GetItemsByID",
+        "documentation": {}
+    },
+    {
         "label": "VehicleRequestParams",
         "kind": 6,
         "importPath": "api_pages.models.getVehicle",
@@ -1483,7 +1549,7 @@
         "kind": 6,
         "importPath": "data_base.models.Items_db",
         "description": "data_base.models.Items_db",
-        "peekOfCode": "class ItemsDB:\n    id: int\n    item_name: str\n    guid: str\n    description: str\n    deleted_at: time\n    @staticmethod\n    #@allure.step(\"Сгенерировать данные для добавления нового водителя в БД\")\n    def generate_random_item():\n        fake = Faker(\"ru_RU\")",
+        "peekOfCode": "class ItemsDB:\n    item_name: str\n    guid: str\n    description: str\n    deleted_at: time\n    @staticmethod\n    #@allure.step(\"Сгенерировать данные для добавления нового водителя в БД\")\n    def generate_random_item():\n        fake = Faker(\"ru_RU\")\n        return ItemsDB(",
         "detail": "data_base.models.Items_db",
         "documentation": {}
     },
@@ -1591,7 +1657,7 @@
         "kind": 6,
         "importPath": "tests.api.test_getAllItems",
         "description": "tests.api.test_getAllItems",
-        "peekOfCode": "class TestGetAllItems:\n    def test_get_all_items(self,client, db_connection):\n        db = SqlQueries(db_connection)\n        response = api_utils.get_request(client, routes.Routes.GET_ALL_ITEMS)\n        print(response)\n        api_utils.assert_response_code(HTTPStatus.OK, response.status_code)\n        #api_utils.assert_schema(response, getAllItems.GetAllItemsResponseSchema)",
+        "peekOfCode": "class TestGetAllItems:\n    # def test_get_all_items(self,client, db_connection):\n    #     db = SqlQueries(db_connection)\n    #     get_all = SqlQueries.get_all_items(self)\n    #     print(get_all)\n    #     response = api_utils.get_request(client, routes.Routes.GET_ALL_ITEMS)\n    #     print(response)\n    #     api_utils.assert_response_code(HTTPStatus.OK, response.status_code)\n        #api_utils.assert_schema(response, getAllItems.GetAllItemsResponseSchema)\n        # Сходить в БД и сделать селект всех строк.",
         "detail": "tests.api.test_getAllItems",
         "documentation": {}
     },

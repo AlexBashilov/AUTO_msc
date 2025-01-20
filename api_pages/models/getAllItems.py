@@ -15,6 +15,7 @@ class GetAllItemsResponseSchema(BaseModel):
     result: List[GetAllItemsDetailsResponse]
 
 
+
 class ErrorMessage(BaseModel):
     message: str
 

@@ -9,7 +9,6 @@ from faker import Faker
 
 @dataclass
 class ItemsDB:
-    id: int
     item_name: str
     guid: str
     description: str
@@ -24,4 +23,5 @@ class ItemsDB:
             item_name=fake.last_name(),
             guid=uuid.uuid4(),
             description=fake.word(),
+            deleted_at=None
         )
