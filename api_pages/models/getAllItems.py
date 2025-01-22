@@ -10,9 +10,13 @@ class GetAllItemsDetailsResponse(BaseModel):
     item_name: str
 
 
+class AllItems(BaseModel):
+    AllItems: GetAllItemsDetailsResponse
+
+
 class GetAllItemsResponseSchema(BaseModel):
-    details: str
-    result: List[GetAllItemsDetailsResponse]
+    details: AllItems
+    result: str
 
 
 

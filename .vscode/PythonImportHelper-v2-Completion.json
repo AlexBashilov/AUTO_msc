@@ -913,6 +913,14 @@
         "documentation": {}
     },
     {
+        "label": "\\",
+        "importPath": "api_pages.models.GetItemsByID",
+        "description": "api_pages.models.GetItemsByID",
+        "isExtraImport": true,
+        "detail": "api_pages.models.GetItemsByID",
+        "documentation": {}
+    },
+    {
         "label": "Base",
         "importPath": "pages.base_page",
         "description": "pages.base_page",
@@ -1423,7 +1431,16 @@
         "kind": 6,
         "importPath": "api_pages.models.getAllItems",
         "description": "api_pages.models.getAllItems",
-        "peekOfCode": "class GetAllItemsDetailsResponse(BaseModel):\n    description: str\n    guid: str\n    id: int\n    item_name: str\nclass GetAllItemsResponseSchema(BaseModel):\n    details: str\n    result: List[GetAllItemsDetailsResponse]\nclass ErrorMessage(BaseModel):\n    message: str",
+        "peekOfCode": "class GetAllItemsDetailsResponse(BaseModel):\n    description: str\n    guid: str\n    id: int\n    item_name: str\nclass AllItems(BaseModel):\n    AllItems: GetAllItemsDetailsResponse\nclass GetAllItemsResponseSchema(BaseModel):\n    details: AllItems\n    result: str",
+        "detail": "api_pages.models.getAllItems",
+        "documentation": {}
+    },
+    {
+        "label": "AllItems",
+        "kind": 6,
+        "importPath": "api_pages.models.getAllItems",
+        "description": "api_pages.models.getAllItems",
+        "peekOfCode": "class AllItems(BaseModel):\n    AllItems: GetAllItemsDetailsResponse\nclass GetAllItemsResponseSchema(BaseModel):\n    details: AllItems\n    result: str\nclass ErrorMessage(BaseModel):\n    message: str\nclass GetDriverErrorSchema(BaseModel):\n    requestId: str\n    errors: List[ErrorMessage]",
         "detail": "api_pages.models.getAllItems",
         "documentation": {}
     },
@@ -1432,7 +1449,7 @@
         "kind": 6,
         "importPath": "api_pages.models.getAllItems",
         "description": "api_pages.models.getAllItems",
-        "peekOfCode": "class GetAllItemsResponseSchema(BaseModel):\n    details: str\n    result: List[GetAllItemsDetailsResponse]\nclass ErrorMessage(BaseModel):\n    message: str\nclass GetDriverErrorSchema(BaseModel):\n    requestId: str\n    errors: List[ErrorMessage]",
+        "peekOfCode": "class GetAllItemsResponseSchema(BaseModel):\n    details: AllItems\n    result: str\nclass ErrorMessage(BaseModel):\n    message: str\nclass GetDriverErrorSchema(BaseModel):\n    requestId: str\n    errors: List[ErrorMessage]",
         "detail": "api_pages.models.getAllItems",
         "documentation": {}
     },
@@ -1455,11 +1472,20 @@
         "documentation": {}
     },
     {
+        "label": "GetOneItemParams",
+        "kind": 6,
+        "importPath": "api_pages.models.GetItemsByID",
+        "description": "api_pages.models.GetItemsByID",
+        "peekOfCode": "class GetOneItemParams(BaseModel):\n    id: int\nclass GetOneItemsByIDDetailsResponse(BaseModel):\n    id: int\n    item_name: str\n    guid: str\n    description: str\nclass GetOneItemsByIDResponseSchema(BaseModel):\n    result: str\n    details: GetOneItemsByIDDetailsResponse",
+        "detail": "api_pages.models.GetItemsByID",
+        "documentation": {}
+    },
+    {
         "label": "GetOneItemsByIDDetailsResponse",
         "kind": 6,
         "importPath": "api_pages.models.GetItemsByID",
         "description": "api_pages.models.GetItemsByID",
-        "peekOfCode": "class GetOneItemsByIDDetailsResponse(BaseModel):\n    id: int\n    item_name: str\n    guid: str\n    description: str\nclass GetOneItemsByIDResponseSchema(BaseModel):\n    details: str\n    result: GetOneItemsByIDDetailsResponse",
+        "peekOfCode": "class GetOneItemsByIDDetailsResponse(BaseModel):\n    id: int\n    item_name: str\n    guid: str\n    description: str\nclass GetOneItemsByIDResponseSchema(BaseModel):\n    result: str\n    details: GetOneItemsByIDDetailsResponse",
         "detail": "api_pages.models.GetItemsByID",
         "documentation": {}
     },
@@ -1468,7 +1494,7 @@
         "kind": 6,
         "importPath": "api_pages.models.GetItemsByID",
         "description": "api_pages.models.GetItemsByID",
-        "peekOfCode": "class GetOneItemsByIDResponseSchema(BaseModel):\n    details: str\n    result: GetOneItemsByIDDetailsResponse",
+        "peekOfCode": "class GetOneItemsByIDResponseSchema(BaseModel):\n    result: str\n    details: GetOneItemsByIDDetailsResponse",
         "detail": "api_pages.models.GetItemsByID",
         "documentation": {}
     },
@@ -1657,7 +1683,7 @@
         "kind": 6,
         "importPath": "tests.api.test_getAllItems",
         "description": "tests.api.test_getAllItems",
-        "peekOfCode": "class TestGetAllItems:\n    # def test_get_all_items(self,client, db_connection):\n    #     db = SqlQueries(db_connection)\n    #     get_all = SqlQueries.get_all_items(self)\n    #     print(get_all)\n    #     response = api_utils.get_request(client, routes.Routes.GET_ALL_ITEMS)\n    #     print(response)\n    #     api_utils.assert_response_code(HTTPStatus.OK, response.status_code)\n        #api_utils.assert_schema(response, getAllItems.GetAllItemsResponseSchema)\n        # Сходить в БД и сделать селект всех строк.",
+        "peekOfCode": "class TestGetAllItems:\n    # def test_get_all_items(self,client, db_connection):\n        # db = SqlQueries(db_connection)\n        # get_all = SqlQueries.get_all_items(db)\n        # print(get_all)\n        # response = api_utils.get_request(client, routes.Routes.GET_ALL_ITEMS)\n        # print(response.json())\n        # api_utils.assert_response_code(HTTPStatus.OK, response.status_code)\n        # api_utils.assert_schema(response, getAllItems.GetAllItemsResponseSchema) #ответ из БД не совпадает с ответом гет запроса\n        # Сходить в БД и сделать селект всех строк.",
         "detail": "tests.api.test_getAllItems",
         "documentation": {}
     },

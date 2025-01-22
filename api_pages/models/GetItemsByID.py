@@ -2,6 +2,9 @@ from typing import List
 #import uuid
 from pydantic import BaseModel
 
+class GetOneItemParams(BaseModel):
+    id: int
+
 class GetOneItemsByIDDetailsResponse(BaseModel):
     id: int
     item_name: str
@@ -10,5 +13,5 @@ class GetOneItemsByIDDetailsResponse(BaseModel):
 
 
 class GetOneItemsByIDResponseSchema(BaseModel):
-    details: str
-    result: GetOneItemsByIDDetailsResponse
+    result: str
+    details: GetOneItemsByIDDetailsResponse
