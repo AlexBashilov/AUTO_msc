@@ -15,7 +15,7 @@ class AllItems(BaseModel):
 
 
 class GetAllItemsResponseSchema(BaseModel):
-    details: AllItems
+    details: List[GetAllItemsDetailsResponse]
     result: str
 
 

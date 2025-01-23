@@ -34,7 +34,7 @@ class SqlQueries:
         return self.__execute_request_update_insert_delete(request_insert)[0][0]
 
     def get_all_items(self) -> List:
-        request = f"""select * from book_cost_items"""
+        request = f"""select description, guid, id, item_name from book_cost_items"""
         return self.__execute_request_select(request)
     
     
